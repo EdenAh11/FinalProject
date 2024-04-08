@@ -1,0 +1,60 @@
+
+
+
+#loginDiv{
+    background-image: url('/img/login-background.png'); 
+    background-size: cover; 
+    background-position: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+#login{
+    background-color: rgba(255, 255, 255, 0.8);  
+    text-align: center;
+    padding: 0 0 120px 0px;
+    position: relative;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5) ;
+    border: 1px solid #fff;
+    width: 30%;
+    height: 50%;
+    top: 15%;
+    left: 30%;
+}
+
+#matrixImg{
+    margin-top: -15%;
+    height: 80%;
+}
+
+#bForm{
+    margin-top: -10%;
+}
+
+#CheckDiv{
+text-align: left;
+margin-left: 19%;
+margin-top: 2%;
+}
+
+#btn{
+    margin-top: 5%;
+    width:70%;
+    height: 50px;
+    background-color:#2E2B76 ;
+    border-radius: 40px 40px 40px 40px;
+   
+}
+
+
+
+
+
+
+
+
+
+
