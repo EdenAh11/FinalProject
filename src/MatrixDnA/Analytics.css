@@ -166,7 +166,7 @@ margin-bottom: 5%;
     text-align: center;
 }
 
-#deskA{
+#AdeskA{
     width: 150px;
     height: 180px;
     position: absolute;
@@ -174,7 +174,7 @@ margin-bottom: 5%;
     top:5%
 }
 
-#deskB{
+#AdeskB{
     width: 150px;
     height: 180px;
     position: absolute;
@@ -182,7 +182,7 @@ margin-bottom: 5%;
     top: 5%;
 }
 
-#deskC{
+#AdeskC{
     width: 150px;
     height: 180px;
     position: absolute;
@@ -190,7 +190,7 @@ margin-bottom: 5%;
     top: 5%;
 }
 
-#deskD{
+#AdeskD{
     width: 150px;
     height: 180px;
     position: absolute;
@@ -199,7 +199,7 @@ margin-bottom: 5%;
   
 }
 
-#deskE{
+#AdeskE{
     width: 150px;
     height: 180px;
     position: absolute;
@@ -208,7 +208,7 @@ margin-bottom: 5%;
     left: 4%;
 }
 
-#deskF{
+#AdeskF{
     width: 150px;
     height: 180px;
     position: absolute;
@@ -218,7 +218,7 @@ margin-bottom: 5%;
 }
 
 
-#seatA1{
+#AseatA1{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -229,7 +229,7 @@ margin-bottom: 5%;
     left: 0;
 }
 
-#seatA2{
+#AseatA2{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -240,7 +240,7 @@ margin-bottom: 5%;
     left: 0;
 }
 
-#seatA3{
+#AseatA3{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -251,7 +251,7 @@ margin-bottom: 5%;
     top:37%;
 }
 
-#seatA4{
+#AseatA4{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -262,7 +262,7 @@ margin-bottom: 5%;
     top:10%;
 }
 
-#seatB1{
+#AseatB1{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -273,7 +273,7 @@ margin-bottom: 5%;
     right: 0;
 }
 
-#seatB2{
+#AseatB2{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -284,7 +284,7 @@ margin-bottom: 5%;
     left: 0;
 }
 
-#seatB3{
+#AseatB3{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -295,7 +295,7 @@ margin-bottom: 5%;
     top:37%;
 }
 
-#seatC1{
+#AseatC1{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -306,7 +306,7 @@ margin-bottom: 5%;
     left: 0;
 }
 
-#seatC2{
+#AseatC2{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -317,7 +317,7 @@ margin-bottom: 5%;
     left: 0;
 }
 
-#seatC3{
+#AseatC3{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -328,51 +328,7 @@ margin-bottom: 5%;
     top:37%;
 }
 
-#seatD1{
-    width: 40px;
-    height: 40px;
-    border-radius: 8px 8px 0px 0px;
-    background-color:#76BC8B ;
-    transform: rotate(270deg);
-    position: absolute;
-    top:10%;
-    left: 0;
-}
-
-#seatD2{
-    width: 40px;
-    height: 40px;
-    border-radius: 8px 8px 0px 0px;
-    background-color:#76BC8B ;
-    transform: rotate(270deg);
-    position: absolute;
-    top:37%;
-    left: 0;
-}
-
-#seatD3{
-    width: 40px;
-    height: 40px;
-    border-radius: 8px 8px 0px 0px;
-    background-color:#76BC8B ;
-    transform: rotate(90deg);
-    position: absolute;
-    right: 0;
-    top:37%;
-}
-
-#seatD4{
-    width: 40px;
-    height: 40px;
-    border-radius: 8px 8px 0px 0px;
-    background-color:#76BC8B ;
-    transform: rotate(90deg);
-    position: absolute;
-    right: 0;
-    top:10%;
-}
-
-#seatE1{
+#AseatD1{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -383,7 +339,7 @@ margin-bottom: 5%;
     left: 0;
 }
 
-#seatE2{
+#AseatD2{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -394,7 +350,7 @@ margin-bottom: 5%;
     left: 0;
 }
 
-#seatE3{
+#AseatD3{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -405,7 +361,7 @@ margin-bottom: 5%;
     top:37%;
 }
 
-#seatE4{
+#AseatD4{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -416,7 +372,51 @@ margin-bottom: 5%;
     top:10%;
 }
 
-#seatE5{
+#AseatE1{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(270deg);
+    position: absolute;
+    top:10%;
+    left: 0;
+}
+
+#AseatE2{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(270deg);
+    position: absolute;
+    top:37%;
+    left: 0;
+}
+
+#AseatE3{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(90deg);
+    position: absolute;
+    right: 0;
+    top:37%;
+}
+
+#AseatE4{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(90deg);
+    position: absolute;
+    right: 0;
+    top:10%;
+}
+
+#AseatE5{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -428,7 +428,7 @@ margin-bottom: 5%;
 }
 
 
-#seatE6{
+#AseatE6{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -439,7 +439,7 @@ margin-bottom: 5%;
     top:64%;
 }
 
-#seatF1{
+#AseatF1{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -450,7 +450,7 @@ margin-bottom: 5%;
     left: 0;
 }
 
-#seatF2{
+#AseatF2{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -461,7 +461,7 @@ margin-bottom: 5%;
     left: 0;
 }
 
-#seatF3{
+#AseatF3{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -472,7 +472,7 @@ margin-bottom: 5%;
     top:37%;
 }
 
-#seatF4{
+#AseatF4{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -483,7 +483,7 @@ margin-bottom: 5%;
     top:10%;
 }
 
-#seatF5{
+#AseatF5{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;
@@ -495,7 +495,7 @@ margin-bottom: 5%;
 }
 
 
-#seatF6{
+#AseatF6{
     width: 40px;
     height: 40px;
     border-radius: 8px 8px 0px 0px;

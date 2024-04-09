@@ -14,25 +14,13 @@ import Datepicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Analytics.css'
-import ImgMatrix from '/img/imageMatrix.png'
-import sImg from '/img/imgS.png'
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import Calendar from 'react-calendar' 
-import floorImg from '/img/floor.jpg'
-import desk3Img from '/img/desk3.png'
-import doorImg from '/img/door.png'
-import manageImg from '/img/manageroom.png'
-import lineImg from '/img/line.png'
-import desk6Img from '/img/desk6.png'
-import desk4Img from '/img/desk4.png'
-import whitelineImg from '/img/whiteline.png'
-import matrixImg from '/img/MatrixDnA.png'
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
-import EventSeatIcon from '@mui/icons-material/EventSeat';
-import GroupsIcon from '@mui/icons-material/Groups';
-import LiveHelpIcon from '@mui/icons-material/LiveHelp';
+import './Delivery.css'
+import './Classtified.css'
 
-import { Filter, Scale } from '@mui/icons-material'
+
+import ImgMatrix from '/img/imageMatrix.png'
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+
 
 
 
@@ -55,8 +43,21 @@ export default function Analytics() {
   const [isHidden, setIsHidden] = useState(true);
   //לחצן הלוח השנה 
   const [isDisabled, setIsDisabled] = useState(false);
-//צבע כיסא
-  const [SeatColor, setSeatColor] = useState('#33BBFF');
+//כסא נוכחי
+  const [currentSeat, setCurrentSeat] = useState('');
+  //כסא פנוי
+  const [greenColor, setGreenColor] = useState("#76BC8B");
+  //כסא תפוס
+  const [redColor, setRedColor] = useState("#E87D7D");
+  //כסא בתהליך
+  const [blueColor, setBlueColor] = useState("#33BBFF");
+  //מחקת אנליטיקס
+  const [classAnalytics, setClassAnlytics] = useState(false);
+
+  const [classDelivery, setClassDelivery] = useState(false);
+
+  const [classtified, setClasstified] = useState(false)
+
 
 
 
@@ -109,11 +110,47 @@ const handleDateChange = date => {
 
 // בחירת מושב
  function pickSeat(e){
-      e.backgroundColor = SeatColor;
+      e.backgroundColor = blueColor;
       setIsBlurred(true);
       setIsHidden(false);
- }
+    }
 
+    //יציאה מהתפריט
+    function exitMenu(){
+      setIsBlurred(false);
+      setIsHidden(true);
+      document.getElementById(currentSeat).style.backgroundColor = greenColor;
+    }
+
+
+    //בחירת מחלקות
+    function chooseClasses(e){
+      if(e.value == 'analytics'){
+        setClasstified(false);
+        setClassDelivery(false);
+        setClassAnlytics(true);
+      }
+      if(e.value == "delivery"){
+        setClasstified(false);
+        setClassAnlytics(false);
+        setClassDelivery(true);
+       
+      }
+      if(e.value == 'classtified'){
+        setClassDelivery(false);
+        setClassAnlytics(false);
+        setClasstified(true);
+       
+      }
+    }
+
+    //אישור כיסא
+    function confirmSeat(){
+      document.getElementById(currentSeat).style.backgroundColor = redColor;
+      document.getElementById(currentSeat).disabled = true;
+      setIsBlurred(false);
+      setIsHidden(true);
+    }
 
 
 
@@ -137,69 +174,220 @@ const handleDateChange = date => {
           </Row>
           <Row id="body">
           <Col  xs={9}>
-            <div id="places" >
-              <div id="deskA">
-                  <button id="seatA1" disabled={btnDisabled} onClick={(e) => {pickSeat(e.target.style)}}></button>  
+      <div id="places">
+      {classAnalytics &&
+          (<> 
+             <div id="AdeskA">
+                  <button id="AseatA1" disabled={btnDisabled} onClick={(e) => {
+                                  setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                    </button>  
                   <div className="desk"></div>
-                  <button id="seatA2"></button>
-                  <button id="seatA3"></button>   
-                  <button id="seatA4"></button>             
+                  <button id="AseatA2" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                  </button>
+                  <button id="AseatA3" disabled={btnDisabled} onClick={(e) => {
+                                          setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}> 
+                                  </button>   
+                  <button id="AseatA4" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>  
               </div>
 
-              <div id="deskB">
-              <button id="seatB1"></button>  
+              <div id="AdeskB">
+              <button id="AseatB1" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>   
                   <div className="desk"></div>
-                  <button id="seatB2"></button>
-                  <button id="seatB3"></button>
+                  <button id="AseatB2" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>  
+                  <button id="AseatB3" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>  
               </div>
 
-              <div id="deskC">
-              <button id="seatC1"></button>  
+              <div id="AdeskC">
+              <button id="AseatC1" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>   
                   <div className="desk"></div>
-                  <button id="seatC2"></button>
-                  <button id="seatC3"></button>    
+                  <button id="AseatC2" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>  
+                  <button id="AseatC3" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>     
               </div>
 
               
-              <div id="deskD">
-                  <button id="seatD1"></button>  
+              <div id="AdeskD">
+                  <button id="AseatD1" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>   
                   <div className="desk"></div>
-                  <button id="seatD2"></button>
-                  <button id="seatD3"></button>   
-                  <button id="seatD4"></button>             
+                  <button id="AseatD2" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>  
+                  <button id="AseatD3" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>    
+                  <button id="AseatD4" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>              
               </div>
 
-              <div id="deskE">
-                  <button id="seatE1"></button>  
+              <div id="AdeskE">
+                  <button id="AseatE1" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>   
                   <div className="desk2"></div>
-                  <button id="seatE2" ></button>
-                  <button id="seatE3" ></button>   
-                  <button id="seatE4"></button> 
-                  <button id="seatE5"></button> 
-                  <button id="seatE6"></button> 
+                  <button id="AseatE2"  disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>  
+                  <button id="AseatE3"  disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>     
+                  <button id="AseatE4" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>  
+                  <button id="AseatE5" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>  
+                  <button id="AseatE6" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>  
               </div>
 
-              <div id="deskF">
-                  <button id="seatF1"></button>  
+              <div id="AdeskF">
+                  <button id="AseatF1" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>   
                   <div className="desk2"></div>
-                  <button id="seatF2" ></button>
-                  <button id="seatF3"></button>   
-                  <button id="seatF4"></button> 
-                  <button id="seatF5"></button> 
-                  <button id="seatF6"></button> 
+                  <button id="AseatF2"  disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>  
+                  <button id="AseatF3" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>   
+                  <button id="AseatF4" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>  
+                  <button id="AseatF5" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>  
+                  <button id="AseatF6" disabled={btnDisabled} onClick={(e) => {
+                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                    </button>  
               </div>
 
-            </div>
+            </>)
+            }
+
+       {classDelivery &&
+            (<>
+                  <div id="DdeskA">
+                     <button id="DseatA1"></button>  
+                       <div className="desk"></div>
+                      <button id="DseatA2"></button>
+                      <button id="DseatA3"></button>    
+                  </div>
+
+                  <div id="DdeskB">
+                     <button id="DseatB1"></button>  
+                       <div className="desk"></div>
+                      <button id="DseatB2"></button>
+                      <button id="DseatB3"></button>    
+                  </div>
+
+                  <div id="DdeskC">
+                     <button id="DseatC1"></button>  
+                       <div className="desk"></div>
+                      <button id="DseatC2"></button>
+                      <button id="DseatC3"></button> 
+                      <button id="DseatC4"></button>    
+                  </div>
+
+                  <div id="DdeskD">
+                     <button id="DseatD1"></button>  
+                       <div className="desk"></div>
+                      <button id="DseatD2"></button>
+                      <button id="DseatD3"></button> 
+                      <button id="DseatD4"></button>    
+                  </div>
+
+                  <div id="DdeskE">
+                     <button id="DseatE1"></button>  
+                       <div className="desk"></div>
+                      <button id="DseatE2"></button>
+                      <button id="DseatE3"></button>    
+                  </div>
+
+                  
+                  <div id="DdeskF">
+                     <button id="DseatF1"></button>  
+                       <div className="desk"></div>
+                      <button id="DseatF2"></button>
+                       
+                  </div>
+            </>) 
+            }
+
+        {classtified &&
+              ( 
+                  <>
+                  <div id="CdeskA">
+                     <button id="Cseat1"></button>  
+                       <div className="desk4"></div>
+                      <button id="Cseat2"></button>
+                      <button id="Cseat3"></button>
+                   </div>
+
+                <div id="CdeskB">
+                <button id="Cseat4"></button>  
+                  <div  className="desk3"> </div>
+                </div>
+                     
+                  <div id="CdeskC">
+                     <button id="Cseat5"></button>  
+                       <div className="desk3"></div>
+                      <button id="Cseat6"></button>
+                   </div>
+
+
+                   <div id="CdeskD">
+                     <button id="Cseat7"></button>  
+                       <div className="desk"></div>
+                      <button id="Cseat8"></button>
+                   </div>
+
+                <div id="CdeskE">
+                     <button id="Cseat9"></button>  
+                       <div className="desk3"></div>
+                      <button id="Cseat10"></button>
+                </div>
+
+                 <div id="CdeskF">
+                     <button id="Cseat11"></button>  
+                       <div className="desk3"></div>
+                      <button id="Cseat12"></button>
+                  </div>
+
+                  </>
+              )
+            }
+        </div>
           </Col>
           <Col xs={3}>
           <div>
-      <button  id="DateBtn" disabled={isDisabled} onClick={() => setShowDatePicker(true)} value="בחר/י תאריך">
+      <button  id="DateBtn" disabled={isDisabled} onClick={() => 
+                                        setShowDatePicker(true)} value="בחר/י תאריך">
         <CalendarMonthIcon id="CalendarIcon"/>
         בחר/י תאריך
       </button>
 
           {showChoose && 
-           (<p id="pDiv"><FaEraser id="FaEraser" onClick={(e)=>{setShowChoose(false),setIsDisabled(false)}}/>
+           (<p id="pDiv"><FaEraser id="FaEraser" onClick={(e)=>{
+                                      setShowChoose(false),setIsDisabled(false)}}/>
                   <b>{date}</b></p>)}
           {showDatePicker && (
                   <Datepicker
@@ -218,10 +406,10 @@ const handleDateChange = date => {
             <div>
            
            
-              <select className="dropdown-select" >
+              <select className="dropdown-select" onChange={(e) => {chooseClasses(e.target)}}>
               <option value="" disabled selected>מחלקות</option>
                   <option value="analytics">מחלקת אנליטיקס</option>
-                  <option value="delivary">מחלקת דליברי</option>
+                  <option value="delivery">מחלקת דליברי</option>
                   <option value="classtified">מסווגים</option>
               </select>
               <input type="button" value="חדרי ישיבות" />
@@ -236,10 +424,10 @@ const handleDateChange = date => {
       </Container>
       { isHidden ? null :
             (<div id="pickDiv">
-                      <DisabledByDefaultIcon id="exitIcon" onClick={(e) => {setIsBlurred(false) , setIsHidden(true)}} />
+                      <DisabledByDefaultIcon id="exitIcon" onClick={(e) => {exitMenu()}} />
                       <CheckCircleIcon id="checkIcon" />
                       <p id="textPick">  המושב שוריין לתאריך {date} יום {getDayOfWeek(selectedDate)}</p>
-                      <button id='confimPick'>אישור הבחירה וסיום<CheckIcon /></button>
+                      <button id='confimPick' onClick={(e) => {confirmSeat()}}>אישור הבחירה וסיום<CheckIcon /></button>
                       <button id='changePick'>שינוי הבחירה<DriveFileRenameOutlineIcon /></button>
                       <button id='anotherPick'>שיריון מושב נוסף<ControlPointIcon /></button>
             </div>

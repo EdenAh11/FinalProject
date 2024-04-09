@@ -1,7 +1,7 @@
-import React from 'react'
+import {React , useState} from 'react'
 import './Login.css'
 import backgroundImage from '/img/login-background.png'
-import matrixImg from '/img/MatrixDnA.png'
+import ImgMatrix from '/img/imageMatrix.png'
 import loginImage from '/img/login.png'
 import video from '/img/back_video.mp4'
 //username
@@ -21,9 +21,12 @@ import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 
     
-export default function Login() {
+export default function Login(props) {
 
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [users, setUsers] = useState(props.users);
+
 
     //password function
       const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -32,13 +35,12 @@ export default function Login() {
         event.preventDefault();
       };
 
+
     return (
        <>
-         <div className='container' id="loginDiv">
-        
+         <div className='container-fluid' id="loginDiv">
            <div id='login'>
-            <img id="matrixImg"src={matrixImg}></img> 
-
+            <img id="matrixImg"src={ImgMatrix}></img> 
               <form id='bForm'>
                 <TextField
                 id="username"
@@ -48,7 +50,8 @@ export default function Login() {
                 style: { color: 'black', 
                         backgroundColor:'white',
                           borderRadius:'40px 40px 40px 40px',
-                          height:"50px"
+                          height:"40px",
+                          width:"260px",
                     } ,
                  startAdornment: (
                  <InputAdornment position="start">
@@ -69,7 +72,9 @@ export default function Login() {
                 style: { color: 'black', 
                         backgroundColor:'white',
                           borderRadius:'40px 40px 40px 40px',
-                          height:"50px"
+                          height:"40px",
+                          width:"260px"
+
                     } ,
                  startAdornment: (
                  <InputAdornment position="start">

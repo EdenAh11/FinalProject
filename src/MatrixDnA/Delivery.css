@@ -1,0 +1,266 @@
+
+#DdeskA{
+    width: 150px;
+    height: 180px;
+    position: absolute;
+    left: 80%;
+    top:5%
+}
+
+
+#DdeskB{
+    width: 150px;
+    height: 180px;
+    position: absolute;
+    left: 60%;
+    top: 5%;
+}
+
+#DdeskC{
+    width: 150px;
+    height: 180px;
+    position: absolute;
+    left: 40%;
+    top: 5%;
+}
+
+
+#DdeskD{
+    width: 150px;
+    height: 180px;
+    position: absolute;
+    transform: rotate(90deg);
+    top:20%;
+}
+
+#DdeskE{
+    width: 150px;
+    height: 180px;
+    position: absolute;
+    transform: rotate(90deg);
+    top:60%;
+}
+
+#DdeskF{
+    width: 150px;
+    height: 180px;
+    position: absolute;
+    transform: rotate(90deg);
+    left:18%;
+    top: -5%
+}
+
+
+
+#DseatA1{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(270deg);
+    position: absolute;
+    top:10%;
+    left: 0;
+}
+
+#DseatA2{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(270deg);
+    position: absolute;
+    top:37%;
+    left: 0;
+}
+
+#DseatA3{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(90deg);
+    position: absolute;
+    right: 0;
+    top:37%;
+}
+
+
+#DseatB1{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(270deg);
+    position: absolute;
+    top:10%;
+    left: 0;
+}
+
+#DseatB2{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(270deg);
+    position: absolute;
+    top:37%;
+    left: 0;
+}
+
+#DseatB3{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(90deg);
+    position: absolute;
+    right: 0;
+    top:37%;
+}
+
+#DseatC1{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(270deg);
+    position: absolute;
+    top:10%;
+    left: 0;
+}
+
+#DseatC2{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(270deg);
+    position: absolute;
+    top:37%;
+    left: 0;
+}
+
+#DseatC3{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(90deg);
+    position: absolute;
+    right: 0;
+    top:37%;
+}
+
+
+#DseatC4{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(90deg);
+    position: absolute;
+    right: 0;
+    top:10%;
+}
+
+#DseatD1{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(270deg);
+    position: absolute;
+    top:10%;
+    left: 0;
+}
+
+#DseatD2{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(270deg);
+    position: absolute;
+    top:37%;
+    left: 0;
+}
+
+#DseatD3{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(90deg);
+    position: absolute;
+    right: 0;
+    top:37%;
+}
+
+
+#DseatD4{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(90deg);
+    position: absolute;
+    right: 0;
+    top:10%;
+}
+
+#DseatE1{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(90deg);
+    position: absolute;
+    top:10%;
+    right: 0;
+}
+
+#DseatE2{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(270deg);
+    position: absolute;
+    top:37%;
+    left: 0;
+}
+
+#DseatE3{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(90deg);
+    position: absolute;
+    right: 0;
+    top:37%;
+}
+
+#DseatF1{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(90deg);
+    position: absolute;
+    top:10%;
+    right: 0;
+}
+
+#DseatF2{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#76BC8B ;
+    transform: rotate(90deg);
+    position: absolute;
+    top:37%;
+    right: 0;
+}
+
