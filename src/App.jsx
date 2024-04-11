@@ -7,6 +7,7 @@ function App() {
 
   const [apiUrl, setApiUrl] = useState("https://localhost:7180/api/users");
   const [users, setUsers] = useState([]);
+  const [first, setfirst] = useState(false)
 
 //לקיחת דאטה מהמערכת
   function fetchData2(){
@@ -57,7 +58,8 @@ function App() {
   return (
     <>
     
-      <Login usersArr={users} />
+    { first ?<Login usersArr={users} />:
+      <Analytics />}
       
     </>
   )

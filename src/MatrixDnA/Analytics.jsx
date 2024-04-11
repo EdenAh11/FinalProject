@@ -9,6 +9,8 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CheckIcon from '@mui/icons-material/Check';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
+import WeekendIcon from '@mui/icons-material/Weekend';
+import SpaIcon from '@mui/icons-material/Spa';
 
 import Datepicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
@@ -282,6 +284,25 @@ const handleDateChange = date => {
                                         setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
                                     </button>  
               </div>
+
+              <div id="AdeskG">
+                   <button id="AseatG1" disabled></button>   
+                        <div className="desk5"></div>
+                    <button id="AseatG2"  disabled></button> 
+              </div>
+
+              < hr id="line" />
+              < hr id="line2" />
+              < hr id="line3" />
+              < hr id="line4" />
+              < hr id="line5" />
+              < hr id="line6" />
+              < hr id="line7" />
+
+              <WeekendIcon id="couch" />
+              <SpaIcon id="spa"/>
+
+
 
             </>)
             }
