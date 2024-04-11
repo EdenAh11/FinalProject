@@ -8,9 +8,8 @@ function App() {
   const [apiUrl, setApiUrl] = useState("https://localhost:7180/api/users");
   const [users, setUsers] = useState([]);
 
-
-
-  useEffect(() => {
+//לקיחת דאטה מהמערכת
+  function fetchData2(){
     fetch(apiUrl,{
       method: 'GET' ,
       headers: new Headers({
@@ -28,15 +27,37 @@ function App() {
 
       .then(
         (result) => {
-          setUsers(result);
-      })
-  }, [])
+          console.log(result);
+          return result;
+        })
+
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+
+    }
+
+    //לקיחת דאטה מהמערכת
+    const fetchData = async () => {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      return data;
+    };
+
+
+    useEffect(() => {
+      const fetchDataFromApi = async () => {
+        const data = await fetchData();
+        setUsers(data);
+      };
+      fetchDataFromApi();
+    } , []);
   
 
   return (
     <>
     
-      <Login users={users} />
+      <Login usersArr={users} />
       
     </>
   )

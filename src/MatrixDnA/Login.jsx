@@ -1,4 +1,4 @@
-import {React , useState} from 'react'
+import {React , useState , useEffect} from 'react'
 import './Login.css'
 import backgroundImage from '/img/login-background.png'
 import ImgMatrix from '/img/imageMatrix.png'
@@ -25,8 +25,17 @@ export default function Login(props) {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const [users, setUsers] = useState(props.users);
+  const [username, setUsername] = useState("");
 
+  const [password, setPassword] = useState("");
+
+  const { usersArr } = props;
+
+  useEffect(() => {
+    // This effect will run whenever usersArr prop changes
+    console.log('Users prop updated:', usersArr);
+    // You can perform any login-related logic here
+  }, []);
 
     //password function
       const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -35,17 +44,40 @@ export default function Login(props) {
         event.preventDefault();
       };
 
+      const submitUser = (e) =>{
+        setUsername(e.target.value);
+      }
+
+      const submitPass = (e) =>{
+        setPassword(e.target.value);
+      }
+
+      const loginSubmit = (e) => {
+        e.preventDefault();
+        
+        usersArr.map(item => {
+          if(item._username == username && item._password == password){
+            console.log(username)
+            return true;
+          }
+        })
+
+      
+      }
+
 
     return (
        <>
          <div className='container-fluid' id="loginDiv">
            <div id='login'>
             <img id="matrixImg"src={ImgMatrix}></img> 
-              <form id='bForm'>
+              <form id='bForm' onSubmit={loginSubmit}>
                 <TextField
                 id="username"
                 placeholder='Username'
-                style={{width:'70%'}}
+                onChange={submitUser}
+                required
+                style={{width:'260px'}}
                 InputProps={{
                 style: { color: 'black', 
                         backgroundColor:'white',
@@ -66,15 +98,16 @@ export default function Login(props) {
             <TextField
                 id="password"
                 placeholder='Password'
+                onChange={submitPass}
+                required
                 type={showPassword ? 'text' : 'password'}
-                style={{width:'70%' }}
+                style={{width:'260px'}}
                 InputProps={{
                 style: { color: 'black', 
                         backgroundColor:'white',
                           borderRadius:'40px 40px 40px 40px',
                           height:"40px",
-                          width:"260px"
-
+                          width:"260px",
                     } ,
                  startAdornment: (
                  <InputAdornment position="start">
@@ -97,9 +130,9 @@ export default function Login(props) {
             <br /> 
             <div id='CheckDiv'>
               <input type='checkbox' id='check'></input>
-              <label for='check'> Remember Me</label>
+              <label htmlFor='check'> Remember Me</label>
             </div>
-            <Button id="btn" variant="contained">Login</Button>
+            <Button id="btn"type="submit"variant="contained" >Login</Button>
 
                </form>
                
