@@ -305,6 +305,14 @@ margin-bottom: 5%;
     top:53%;
     right: 30%
 }
+#plot{
+    width: 35px;
+    height: 35px;
+    color: #2E2B76;  
+    position: absolute;
+    top:53%;
+    right: 34%
+}
 
 
 #AseatA1{

@@ -10,7 +10,6 @@ import CheckIcon from '@mui/icons-material/Check';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import WeekendIcon from '@mui/icons-material/Weekend';
-import SpaIcon from '@mui/icons-material/Spa';
 
 import Datepicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
@@ -21,6 +20,7 @@ import './Classtified.css'
 
 
 import ImgMatrix from '/img/imageMatrix.png'
+import plot from '/img/plot.png'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 
@@ -300,7 +300,7 @@ const handleDateChange = date => {
               < hr id="line7" />
 
               <WeekendIcon id="couch" />
-              <SpaIcon id="spa"/>
+              <img id="plot" src={plot} />
 
 
 
