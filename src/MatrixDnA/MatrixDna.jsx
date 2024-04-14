@@ -4,30 +4,32 @@ import {InputLabel , MenuItem , FormControl , Select } from '@mui/material';
 
 import { FaEraser } from "react-icons/fa";
 
+
+import WeekendIcon from '@mui/icons-material/Weekend';
+import plot from '/img/plot.png'
+
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CheckIcon from '@mui/icons-material/Check';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import WeekendIcon from '@mui/icons-material/Weekend';
 
 import Datepicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Analytics.css'
-import './Delivery.css'
-import './Classtified.css'
-import './Meeting.css'
+import './CSS/Analytics.css'
+import './CSS/Delivery.css'
+import './CSS/Classtified.css'
+import './CSS/Meeting.css'
 
 
 import ImgMatrix from '/img/imageMatrix.png'
-import plot from '/img/plot.png'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 
 
 
-export default function Analytics(props) {
+export default function MatrixDnA(props) {
   //שם משתמש
   const [user, setUser] = useState("רופין רופין");
 //לינק לשרת
@@ -63,7 +65,7 @@ export default function Analytics(props) {
 
   const [classtified, setClasstified] = useState(false);
 
-  const [meeting, setMeeting] = useState(true);
+  const [meeting, setMeeting] = useState(false);
 
   const [seatUsers, setSeatUsers] = useState(props.seatsUser);
 
@@ -208,130 +210,131 @@ const handleDateChange = date => {
           <Col  xs={9}>
       <div id="places">
       {classAnalytics &&
-          (<> 
-             <div id="AdeskA">
-                  <button id="AseatA1" disabled={btnDisabled} onClick={(e) => {
-                                  setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                    </button>  
-                  <div className="desk"></div>
-                  <button id="AseatA2" disabled={btnDisabled} style={{backgroundColor:seatsUser["AseatA2"].color}} onClick={(e) => {
-                                        statusSeats(e.target.id)}}>
-                                  </button>
-                  <button id="AseatA3" disabled={btnDisabled} onClick={(e) => {
-                                          setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}> 
-                                  </button>   
-                  <button id="AseatA4" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>  
-              </div>
-
-              <div id="AdeskB">
-              <button id="AseatB1" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>   
-                  <div className="desk"></div>
-                  <button id="AseatB2" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>  
-                  <button id="AseatB3" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>  
-              </div>
-
-              <div id="AdeskC">
-              <button id="AseatC1" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>   
-                  <div className="desk"></div>
-                  <button id="AseatC2" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>  
-                  <button id="AseatC3" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>     
-              </div>
-
-              
-              <div id="AdeskD">
-                  <button id="AseatD1" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>   
-                  <div className="desk"></div>
-                  <button id="AseatD2" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>  
-                  <button id="AseatD3" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>    
-                  <button id="AseatD4" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>              
-              </div>
-
-              <div id="AdeskE">
-                  <button id="AseatE1" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>   
-                  <div className="desk2"></div>
-                  <button id="AseatE2"  disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>  
-                  <button id="AseatE3"  disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>     
-                  <button id="AseatE4" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>  
-                  <button id="AseatE5" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>  
-                  <button id="AseatE6" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>  
-              </div>
-
-              <div id="AdeskF">
-                  <button id="AseatF1" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>   
-                  <div className="desk2"></div>
-                  <button id="AseatF2"  disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>  
-                  <button id="AseatF3" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>   
-                  <button id="AseatF4" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>  
-                  <button id="AseatF5" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>  
-                  <button id="AseatF6" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                    </button>  
-              </div>
-
-              <div id="AdeskG">
-                   <button id="AseatG1" disabled></button>   
-                        <div className="desk5"></div>
-                    <button id="AseatG2"  disabled></button> 
-              </div>
-
-              < hr id="line" />
-              < hr id="line2" />
-              < hr id="line3" />
-              < hr id="line4" />
-              < hr id="line5" />
-              < hr id="line6" />
-              < hr id="line7" />
-
-              <WeekendIcon id="couch" />
-              <img id="plot" src={plot} />
-
-
-
-            </>)
+        ( 
+          <> 
+          <div id="AdeskA">
+               <button id="AseatA1" disabled={btnDisabled} onClick={(e) => {
+                               setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                 </button>  
+               <div className="desk"></div>
+               <button id="AseatA2" disabled={btnDisabled} onClick={(e) => {
+                               setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                               </button>
+               <button id="AseatA3" disabled={btnDisabled} onClick={(e) => {
+                                       setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}> 
+                               </button>   
+               <button id="AseatA4" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>  
+           </div>
+      
+           <div id="AdeskB">
+           <button id="AseatB1" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>   
+               <div className="desk"></div>
+               <button id="AseatB2" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>  
+               <button id="AseatB3" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>  
+           </div>
+      
+           <div id="AdeskC">
+           <button id="AseatC1" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>   
+               <div className="desk"></div>
+               <button id="AseatC2" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>  
+               <button id="AseatC3" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>     
+           </div>
+      
+           
+           <div id="AdeskD">
+               <button id="AseatD1" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>   
+               <div className="desk"></div>
+               <button id="AseatD2" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>  
+               <button id="AseatD3" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>    
+               <button id="AseatD4" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>              
+           </div>
+      
+           <div id="AdeskE">
+               <button id="AseatE1" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>   
+               <div className="desk2"></div>
+               <button id="AseatE2"  disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>  
+               <button id="AseatE3"  disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>     
+               <button id="AseatE4" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>  
+               <button id="AseatE5" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>  
+               <button id="AseatE6" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>  
+           </div>
+      
+           <div id="AdeskF">
+               <button id="AseatF1" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>   
+               <div className="desk2"></div>
+               <button id="AseatF2"  disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>  
+               <button id="AseatF3" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>   
+               <button id="AseatF4" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>  
+               <button id="AseatF5" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>  
+               <button id="AseatF6" disabled={btnDisabled} onClick={(e) => {
+                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                 </button>  
+           </div>
+      
+           <div id="AdeskG">
+                <button id="AseatG1" disabled></button>   
+                     <div className="desk5"></div>
+                 <button id="AseatG2"  disabled></button> 
+           </div>
+      
+           < hr id="line" />
+           < hr id="line2" />
+           < hr id="line3" />
+           < hr id="line4" />
+           < hr id="line5" />
+           < hr id="line6" />
+           < hr id="line7" />
+      
+           <WeekendIcon id="couch" />
+           <img id="plot" src={plot} />
+      
+      
+      
+         </>)
             }
 
        {classDelivery &&
@@ -457,7 +460,11 @@ const handleDateChange = date => {
         <CalendarMonthIcon id="CalendarIcon"/>
         בחר/י תאריך
       </button>
+              <div>                    
+                     <label id="labelCheck" htmlFor='checkPlace'> בחר/י שוב את מה שבחרתי בפעם האחרונה</label>
 
+                     <input type='checkbox' id='checkPlace'></input>
+              </div>
           {showChoose && 
            (<p id="pDiv"><FaEraser id="FaEraser" onClick={(e)=>{
                                       setShowChoose(false),setIsDisabled(false)}}/>

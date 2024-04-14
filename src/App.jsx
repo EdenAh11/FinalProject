@@ -1,7 +1,7 @@
 import { useState , useEffect } from 'react'
 import './App.css'
 import Login from './MatrixDnA/Login.jsx'
-import Analytics from './MatrixDnA/Analytics.jsx'
+import Matrix from './MatrixDnA/MatrixDna.jsx'
 
 function App() {
 
@@ -41,7 +41,7 @@ const fetchData2 = async () => {
     <>
     
     { first ?<Login usersArr={users} />: null}
-    {seats.length > 0  ? <Analytics seatsUser={seats} /> : null}
+    {seats.length > 0  ? <Matrix seatsUser={seats} /> : null}
       
     </>
   )

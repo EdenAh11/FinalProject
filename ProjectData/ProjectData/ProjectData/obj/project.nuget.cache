@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "mZlwUO8CLdz+Bmjul0JAkoj9ifqeq9NmhAY/1tJGnDKfmv7XMjGI6g44yY8oF3wdC9/4cKOlJbnN5xSw229pqQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Eden_Ahrak\\Desktop\\תואר - הנדסה תעשיה וניהול\\פרויקט גמר\\FinalProject\\ProjectData\\ProjectData\\ProjectData\\ProjectData.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Eden_Ahrak\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\Eden_Ahrak\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Eden_Ahrak\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\Eden_Ahrak\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\Eden_Ahrak\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\Eden_Ahrak\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}

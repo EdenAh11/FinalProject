@@ -15,7 +15,19 @@
     height: 85%;
 }
 
+#checkPlace{
+    width: 10px;
+    height: 10px;
+   
+}
 
+#labelCheck{
+    font-size: x-small;
+    font-family: "Rubik" , sans-serif;
+    margin-right: 2%;
+   
+    color: #2E2B76;
+}
 
 #MatrixImg{
     width: 20%;
