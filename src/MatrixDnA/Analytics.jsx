@@ -1,4 +1,4 @@
-import {React , useState , createContext} from 'react'
+import {React , useState , createContext , useEffect} from 'react'
 import {Container , Row , Col , Button  } from 'react-bootstrap';
 import {InputLabel , MenuItem , FormControl , Select } from '@mui/material';
 
@@ -17,6 +17,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Analytics.css'
 import './Delivery.css'
 import './Classtified.css'
+import './Meeting.css'
 
 
 import ImgMatrix from '/img/imageMatrix.png'
@@ -26,9 +27,11 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 
 
-export default function Analytics() {
+export default function Analytics(props) {
   //שם משתמש
   const [user, setUser] = useState("רופין רופין");
+//לינק לשרת
+  const [apiUrl2, setApiUrl2] = useState("https://localhost:7180/api/Seats");
   //תאריך נוכחי
   const [date, setDate] = useState(getCurrentDate());
   //בחירת תאריך למקום
@@ -60,16 +63,38 @@ export default function Analytics() {
 
   const [classtified, setClasstified] = useState(false);
 
+  const [meeting, setMeeting] = useState(true);
+
+  const [seatUsers, setSeatUsers] = useState(props.seatsUser);
 
 
+ useEffect(() => {
+  const index = seatUsers.findIndex(item => item._id === "AseatA2");
+  setSeatUsers(seatUsers => {
+    const newArray = [...seatUsers];
+    newArray[index] = {...newArray[index], _color:redColor};
+    console.log(newArray);
+    return newArray
+  });
+  // This effect will run whenever usersArr prop changes
+  seatUsers.map(user1 => {
+  
+    console.log(user1 , index);
+  } )
+                                                // You can perform any login-related logic here
+ }, []);
+    
+ function statusSeats(e){
+
+  const index = seatUsers.findIndex(item => item._id === e);
+  setSeatUsers(seatUsers => {
+    const newArray = [...seatUsers];
+    newArray[index] = {...newArray[index], _color:redColor};
+    console.log(newArray);
+    });
 
 
-
-
-
-
-
-
+}
 
   //תאריך נוכחי לכותרת
   function getCurrentDate() {
@@ -166,6 +191,8 @@ const handleDateChange = date => {
   return (
     <>
       <Container id='AnalystDiv' fluid style={{filter: isBlurred ? 'blur(4px)' : 'none'}}>
+      <button onClick={statusSeats}></button>
+
           <Row id="head">
             <Col id="LeftUp">
               <img id='MatrixImg' src={ImgMatrix}/>
@@ -187,8 +214,8 @@ const handleDateChange = date => {
                                   setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
                     </button>  
                   <div className="desk"></div>
-                  <button id="AseatA2" disabled={btnDisabled} onClick={(e) => {
-                                        setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                  <button id="AseatA2" disabled={btnDisabled} style={{backgroundColor:seatsUser["AseatA2"].color}} onClick={(e) => {
+                                        statusSeats(e.target.id)}}>
                                   </button>
                   <button id="AseatA3" disabled={btnDisabled} onClick={(e) => {
                                           setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}> 
@@ -399,6 +426,28 @@ const handleDateChange = date => {
                   </>
               )
             }
+
+            {meeting &&(
+                <>
+                
+                  <div id="Mdesk1">
+                    
+                  <hr id="mline"></hr>
+                  <hr id="mline2"></hr>
+
+                    <button id="Mseat1"></button>
+                  <div className="mdesk"></div>
+                  <button id="Mseat2"></button>
+                  <button id="Mseat3"></button>
+                  <button id="Mseat4"></button>
+
+                
+
+
+
+                   </div>
+                </>
+            )}
         </div>
           </Col>
           <Col xs={3}>

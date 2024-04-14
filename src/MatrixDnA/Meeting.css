@@ -1,0 +1,82 @@
+
+#Mdesk1{
+width: 45%;
+height: 35%;
+position: relative;
+float: right;
+top:7%
+
+}
+
+.mdesk{
+    width: 10%;
+    height: 28%;
+    border-radius: 8px;
+    background-color: #BFCBD9 ;
+    position: absolute;
+    top:35%;
+    left: 40%;
+    
+}
+
+#Mseat1{
+    width: 8%;
+    height: 25%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    position: absolute;
+    top:8%;
+    left: 40%;
+}
+#Mseat2{
+    width: 8%;
+    height: 25%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(180deg);
+    position: absolute;
+    top:65%;
+    left: 40%;
+}
+#Mseat3{
+    width: 8%;
+    height: 25%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(90deg);
+    position: absolute;
+    top:35%;
+    left: 50%;
+}#Mseat4{
+    width: 8%;
+    height: 25%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(-90deg);
+    position: absolute;
+    top:35%;
+    left: 30%;
+}
+
+#mline{
+    background-color: #7D7D82;
+    border-radius: 8px 8px 0px 0px;
+    height: 6%;
+    width: 40%;
+    position: absolute;
+    margin-top: 0;
+    
+
+}
+
+#mline2{
+    background-color: #7D7D82;
+    border-radius: 8px 8px 0px 0px;
+    border-radius: 8px 8px 0px 0px;
+    height: 6%;
+    width: 40%;
+    margin-top: 0;
+    float: right;
+    margin-right: 10%;
+
+}
