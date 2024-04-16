@@ -1,204 +1,42 @@
 
-#AnalystDiv{
+
+
+
+#upperDesks{
     position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
+    width: 75%;
+    height: 40%;
+    right: 0;
+    top:5%
+}
+
+#leftDesks{
+    position: absolute;
     left: 0;
-    background-color: #FCF7FD;
+    bottom: 0;
+    height: 80%;
 }
-
-#head{
-    height: 15%;
-}
-#body{
-    height: 85%;
-}
-
-#checkPlace{
-    width: 10px;
-    height: 10px;
-   
-}
-
-#labelCheck{
-    font-size: x-small;
-    font-family: "Rubik" , sans-serif;
-    margin-right: 2%;
-   
-    color: #2E2B76;
-}
-
-#MatrixImg{
-    width: 20%;
-    margin-left: 5%;
-    justify-content: space-between;
-}
-
-#Sdiv{
-    float: right;
-    text-align: right;
-    width: 12%
-}
-
-#imgS{
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-    background-color: #2E2B76;
-    text-align: center;
-    margin-top: 20px;
-    
-
-}
-
-#imgS label{
-    width: 35px;
-    height: 35px;
-    color: white;
-
-    font-family: Rubik, sans-serif;
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 40px;
-}
-
-#SImg{
-    width: 100%;
-    margin-top: 15px;
-}
-
-
-#LeftUp{
-    text-align: left;
-    margin-top: 24px;
-}
-#rightUp{
-    text-align: right;
-
-}
-#divName {
-    width: 85%;
-    height: 50%;
-    text-align: right;
-    font-family: "Rubik" , sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 62px;
-    color: #2E2B76;
-    
-}
-
-#divDate {
-    font-family: Rubik , sans-serif;
-    font-weight: 400;
-    font-size: 12px;
-    text-align: right;
-    width: 85%;
-}
-
-#places{
-   
-    position: relative;
-    background-color: white;
-    width: 97%;
-    height: 98%;
-    margin-left:5% ;
-    box-shadow: 2px 4px 40px 2px rgba(0, 0, 0, 0.15);
-    border-radius: 1%
-}
-
-input , select  {
-    width: 70%;
-    height: 25px;
-    border-radius: 40px 40px 40px 40px;
-    color: #2E2B76;
-    border:1px solid #2E2B76;
-    background-color: white;
-    font-family: "Rubik" , sans-serif;
-    font-weight: 600;
-    text-align: right;
-    padding: 8px, 16px, 8px, 16px;
-    margin-bottom: 5%;
- 
-
-}
-
-#DateBtn{
-background-color: white;
-border-radius: 40px 40px 40px 40px;
-width: 70%;
-height: 25px;
-text-align: right;
-color: #2E2B76;
-border:1px solid #2E2B76;
-background-color: white;
-font-family:Rubik , sans-serif;
-font-weight: 600;
-padding: 0 2%;
-margin-bottom: 5%;
-
-}
-.dropdown-select{
-    direction: rtl
-}
-
-#selectClass {
-    background-color: white;
-    border-radius: 40px 40px 40px 40px;
-    color:#2E2B76;
-    width: 80%;
-    height: 70%;
-
-}
-
-#CalendarIcon{
-    margin-right: 40%;
-    margin-top: -2.5%;
-    width: 14%;
-    height: 85%;
-}
-
-#pDiv{
-    text-align: right;
-    width:85%;
-    color: #2E2B76;
-    font-family:Rubik , sans-serif;
-
-}
-
-#FaEraser{
-    margin-right: 42%;
-    margin-top: -2%;
-}
-
-#endBtn{
-    color: white;
-    background-color: #2E2B76;
-    text-align: center;
-}
-
 #AdeskA{
-    width: 150px;
-    height: 180px;
+    width: 22%;
+    height: 70%;
     position: absolute;
-    left: 75%;
+    right: 5%;
     top:5%
 }
 
 #AdeskB{
-    width: 150px;
-    height: 180px;
+    width: 22%;
+    height: 70%;
     position: absolute;
-    left: 55%;
+    right: 33%;
     top: 5%;
 }
 
 #AdeskC{
-    width: 150px;
-    height: 180px;
+    width: 22%;
+    height: 70%;
     position: absolute;
-    left: 35%;
+    right: 60%;
     top: 5%;
 }
 
@@ -239,19 +77,19 @@ margin-bottom: 5%;
 }
 
 #line{
-    width: 15%;
-    border: 3px solid #2E2B76;  
+    width: 18%;
+    border: 1.5px solid #2E2B76;  
     transform: rotate(90deg); 
     position: absolute;
-    top:12%;
-    left: 17%
+    top:26%;
+    left: 0;
     
 }
 #line2{
-    width: 55%;
-    border: 3px solid #2E2B76;  
+    width: 70%;
+    border: 1.5px solid #2E2B76;  
     position: absolute;
-    top:30%;
+    bottom: 0%;
     right: 12%
     
 }
@@ -328,113 +166,113 @@ margin-bottom: 5%;
 
 
 #AseatA1{
-    width: 40px;
-    height: 40px;
+    width: 20%;
+    height: 30%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
     transform: rotate(270deg);
     position: absolute;
-    top:10%;
+    top:12%;
     left: 0;
 }
 
 #AseatA2{
-    width: 40px;
-    height: 40px;
+    width: 20%;
+    height: 30%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
     transform: rotate(270deg);
     position: absolute;
-    top:37%;
+    top:47%;
     left: 0;
 }
 
 #AseatA3{
-    width: 40px;
-    height: 40px;
+    width: 20%;
+    height: 30%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
     transform: rotate(90deg);
     position: absolute;
     right: 0;
-    top:37%;
+    top:12%;
 }
 
 #AseatA4{
-    width: 40px;
-    height: 40px;
+    width: 20%;
+    height: 30%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
     transform: rotate(90deg);
     position: absolute;
     right: 0;
-    top:10%;
+    top:47%;
 }
 
 #AseatB1{
-    width: 40px;
-    height: 40px;
+    width: 20%;
+    height: 30%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
     transform: rotate(90deg);
     position: absolute;
-    top:10%;
+    top:12%;
     right: 0;
 }
 
 #AseatB2{
-    width: 40px;
-    height: 40px;
+    width: 20%;
+    height: 30%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
     transform: rotate(270deg);
     position: absolute;
-    top:37%;
+    top:47%;
     left: 0;
 }
 
 #AseatB3{
-    width: 40px;
-    height: 40px;
+    width: 20%;
+    height: 30%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
     transform: rotate(90deg);
     position: absolute;
     right: 0;
-    top:37%;
+    top:47%;
 }
 
 #AseatC1{
-    width: 40px;
-    height: 40px;
+    width: 20%;
+    height: 30%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
     transform: rotate(270deg);
     position: absolute;
-    top:10%;
+    top:12%;
     left: 0;
 }
 
 #AseatC2{
-    width: 40px;
-    height: 40px;
+    width: 20%;
+    height: 30%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
     transform: rotate(270deg);
     position: absolute;
-    top:37%;
+    top:47%;
     left: 0;
 }
 
 #AseatC3{
-    width: 40px;
-    height: 40px;
+    width: 20%;
+    height: 30%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
     transform: rotate(90deg);
     position: absolute;
     right: 0;
-    top:37%;
+    top:47%;
 }
 
 #AseatD1{
@@ -665,98 +503,7 @@ margin-bottom: 5%;
     top:10%;
     left:30%
 }
-#pickDiv{
-    background-color: white;
-    position: absolute;
-    width: 600px;
-    height: 180px;
-    top: 25%;
-    left: 25%;
-    border-radius: 8px;
-    box-shadow: 2px 4px 40px 2px rgba(0, 0, 0, 0.15);
 
-}
-
-#exitIcon{
-    color:#2E2B76;
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    left: 2%;
-    top:5%
-}
-
-#checkIcon{
-    color:#2E2B76;
-    width: 40px;
-    height: 90px;
-    position: absolute;
-    right:5%;
-    top: 10%;
-}
-
-#textPick{
-    font-family: Rubik, sans-serif;
-    font-weight: 600;
-    font-size: 24px;
-    color: #2E2B76;
-    position: absolute;
-    right:13%;
-    top: 23%;
-}
-
-#confimPick{
-border-radius: 40px 40px 40px 40px;
-width: 28%;
-height: 30px;
-color: #2E2B76;
-border:1px solid #2E2B76;
-background-color: white;
-font-family:Rubik , sans-serif;
-font-weight: 600;
-font-size: 14px;
-text-align: right;
-position: absolute;
-top:60%;
-right:5%;
-padding: 0;
-text-align: center;
-}
-#changePick{
-    border-radius: 40px 40px 40px 40px;
-    width: 28%;
-    height: 30px;
-    color: #2E2B76;
-    border:1px solid #2E2B76;
-    background-color: white;
-    font-family:Rubik , sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    text-align: right;
-    position: absolute;
-    top:60%;
-    right:34%;
-    padding: 0;
-    text-align: center;
-}
-
-#anotherPick{
-    border-radius: 40px 40px 40px 40px;
-    width: 28%;
-    height: 30px;
-    color: #2E2B76;
-    border:1px solid #2E2B76;
-    background-color: white;
-    font-family:Rubik , sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    text-align: right;
-    position: absolute;
-    top:60%;
-    right:64%;
-    padding: 0;
-    text-align: center;
-}
 
 
 

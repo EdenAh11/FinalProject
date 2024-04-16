@@ -1,0 +1,277 @@
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#MatrixDiv{
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #FCF7FD;
+}
+
+#head{
+    height: 15%;
+}
+#body{
+    height: 85%;
+}
+
+#checkPlace{
+    width: 10px;
+    height: 10px;
+   
+}
+
+#labelCheck{
+    font-size: x-small;
+    font-family: "Rubik" , sans-serif;
+    margin-right: 2%;
+   
+    color: #2E2B76;
+}
+
+#MatrixImg{
+    width: 20%;
+    margin-left: 5%;
+    justify-content: space-between;
+}
+
+#Sdiv{
+    float: right;
+    text-align: right;
+    width: 12%
+}
+
+#imgS{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: #2E2B76;
+    text-align: center;
+
+    
+
+}
+
+#imgS label{
+    width: 35px;
+    height: 35px;
+    color: white;
+
+    font-family: Rubik, sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 40px;
+}
+
+#SImg{
+    width: 100%;
+    margin-top: 15px;
+}
+
+
+#LeftUp{
+    text-align: left;
+}
+#rightUp{
+    text-align: right;
+
+}
+#divName {
+    width: 85%;
+    height: 100%;
+    text-align: right;
+    font-family: "Rubik" , sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    margin-top: 0;
+    color: #2E2B76;
+    
+}
+
+#pDate {
+    font-family: "Rubik" , sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    text-align: right;
+    width: 100%;
+}
+
+#places{
+   
+    position: relative;
+    background-color: white;
+    width: 97%;
+    height: 98%;
+    left:5% ;
+    box-shadow: 2px 4px 40px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 1%
+}
+
+input , select  {
+    width: 70%;
+    height: 25px;
+    border-radius: 40px 40px 40px 40px;
+    color: #2E2B76;
+    border:1px solid #2E2B76;
+    background-color: white;
+    font-family: "Rubik" , sans-serif;
+    font-weight: 600;
+    text-align: right;
+    padding: 8px, 16px, 8px, 16px;
+    margin-bottom: 5%;
+ 
+
+}
+
+#DateBtn{
+background-color: white;
+border-radius: 40px 40px 40px 40px;
+width: 70%;
+height: 25px;
+text-align: right;
+color: #2E2B76;
+border:1px solid #2E2B76;
+background-color: white;
+font-family:Rubik , sans-serif;
+font-weight: 600;
+padding: 0 2%;
+margin-bottom: 5%;
+
+}
+.dropdown-select{
+    direction: rtl
+}
+
+#selectClass {
+    background-color: white;
+    border-radius: 40px 40px 40px 40px;
+    color:#2E2B76;
+    width: 80%;
+    height: 70%;
+
+}
+
+#CalendarIcon{
+    margin-right: 40%;
+    margin-top: -2.5%;
+    width: 14%;
+    height: 85%;
+}
+
+#pDiv{
+    text-align: right;
+    width:85%;
+    color: #2E2B76;
+    font-family:Rubik , sans-serif;
+
+}
+
+#FaEraser{
+    margin-right: 42%;
+    margin-top: -2%;
+}
+
+#endBtn{
+    color: white;
+    background-color: #2E2B76;
+    text-align: center;
+}
+
+#pickDiv{
+    background-color: white;
+    position: absolute;
+    width: 600px;
+    height: 180px;
+    top: 25%;
+    left: 25%;
+    border-radius: 8px;
+    box-shadow: 2px 4px 40px 2px rgba(0, 0, 0, 0.15);
+
+}
+
+#exitIcon{
+    color:#2E2B76;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    left: 2%;
+    top:5%
+}
+
+#checkIcon{
+    color:#2E2B76;
+    width: 40px;
+    height: 90px;
+    position: absolute;
+    right:5%;
+    top: 10%;
+}
+
+#textPick{
+    font-family: Rubik, sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: #2E2B76;
+    position: absolute;
+    right:13%;
+    top: 23%;
+}
+
+#confimPick{
+border-radius: 40px 40px 40px 40px;
+width: 28%;
+height: 30px;
+color: #2E2B76;
+border:1px solid #2E2B76;
+background-color: white;
+font-family:Rubik , sans-serif;
+font-weight: 600;
+font-size: 14px;
+text-align: right;
+position: absolute;
+top:60%;
+right:5%;
+padding: 0;
+text-align: center;
+}
+#changePick{
+    border-radius: 40px 40px 40px 40px;
+    width: 28%;
+    height: 30px;
+    color: #2E2B76;
+    border:1px solid #2E2B76;
+    background-color: white;
+    font-family:Rubik , sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: right;
+    position: absolute;
+    top:60%;
+    right:34%;
+    padding: 0;
+    text-align: center;
+}
+
+#anotherPick{
+    border-radius: 40px 40px 40px 40px;
+    width: 28%;
+    height: 30px;
+    color: #2E2B76;
+    border:1px solid #2E2B76;
+    background-color: white;
+    font-family:Rubik , sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: right;
+    position: absolute;
+    top:60%;
+    right:64%;
+    padding: 0;
+    text-align: center;
+}

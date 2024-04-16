@@ -1,16 +1,69 @@
 
 #Mdesk1{
-width: 45%;
+width: 35%;
 height: 35%;
-position: relative;
-float: right;
-top:7%
+position: absolute;
+top:7%;
+right: 0;
+}
+
+#Mdesk1::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 15%;
+    height: 70%;
+    width: 100%;
+    border-left: 3px solid #2E2B76;
+}
+
+
+
+
+#Mdesk2{
+    width: 25%;
+    height: 70%;
+    position: absolute;
+    top:15%;
+    right:43%;
+
+}
+
+#Mdesk2::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10%;
+    bottom: 0;
+    height: 95%;
+    width: 100%;
+    border-left: 3px solid #2E2B76;
+    border-right: 3px solid #2E2B76;
+}
+
+#Mdesk3{
+    width: 20%;
+    height: 35%;
+    position: absolute;
+    top:55%;
+    left:5%;
+    border-right: 3px solid #2E2B76;
+
+}
+
+#Mdesk4{
+    width: 20%;
+    height: 35%;
+    position: absolute;
+    top:60%;
+    right:15%;
+    border-right: 3px solid #2E2B76;
 
 }
 
 .mdesk{
-    width: 10%;
-    height: 28%;
+    width: 13%;
+    height: 25%;
     border-radius: 8px;
     background-color: #BFCBD9 ;
     position: absolute;
@@ -19,64 +72,370 @@ top:7%
     
 }
 
+.mdesk2{
+    width: 25%;
+    height: 75%;
+    border-radius: 8px;
+    background-color: #BFCBD9 ;
+    position: absolute;
+    top:20%;
+    right: 36%;
+}
+
+.mdesk3{
+    width: 26%;
+    height: 30%;
+    border-radius: 8px;
+    background-color: #BFCBD9 ;
+    position: absolute;
+    top:35%;
+    left: 38%;
+    
+}
+
+
 #Mseat1{
     width: 8%;
-    height: 25%;
+    height: 20%;
     border-radius: 8px 8px 0px 0px;
     background-color:#C7C7C9 ;
     position: absolute;
-    top:8%;
+    top:14%;
     left: 40%;
 }
 #Mseat2{
     width: 8%;
-    height: 25%;
+    height: 20%;
     border-radius: 8px 8px 0px 0px;
     background-color:#C7C7C9 ;
     transform: rotate(180deg);
     position: absolute;
-    top:65%;
+    top:61%;
     left: 40%;
 }
 #Mseat3{
     width: 8%;
-    height: 25%;
+    height: 20%;
     border-radius: 8px 8px 0px 0px;
     background-color:#C7C7C9 ;
     transform: rotate(90deg);
     position: absolute;
-    top:35%;
-    left: 50%;
+    top:37%;
+    right: 35%;
 }#Mseat4{
     width: 8%;
-    height: 25%;
+    height: 20%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(-90deg);
+    position: absolute;
+    top:37%;
+    left: 28%;
+}
+
+#Mseat5{
+    width: 22%;
+    height: 12%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    position: absolute;
+    top:7%;
+    left: 41%;
+}
+
+#Mseat6{
+    width: 20%;
+    height: 12%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(-90deg);
+    position: absolute;
+    top:20%;
+    left: 19%;
+}
+
+#Mseat7{
+    width: 20%;
+    height: 12%;
     border-radius: 8px 8px 0px 0px;
     background-color:#C7C7C9 ;
     transform: rotate(-90deg);
     position: absolute;
     top:35%;
-    left: 30%;
+    left: 19%;
 }
+#Mseat8{
+    width: 20%;
+    height: 12%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(-90deg);
+    position: absolute;
+    top:50%;
+    left: 19%;
+}
+#Mseat9{
+    width: 20%;
+    height: 12%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(-90deg);
+    position: absolute;
+    top:65%;
+    left: 19%;
+}
+#Mseat10{
+    width: 20%;
+    height: 12%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(-90deg);
+    position: absolute;
+    top:80%;
+    left: 19%;
+}
+#Mseat11{
+    width: 20%;
+    height: 12%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(90deg);
+    position: absolute;
+    top:20%;
+    left: 64%;
+}
+#Mseat12{
+    width: 20%;
+    height: 12%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(90deg);
+    position: absolute;
+    top:35%;
+    left: 64%;
+}
+#Mseat13{
+    width: 20%;
+    height: 12%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(90deg);
+    position: absolute;
+    top:50%;
+    left: 64%;
+}
+#Mseat14{
+    width: 20%;
+    height: 12%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(90deg);
+    position: absolute;
+    top:65%;
+    left: 64%;
+}
+#Mseat15{
+    width: 20%;
+    height: 12%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(90deg);
+    position: absolute;
+    top:80%;
+    left: 64%;
+}
+#Mseat16{
+    width: 20%;
+    height: 12%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(180deg);
+    position: absolute;
+    top:96%;
+    left: 41%;
+}
+
+#Mseat17{
+    width: 8%;
+    height: 20%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    position: absolute;
+    top:14%;
+    left: 40%;
+}
+#Mseat18{
+    width: 8%;
+    height: 20%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(180deg);
+    position: absolute;
+    top:66%;
+    left: 40%;
+}
+#Mseat19{
+    width: 8%;
+    height: 20%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(90deg);
+    position: absolute;
+    top:40%;
+    right: 14%;
+}#Mseat20{
+    width: 8%;
+    height: 20%;
+    border-radius: 8px 8px 0px 0px;
+    background-color:#C7C7C9 ;
+    transform: rotate(-90deg);
+    position: absolute;
+    top:40%;
+    left: 17%;
+}
+
+
 
 #mline{
     background-color: #7D7D82;
-    border-radius: 8px 8px 0px 0px;
+    border-radius: 8px;
     height: 6%;
     width: 40%;
     position: absolute;
-    margin-top: 0;
+    top: 0;
+    left: 5%;
     
 
 }
 
 #mline2{
     background-color: #7D7D82;
-    border-radius: 8px 8px 0px 0px;
-    border-radius: 8px 8px 0px 0px;
+    border-radius: 8px;
     height: 6%;
     width: 40%;
-    margin-top: 0;
-    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
     margin-right: 10%;
 
 }
+
+
+#mline3{
+    width: 80%;
+    border: 1.5px solid #2E2B76;  
+    position: absolute;
+    margin: 0 ;
+    bottom: 0;
+    right: 5%
+}
+
+
+
+#mline4{
+    width: 100%;
+    border: 5px solid #7D7D82; 
+    border-radius: 8px; 
+    position: absolute;
+    top: 0;
+}
+#mline5{
+    width: 100%;
+    border: 5px solid #7D7D82; 
+    border-radius: 8px; 
+    position: absolute;
+    top: -7%;
+}
+#mline6{
+    width: 90%;
+    border: 5px solid #7D7D82; 
+    border-radius: 8px; 
+    transform: rotate(90deg);
+    position: absolute;
+    top: 45%;
+    left: -45%;
+}
+
+#plot2{
+    width: 30px;
+    height: 30px;
+    color: #2E2B76;  
+    position: absolute;
+    top:18%;
+    left:2%
+}
+
+#plot3{
+    width: 30px;
+    height: 30px;
+    color: #2E2B76;  
+    position: absolute;
+    top:43%;
+    left:2%
+}
+#plot4{
+    width: 30px;
+    height: 30px;
+    color: #2E2B76;  
+    position: absolute;
+    top:5%;
+    left:5%
+}
+
+#Catch1{
+    position: absolute;
+    top: 38%;
+    right: 34%;
+    width: 8%;
+    background-color: #F4BEBE;
+    border-radius: 16px;
+    color: #BF4040;
+    z-index: 1;
+    font-family: "Rubik" , sans-serif;
+    font-weight: 600;
+    border: 1px solid #EB7171;
+}
+
+#Catch2{
+    position: absolute;
+    top: 60%;
+    right: 60%;
+    width: 8%;
+    background-color: #F4BEBE;
+    border-radius: 16px;
+    color: #BF4040;
+    z-index: 1;
+    font-family: "Rubik" , sans-serif;
+    font-weight: 600;
+    border: 1px solid #EB7171;
+}
+
+#Catch3{
+    position: absolute;
+    top: 78%;
+    left: 11%;
+    width: 8%;
+    background-color: #F4BEBE;
+    border-radius: 16px;
+    color: #BF4040;
+    z-index: 1;
+    font-family: "Rubik" , sans-serif;
+    font-weight: 600;
+    border: 1px solid #EB7171;
+}
+#Catch4{
+    position: absolute;
+    top: 82%;
+    right: 38%;
+    width: 8%;
+    background-color: #F4BEBE;
+    border-radius: 16px;
+    color: #BF4040;
+    z-index: 1;
+    font-family: "Rubik" , sans-serif;
+    font-weight: 600;
+    border: 1px solid #EB7171;
+}
+
+
+

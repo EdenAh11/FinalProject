@@ -17,6 +17,7 @@ import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import Datepicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './CSS/MatrixDna.css'
 import './CSS/Analytics.css'
 import './CSS/Delivery.css'
 import './CSS/Classtified.css'
@@ -68,6 +69,16 @@ export default function MatrixDnA(props) {
   const [meeting, setMeeting] = useState(false);
 
   const [seatUsers, setSeatUsers] = useState(props.seatsUser);
+
+  const [catch1Hide, setCatch1Hide] = useState(true);
+  const [catch1Blur, setCatch1Blur] = useState(false);
+  const [catch2Hide, setCatch2Hide] = useState(true);
+  const [catch2Blur, setCatch2Blur] = useState(false);
+  const [catch3Hide, setCatch3Hide] = useState(true);
+  const [catch3Blur, setCatch3Blur] = useState(false);
+  const [catch4Hide, setCatch4Hide] = useState(true);
+  const [catch4Blur, setCatch4Blur] = useState(false);
+
 
 
  useEffect(() => {
@@ -160,20 +171,29 @@ const handleDateChange = date => {
       if(e.value == 'analytics'){
         setClasstified(false);
         setClassDelivery(false);
+        setMeeting(false)
         setClassAnlytics(true);
       }
       if(e.value == "delivery"){
         setClasstified(false);
         setClassAnlytics(false);
+        setMeeting(false)
         setClassDelivery(true);
        
       }
       if(e.value == 'classtified'){
         setClassDelivery(false);
         setClassAnlytics(false);
+        setMeeting(false)
         setClasstified(true);
-       
       }
+    }
+
+    function showMeeting(){
+      setMeeting(true)
+      setClassDelivery(false);
+      setClassAnlytics(false);
+      setClasstified(false);
     }
 
     //אישור כיסא
@@ -184,6 +204,24 @@ const handleDateChange = date => {
       setIsHidden(true);
     }
 
+    //תפיסת שולחנות בחדר הישיבות
+    function catchDesk1(){
+      setCatch1Blur(true);
+      setCatch1Hide(false);
+    }
+    function catchDesk2(){
+      setCatch2Blur(true);
+      setCatch2Hide(false);
+    }
+    function catchDesk3(){
+      setCatch3Blur(true);
+      setCatch3Hide(false);
+    }
+    function catchDesk4(){
+      setCatch4Blur(true);
+      setCatch4Hide(false);
+    }
+
 
 
 
@@ -192,7 +230,7 @@ const handleDateChange = date => {
  
   return (
     <>
-      <Container id='AnalystDiv' fluid style={{filter: isBlurred ? 'blur(4px)' : 'none'}}>
+      <Container id='MatrixDiv' fluid style={{filter: isBlurred ? 'blur(4px)' : 'none'}}>
       <button onClick={statusSeats}></button>
 
           <Row id="head">
@@ -201,61 +239,67 @@ const handleDateChange = date => {
             </Col>
             <Col id="RightUp">
               <div id="Sdiv"><div id="imgS"><label>S</label></div>  </div>
-              <div id="divName"> !שלום {user}</div>
-              <div id="divDate">{getCurrentDate()}</div>
+              <div id="divName"> <label pUser>!שלום {user} </label>
+                                 <label id="pDate"> {getCurrentDate()} </label></div>
         
             </Col>
           </Row>
-          <Row id="body">
-          <Col  xs={9}>
+          <Row id="body" >
+          <Col xs={9}>
       <div id="places">
       {classAnalytics &&
         ( 
           <> 
-          <div id="AdeskA">
-               <button id="AseatA1" disabled={btnDisabled} onClick={(e) => {
-                               setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                 </button>  
-               <div className="desk"></div>
-               <button id="AseatA2" disabled={btnDisabled} onClick={(e) => {
-                               setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                               </button>
-               <button id="AseatA3" disabled={btnDisabled} onClick={(e) => {
-                                       setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}> 
-                               </button>   
-               <button id="AseatA4" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>  
-           </div>
+          <div id="upperDesks">
+                              <div id="line"></div>
+                              <div id="line2"></div>
+                      <div id="AdeskA">
+                            
+                          <button id="AseatA1" disabled={btnDisabled} onClick={(e) => {
+                                          setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                            </button>  
+                          <div className="desk"></div>
+                          <button id="AseatA2" disabled={btnDisabled} onClick={(e) => {
+                                          setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                          </button>
+                          <button id="AseatA3" disabled={btnDisabled} onClick={(e) => {
+                                                  setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}> 
+                                          </button>   
+                          <button id="AseatA4" disabled={btnDisabled} onClick={(e) => {
+                                                setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                            </button>  
+                      </div>
+                  
+                      <div id="AdeskB">
+                      <button id="AseatB1" disabled={btnDisabled} onClick={(e) => {
+                                                setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                            </button>   
+                          <div className="desk"></div>
+                          <button id="AseatB2" disabled={btnDisabled} onClick={(e) => {
+                                                setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                            </button>  
+                          <button id="AseatB3" disabled={btnDisabled} onClick={(e) => {
+                                                setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                            </button>  
+                      </div>
+                  
+                      <div id="AdeskC">
+                      <button id="AseatC1" disabled={btnDisabled} onClick={(e) => {
+                                                setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                            </button>   
+                          <div className="desk"></div>
+                          <button id="AseatC2" disabled={btnDisabled} onClick={(e) => {
+                                                setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                            </button>  
+                          <button id="AseatC3" disabled={btnDisabled} onClick={(e) => {
+                                                setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                                            </button>     
+                        </div>
       
-           <div id="AdeskB">
-           <button id="AseatB1" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>   
-               <div className="desk"></div>
-               <button id="AseatB2" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>  
-               <button id="AseatB3" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>  
            </div>
-      
-           <div id="AdeskC">
-           <button id="AseatC1" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>   
-               <div className="desk"></div>
-               <button id="AseatC2" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>  
-               <button id="AseatC3" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>     
-           </div>
-      
-           
            <div id="AdeskD">
+
+          
                <button id="AseatD1" disabled={btnDisabled} onClick={(e) => {
                                      setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
                                  </button>   
@@ -271,6 +315,7 @@ const handleDateChange = date => {
                                  </button>              
            </div>
       
+      <div id="leftDesks">
            <div id="AdeskE">
                <button id="AseatE1" disabled={btnDisabled} onClick={(e) => {
                                      setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
@@ -314,6 +359,7 @@ const handleDateChange = date => {
                                      setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
                                  </button>  
            </div>
+        </div>
       
            <div id="AdeskG">
                 <button id="AseatG1" disabled></button>   
@@ -321,8 +367,7 @@ const handleDateChange = date => {
                  <button id="AseatG2"  disabled></button> 
            </div>
       
-           < hr id="line" />
-           < hr id="line2" />
+         
            < hr id="line3" />
            < hr id="line4" />
            < hr id="line5" />
@@ -432,20 +477,69 @@ const handleDateChange = date => {
 
             {meeting &&(
                 <>
-                
-                  <div id="Mdesk1">
-                    
-                  <hr id="mline"></hr>
-                  <hr id="mline2"></hr>
+                  <div id="Mdesk1" onClick={catchDesk1} 
+                                      style={{filter: catch1Blur ? 'blur(1px)' : 'none'}}>
+                          <div id="mline"></div>
+                          <div id="mline2"></div>
 
-                    <button id="Mseat1"></button>
-                  <div className="mdesk"></div>
-                  <button id="Mseat2"></button>
-                  <button id="Mseat3"></button>
-                  <button id="Mseat4"></button>
+                          <button id="Mseat1" disabled></button>
+                        <div className="mdesk"></div>
+                        <button id="Mseat2" disabled></button>
+                        <button id="Mseat3" disabled></button>
+                        <button id="Mseat4" disabled></button>
 
-                
+                        <div id="mline3"></div>
 
+                        <img id="plot2" src={plot}></img>
+                        <img id="plot3" src={plot}></img>
+
+                   </div>
+
+                   <div id="Mdesk2" onClick={catchDesk2} 
+                                      style={{filter: catch1Blur ? 'blur(1px)' : 'none'}}>
+
+                        <div id="mline4"></div>
+                        <img id="plot4" src={plot}></img>
+                        <div className="mdesk2"></div>
+                        <div id="Mseat5"></div>
+                        <div id="Mseat6"></div>
+                        <div id="Mseat7"></div>
+                        <div id="Mseat8"></div>
+                        <div id="Mseat9"></div>
+                        <div id="Mseat10"></div> 
+                        <div id="Mseat11"></div>
+                        <div id="Mseat12"></div>
+                        <div id="Mseat13"></div>
+                        <div id="Mseat14"></div>
+                        <div id="Mseat15"></div>
+                        <div id="Mseat16"></div>
+                   
+                   </div>
+
+                   <div id='Mdesk3' onClick={catchDesk3} 
+                                      style={{filter: catch1Blur ? 'blur(1px)' : 'none'}}>
+                            <div id="mline5"></div>
+                            <div id="mline6"></div>
+
+
+                            <button id="Mseat17" disabled></button>
+                            <div className="mdesk3"></div>
+                                  <button id="Mseat18" disabled></button>
+                                  <button id="Mseat19" disabled></button>
+                                  <button id="Mseat20" disabled></button>
+
+
+                   </div>
+
+                   <div id='Mdesk4' onClick={catchDesk4} 
+                                      style={{filter: catch1Blur ? 'blur(1px)' : 'none'}}>
+                            <div id="mline5"></div>
+                            <div id="mline6"></div>
+                            <button id="Mseat17" disabled ></button>
+                            <div className="mdesk3"></div>
+                                  <button id="Mseat18" disabled></button>
+                                  <button id="Mseat19" disabled></button>
+                                  <button id="Mseat20" disabled></button>
 
 
                    </div>
@@ -492,7 +586,7 @@ const handleDateChange = date => {
                   <option value="delivery">מחלקת דליברי</option>
                   <option value="classtified">מסווגים</option>
               </select>
-              <input type="button" value="חדרי ישיבות" />
+              <input type="button" onClick={showMeeting} value="חדרי ישיבות" />
               <input type="button" value="דיווחים" />
               <input type="button" value="בקשות"/>
               <input type='button' id="endBtn" value="סיום" />
@@ -513,6 +607,16 @@ const handleDateChange = date => {
             </div>
             )
       }
+
+        { catch1Hide ? null : (<div id="Catch1">תפוס</div>)}
+
+        { catch2Hide ? null : (<div id="Catch2">תפוס</div>)}
+
+        { catch3Hide ? null : (<div id="Catch3">תפוס</div>)}
+
+        { catch4Hide ? null : (<div id="Catch4">תפוס</div>)}
+
+
     </>
   )
 }
