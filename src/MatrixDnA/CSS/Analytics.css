@@ -41,8 +41,8 @@
 }
 
 #AdeskD{
-    width: 150px;
-    height: 180px;
+    width: 20%;
+    height: 30%;
     position: absolute;
     left: 40%;
     top:55%
@@ -94,20 +94,20 @@
     
 }
 #line3{
-    width: 12%;
-    border: 3px solid #2E2B76;  
+    width: 56%;
+    border: 1.5px solid #2E2B76;  
     position: absolute;
-    top:72%;
-    right: 45%
+    bottom:0%;
+    right: 0%
     
 }
 #line4{
-    width: 12%;
-    border: 3px solid #2E2B76;  
+    width: 56%;
+    border: 1.5px solid #2E2B76;  
     position: absolute;
     transform: rotate(90deg); 
-    top:61%;
-    right: 39%
+    bottom:35%;
+    right: -28%
     
 }
 #line5{
@@ -176,11 +176,10 @@
     left: 0;
 }
 
-#AseatA2{
+#A2{
     width: 20%;
     height: 30%;
     border-radius: 8px 8px 0px 0px;
-    background-color:#76BC8B ;
     transform: rotate(270deg);
     position: absolute;
     top:47%;
@@ -276,14 +275,14 @@
 }
 
 #AseatD1{
-    width: 40px;
-    height: 40px;
+    width: 20%;
+    height: 30%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
     transform: rotate(270deg);
     position: absolute;
-    top:10%;
-    left: 0;
+    top:12%;
+    left: 5%;
 }
 
 #AseatD2{
@@ -293,8 +292,8 @@
     background-color:#76BC8B ;
     transform: rotate(270deg);
     position: absolute;
-    top:37%;
-    left: 0;
+    top:47%;
+    left: 5%;
 }
 
 #AseatD3{
@@ -304,8 +303,8 @@
     background-color:#76BC8B ;
     transform: rotate(90deg);
     position: absolute;
-    right: 0;
-    top:37%;
+    right: 12%;
+    top:47%;
 }
 
 #AseatD4{
@@ -315,8 +314,8 @@
     background-color:#76BC8B ;
     transform: rotate(90deg);
     position: absolute;
-    right: 0;
-    top:10%;
+    right: 12%;
+    top:12%;
 }
 
 #AseatE1{

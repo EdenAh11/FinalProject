@@ -141,7 +141,8 @@ background-color: white;
 font-family:Rubik , sans-serif;
 font-weight: 600;
 padding: 0 2%;
-margin-bottom: 5%;
+bottom: 5%;
+position: relative;
 
 }
 .dropdown-select{
@@ -158,13 +159,15 @@ margin-bottom: 5%;
 }
 
 #CalendarIcon{
-    margin-right: 40%;
-    margin-top: -2.5%;
+    position: absolute;
+    left: 0%;
+    top: 0;
     width: 14%;
     height: 85%;
 }
 
 #pDiv{
+    position: relative;
     text-align: right;
     width:85%;
     color: #2E2B76;
@@ -173,8 +176,9 @@ margin-bottom: 5%;
 }
 
 #FaEraser{
-    margin-right: 42%;
-    margin-top: -2%;
+    position: absolute;
+    left: 20%;
+ 
 }
 
 #endBtn{

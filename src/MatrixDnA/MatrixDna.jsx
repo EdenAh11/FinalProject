@@ -26,6 +26,7 @@ import './CSS/Meeting.css'
 
 import ImgMatrix from '/img/imageMatrix.png'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { json } from 'react-router-dom';
 
 
 
@@ -34,7 +35,7 @@ export default function MatrixDnA(props) {
   //שם משתמש
   const [user, setUser] = useState("רופין רופין");
 //לינק לשרת
-  const [apiUrl2, setApiUrl2] = useState("https://localhost:7180/api/Seats");
+  const [apiUrl2, setApiUrl2] = useState("https://localhost:7180/api/Reservedplace");
   //תאריך נוכחי
   const [date, setDate] = useState(getCurrentDate());
   //בחירת תאריך למקום
@@ -79,35 +80,30 @@ export default function MatrixDnA(props) {
   const [catch4Hide, setCatch4Hide] = useState(true);
   const [catch4Blur, setCatch4Blur] = useState(false);
 
+  const [analyticsSeats, setAnalyticsSeats] = useState([
+                       "AseatA1","A2","AseatA3","AseatA4","AseatB1","AseatB2","AseatB3",
+                          "AseatC1","AseatC2","AseatC3","AseatD1","AseatD2","AseatD3","AseatD4",
+                          "AseatE1","AseatE2","AseatE3","AseatE4","AseatE5","AseatE6",
+                          "AseatF1","AseatF2","AseatF3","AseatF4","AseatF5","AseatF6",
+                                                     ]);
+
+const [status, setStatus] = useState(false)
+                                                  
 
 
- useEffect(() => {
-  const index = seatUsers.findIndex(item => item._id === "AseatA2");
-  setSeatUsers(seatUsers => {
-    const newArray = [...seatUsers];
-    newArray[index] = {...newArray[index], _color:redColor};
-    console.log(newArray);
-    return newArray
-  });
-  // This effect will run whenever usersArr prop changes
-  seatUsers.map(user1 => {
+
+
+      function statusSeats(e){
+        return seatUsers.some(seat => seat.table + seat.seat === e);
+     }
+
+   
+
+
   
-    console.log(user1 , index);
-  } )
-                                                // You can perform any login-related logic here
- }, []);
-    
- function statusSeats(e){
-
-  const index = seatUsers.findIndex(item => item._id === e);
-  setSeatUsers(seatUsers => {
-    const newArray = [...seatUsers];
-    newArray[index] = {...newArray[index], _color:redColor};
-    console.log(newArray);
-    });
 
 
-}
+
 
   //תאריך נוכחי לכותרת
   function getCurrentDate() {
@@ -156,6 +152,37 @@ const handleDateChange = date => {
       e.backgroundColor = blueColor;
       setIsBlurred(true);
       setIsHidden(false);
+
+      const newR = {
+        UserID: "Eden",
+        Class: "analytics" ,
+        Date: new Date() , 
+        Seat : "1" ,
+        Table: "B" ,
+      }
+
+      fetch(apiUrl2, {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json; charset=UTF-8',
+        }) ,
+        body: JSON.stringify(newR)
+      })
+        .then(res => {
+          console.log('res=', res);
+          console.log('res.status', res.status);
+          console.log('res.ok', res.ok);
+          return res.json()
+          })
+        .then(
+          (result) => {
+            console.log("fetch btnFetchGetStudents= ", result);
+            setReservedSeats(result);
+          },
+          (error) => {
+            console.log("err post=", error);
+          });
     }
 
     //יציאה מהתפריט
@@ -231,7 +258,6 @@ const handleDateChange = date => {
   return (
     <>
       <Container id='MatrixDiv' fluid style={{filter: isBlurred ? 'blur(4px)' : 'none'}}>
-      <button onClick={statusSeats}></button>
 
           <Row id="head">
             <Col id="LeftUp">
@@ -259,8 +285,9 @@ const handleDateChange = date => {
                                           setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
                             </button>  
                           <div className="desk"></div>
-                          <button id="AseatA2" disabled={btnDisabled} onClick={(e) => {
-                                          setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+                          <button id="A2" style={{backgroundColor: statusSeats("A2") ? redColor : greenColor}}  
+                                                 disabled={btnDisabled} onClick={(e) => {
+                                               setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
                                           </button>
                           <button id="AseatA3" disabled={btnDisabled} onClick={(e) => {
                                                   setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}> 
@@ -299,7 +326,8 @@ const handleDateChange = date => {
            </div>
            <div id="AdeskD">
 
-          
+           <div id="line3"></div>
+           <div id="line4"></div>
                <button id="AseatD1" disabled={btnDisabled} onClick={(e) => {
                                      setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
                                  </button>   
@@ -368,8 +396,7 @@ const handleDateChange = date => {
            </div>
       
          
-           < hr id="line3" />
-           < hr id="line4" />
+    
            < hr id="line5" />
            < hr id="line6" />
            < hr id="line7" />

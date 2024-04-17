@@ -5,43 +5,68 @@ import Matrix from './MatrixDnA/MatrixDna.jsx'
 
 function App() {
 
-  const [apiUrl, setApiUrl] = useState("https://localhost:7180/api/users");
-  const [apiUrl2, setApiUrl2] = useState("https://localhost:7180/api/Seats");
+  const [apiUrl, setApiUrl] = useState("https://localhost:7180/api/Users");
+  const [apiUrl2, setApiUrl2] = useState("https://localhost:7180/api/Reservedplace");
   const [users, setUsers] = useState([]);
-  const [seats, setSeats] = useState([]);
+  const [reservedSeats, setReservedSeats] = useState([]);
   const [first, setfirst] = useState(false)
 
 //לקיחת דאטה מהמערכת
-const fetchData2 = async () => {
-  const response = await fetch(apiUrl2);
-  const data = await response.json();
-  return data;
-};
+//const fetchData2 = async () => {
+  //const response = await fetch(apiUrl2);
+ // const data = await response.json();
+  //return data;
+//};
 
-    //לקיחת דאטה מהמערכת
-    const fetchData = async () => {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-      return data;
-    };
+useEffect(() => {
+
+                fetch(apiUrl2, {
+                method: 'GET',
+                headers: new Headers({
+                  'Content-Type': 'application/json; charset=UTF-8',
+                  'Accept': 'application/json; charset=UTF-8',
+                })
+              })
+                .then(res => {
+                  console.log('res=', res);
+                  console.log('res.status', res.status);
+                  console.log('res.ok', res.ok);
+                  return res.json()
+                  })
+                .then(
+                  (result) => {
+                    console.log("fetch btnFetchGetStudents= ", result);
+                    setReservedSeats(result);
+                  },
+                  (error) => {
+                    console.log("err post=", error);
+                  });
+
+                  //לקיחת דאטה מהמערכת
+                  const fetchData = async () => {
+                    const response = await fetch(apiUrl);
+                    const data = await response.json();
+                    return data;
+                  };
+              } , []);
 
 
-    useEffect(() => {
-      const fetchDataFromApi = async () => {
-        const data = await fetchData();
-        const data2 = await fetchData2();
-        setUsers(data);
-        setSeats(data2);
-      };
-      fetchDataFromApi();
-    } , []);
+    //useEffect(() => {
+      //const fetchDataFromApi = async () => {
+       // const data = await fetchData();
+       // const data2 = await fetchData2();
+       // setUsers(data);
+       // setSeats(data2);
+     // };
+      //fetchDataFromApi();
+    //} , []);
   
 
   return (
     <>
     
     { first ?<Login usersArr={users} />: null}
-    {seats.length > 0  ? <Matrix seatsUser={seats} /> : null}
+    {reservedSeats.length > 0  ? <Matrix seatsUser={reservedSeats} /> : null}
       
     </>
   )
