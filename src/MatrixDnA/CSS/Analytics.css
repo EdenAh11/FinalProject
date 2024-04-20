@@ -41,7 +41,7 @@
 }
 
 #AdeskD{
-    width: 20%;
+    width: 16%;
     height: 30%;
     position: absolute;
     left: 40%;
@@ -165,7 +165,7 @@
 }
 
 
-#AseatA1{
+#A1{
     width: 20%;
     height: 30%;
     border-radius: 8px 8px 0px 0px;
@@ -186,7 +186,7 @@
     left: 0;
 }
 
-#AseatA3{
+#A3{
     width: 20%;
     height: 30%;
     border-radius: 8px 8px 0px 0px;
@@ -197,7 +197,7 @@
     top:12%;
 }
 
-#AseatA4{
+#A4{
     width: 20%;
     height: 30%;
     border-radius: 8px 8px 0px 0px;
@@ -208,7 +208,7 @@
     top:47%;
 }
 
-#AseatB1{
+#B1{
     width: 20%;
     height: 30%;
     border-radius: 8px 8px 0px 0px;
@@ -219,7 +219,7 @@
     right: 0;
 }
 
-#AseatB2{
+#B2{
     width: 20%;
     height: 30%;
     border-radius: 8px 8px 0px 0px;
@@ -476,8 +476,8 @@
 }
 
 .desk{
-    width: 60px;
-    height: 90px;
+    width: 40%;
+    height: 70%;
     border-radius: 8px;
     background-color: #BFCBD9 ;
     position: absolute;

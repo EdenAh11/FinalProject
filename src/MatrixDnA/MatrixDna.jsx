@@ -26,7 +26,6 @@ import './CSS/Meeting.css'
 
 import ImgMatrix from '/img/imageMatrix.png'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { json } from 'react-router-dom';
 
 
 
@@ -71,6 +70,8 @@ export default function MatrixDnA(props) {
 
   const [seatUsers, setSeatUsers] = useState(props.seatsUser);
 
+  const [pickDiv, setpickDiv] = useState("");
+
   const [catch1Hide, setCatch1Hide] = useState(true);
   const [catch1Blur, setCatch1Blur] = useState(false);
   const [catch2Hide, setCatch2Hide] = useState(true);
@@ -80,17 +81,45 @@ export default function MatrixDnA(props) {
   const [catch4Hide, setCatch4Hide] = useState(true);
   const [catch4Blur, setCatch4Blur] = useState(false);
 
-  const [analyticsSeats, setAnalyticsSeats] = useState([
-                       "AseatA1","A2","AseatA3","AseatA4","AseatB1","AseatB2","AseatB3",
-                          "AseatC1","AseatC2","AseatC3","AseatD1","AseatD2","AseatD3","AseatD4",
-                          "AseatE1","AseatE2","AseatE3","AseatE4","AseatE5","AseatE6",
-                          "AseatF1","AseatF2","AseatF3","AseatF4","AseatF5","AseatF6",
-                                                     ]);
+  const [analyticsSeats, setAnalyticsSeats] = useState([{
+    "desk":{"AdeskA": ["A1","A2","A3","A4"] ,
+            "AdeskB": ["B1","B2","AseatB3"] ,
+             "AdeskC": ["AseatC1","AseatC2","AseatC3"] },
+    "desk2":{"AdeskE": ["AseatE1","AseatE2","AseatE3","AseatE4","AseatE5","AseatE6"],
+            "AdeskF": ["AseatF1","AseatF2","AseatF3","AseatF4","AseatF5","AseatF6"]
+                        }}]);
 
 const [status, setStatus] = useState(false)
                                                   
 
+          useEffect(() => {
 
+                          fetch(apiUrl2, {
+                            method: 'GET',
+                            headers: new Headers({
+                              'Content-Type': 'application/json; charset=UTF-8',
+                              'Accept': 'application/json; charset=UTF-8',
+                            })
+                          })
+                            .then(res => {
+                              console.log('res=', res);
+                              console.log('res.status', res.status);
+                              console.log('res.ok', res.ok);
+                              return res.json()
+                              })
+                            .then(
+                              (result) => {
+                                console.log("fetch btnFetchGetStudents= ", result);
+                                setSeatUsers(result);
+                              },
+                              (error) => {
+                                console.log("err post=", error);
+                              });
+
+                   console.log(seatUsers);
+            
+          }, [pickDiv]);
+          
 
 
       function statusSeats(e){
@@ -149,47 +178,32 @@ const handleDateChange = date => {
 
 // בחירת מושב
  function pickSeat(e){
-      e.backgroundColor = blueColor;
+      let x = e;
+      e.style.backgroundColor = blueColor;
       setIsBlurred(true);
       setIsHidden(false);
 
-      const newR = {
-        UserID: "Eden",
-        Class: "analytics" ,
-        Date: new Date() , 
-        Seat : "1" ,
-        Table: "B" ,
+    
+      const pickDiv = (
+      <div id="pickDiv">
+                  <DisabledByDefaultIcon id="exitIcon" onClick={(e) => {exitMenu(x.style)}} />
+                  <CheckCircleIcon id="checkIcon" />
+                  <p id="textPick">  המושב שוריין לתאריך {date} יום {getDayOfWeek(selectedDate)}</p>
+                  <button id='confimPick' onClick={(e) => {confirmSeat(x)}}>אישור הבחירה וסיום<CheckIcon /></button>
+                  <button id='changePick'>שינוי הבחירה<DriveFileRenameOutlineIcon /></button>
+                  <button id='anotherPick'>שיריון מושב נוסף<ControlPointIcon /></button>
+        </div>
+        )
+
+        setpickDiv(pickDiv);
+   
       }
-
-      fetch(apiUrl2, {
-        method: 'POST',
-        headers: new Headers({
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Accept': 'application/json; charset=UTF-8',
-        }) ,
-        body: JSON.stringify(newR)
-      })
-        .then(res => {
-          console.log('res=', res);
-          console.log('res.status', res.status);
-          console.log('res.ok', res.ok);
-          return res.json()
-          })
-        .then(
-          (result) => {
-            console.log("fetch btnFetchGetStudents= ", result);
-            setReservedSeats(result);
-          },
-          (error) => {
-            console.log("err post=", error);
-          });
-    }
-
     //יציאה מהתפריט
-    function exitMenu(){
+    function exitMenu(e){
       setIsBlurred(false);
       setIsHidden(true);
-      document.getElementById(currentSeat).style.backgroundColor = greenColor;
+      setpickDiv(null);
+      e.backgroundColor = greenColor;
     }
 
 
@@ -224,12 +238,48 @@ const handleDateChange = date => {
     }
 
     //אישור כיסא
-    function confirmSeat(){
-      document.getElementById(currentSeat).style.backgroundColor = redColor;
-      document.getElementById(currentSeat).disabled = true;
+    function confirmSeat(e){
       setIsBlurred(false);
       setIsHidden(true);
+
+      const [desk, seatNumber] = e.id.match(/[A-Z]+|[0-9]+/g);
+
+      const newR = {
+        UserID: "Eden",
+        Class: "analytics" ,
+        Date: new Date() , 
+        Seat : seatNumber ,
+        Table: desk ,
+      }
+
+              fetch(apiUrl2, {
+                method: 'POST',
+                headers: new Headers({
+                  'Content-Type': 'application/json; charset=UTF-8',
+                  'Accept': 'application/json; charset=UTF-8',
+                }) ,
+                body: JSON.stringify(newR)
+              })
+                .then(res => {
+                  console.log('res=', res);
+                  console.log('res.status', res.status);
+                  console.log('res.ok', res.ok);
+                  return res.json()
+                  })
+                .then(
+                  (result) => {
+                    console.log("fetch btnFetchGetStudents= ", result);
+                    setReservedSeats(result);
+                  },
+                  (error) => {
+                    console.log("err post=", error);
+                  });
+            e.disabled = true;
+            setpickDiv(null);
+
     }
+
+    
 
     //תפיסת שולחנות בחדר הישיבות
     function catchDesk1(){
@@ -279,51 +329,33 @@ const handleDateChange = date => {
           <div id="upperDesks">
                               <div id="line"></div>
                               <div id="line2"></div>
-                      <div id="AdeskA">
-                            
-                          <button id="AseatA1" disabled={btnDisabled} onClick={(e) => {
-                                          setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                            </button>  
-                          <div className="desk"></div>
-                          <button id="A2" style={{backgroundColor: statusSeats("A2") ? redColor : greenColor}}  
-                                                 disabled={btnDisabled} onClick={(e) => {
-                                               setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                          </button>
-                          <button id="AseatA3" disabled={btnDisabled} onClick={(e) => {
-                                                  setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}> 
-                                          </button>   
-                          <button id="AseatA4" disabled={btnDisabled} onClick={(e) => {
-                                                setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                            </button>  
-                      </div>
-                  
-                      <div id="AdeskB">
-                      <button id="AseatB1" disabled={btnDisabled} onClick={(e) => {
-                                                setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                            </button>   
-                          <div className="desk"></div>
-                          <button id="AseatB2" disabled={btnDisabled} onClick={(e) => {
-                                                setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                            </button>  
-                          <button id="AseatB3" disabled={btnDisabled} onClick={(e) => {
-                                                setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                            </button>  
-                      </div>
-                  
-                      <div id="AdeskC">
-                      <button id="AseatC1" disabled={btnDisabled} onClick={(e) => {
-                                                setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                            </button>   
-                          <div className="desk"></div>
-                          <button id="AseatC2" disabled={btnDisabled} onClick={(e) => {
-                                                setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                            </button>  
-                          <button id="AseatC3" disabled={btnDisabled} onClick={(e) => {
-                                                setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                            </button>     
-                        </div>
+
+                 {Object.keys(analyticsSeats[0].desk).map(desk => (
+                        <div id={desk}>
+                            <div className="desk"></div>
+
+                            {/* Mapping over the seats of each desk */}
+                            {analyticsSeats[0].desk[desk].map(seat => (
+                                <button 
+                                    key={seat} 
+                                    id={seat} 
+                                    style={{backgroundColor: statusSeats(seat) ? redColor : greenColor}}  
+                                    disabled={btnDisabled} 
+                                    onClick={(e) => {
+                                        setCurrentSeat(e.target.id);
+                                        pickSeat(e.target);
+                                    }}
+                                >
+                                </button>
+                            ))}
+                          </div>
+                              ))}
+
+                     
+                     
       
            </div>
+           
            <div id="AdeskD">
 
            <div id="line3"></div>
@@ -344,49 +376,26 @@ const handleDateChange = date => {
            </div>
       
       <div id="leftDesks">
-           <div id="AdeskE">
-               <button id="AseatE1" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>   
-               <div className="desk2"></div>
-               <button id="AseatE2"  disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>  
-               <button id="AseatE3"  disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>     
-               <button id="AseatE4" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>  
-               <button id="AseatE5" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>  
-               <button id="AseatE6" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>  
-           </div>
-      
-           <div id="AdeskF">
-               <button id="AseatF1" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>   
-               <div className="desk2"></div>
-               <button id="AseatF2"  disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>  
-               <button id="AseatF3" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>   
-               <button id="AseatF4" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>  
-               <button id="AseatF5" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>  
-               <button id="AseatF6" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
-                                 </button>  
-           </div>
+             {Object.keys(analyticsSeats[0].desk2).map(desk => (
+                        <div id={desk}>
+                            <div className="desk2"></div>
+
+                            {/* Mapping over the seats of each desk */}
+                            {analyticsSeats[0].desk2[desk].map(seat => (
+                                <button 
+                                    key={seat} 
+                                    id={seat} 
+                                    style={{backgroundColor: statusSeats(seat) ? redColor : greenColor}}  
+                                    disabled={btnDisabled} 
+                                    onClick={(e) => {
+                                        setCurrentSeat(e.target.id);
+                                        pickSeat(e.target.style);
+                                    }}
+                                >
+                                </button>
+                            ))}
+                        </div>
+                              ))}
         </div>
       
            <div id="AdeskG">
@@ -572,20 +581,20 @@ const handleDateChange = date => {
                    </div>
                 </>
             )}
-        </div>
+       </div>
           </Col>
           <Col xs={3}>
           <div>
-      <button  id="DateBtn" disabled={isDisabled} onClick={() => 
-                                        setShowDatePicker(true)} value="בחר/י תאריך">
-        <CalendarMonthIcon id="CalendarIcon"/>
-        בחר/י תאריך
-      </button>
-              <div>                    
+                  <button  id="DateBtn" disabled={isDisabled} onClick={() => 
+                                                    setShowDatePicker(true)} value="בחר/י תאריך">
+                    <CalendarMonthIcon id="CalendarIcon"/>
+                    בחר/י תאריך
+                  </button>
+          <div>                    
                      <label id="labelCheck" htmlFor='checkPlace'> בחר/י שוב את מה שבחרתי בפעם האחרונה</label>
 
                      <input type='checkbox' id='checkPlace'></input>
-              </div>
+          </div>
           {showChoose && 
            (<p id="pDiv"><FaEraser id="FaEraser" onClick={(e)=>{
                                       setShowChoose(false),setIsDisabled(false)}}/>
@@ -623,17 +632,8 @@ const handleDateChange = date => {
           </Row>
             
       </Container>
-      { isHidden ? null :
-            (<div id="pickDiv">
-                      <DisabledByDefaultIcon id="exitIcon" onClick={(e) => {exitMenu()}} />
-                      <CheckCircleIcon id="checkIcon" />
-                      <p id="textPick">  המושב שוריין לתאריך {date} יום {getDayOfWeek(selectedDate)}</p>
-                      <button id='confimPick' onClick={(e) => {confirmSeat()}}>אישור הבחירה וסיום<CheckIcon /></button>
-                      <button id='changePick'>שינוי הבחירה<DriveFileRenameOutlineIcon /></button>
-                      <button id='anotherPick'>שיריון מושב נוסף<ControlPointIcon /></button>
-            </div>
-            )
-      }
+   
+        {pickDiv}
 
         { catch1Hide ? null : (<div id="Catch1">תפוס</div>)}
 
