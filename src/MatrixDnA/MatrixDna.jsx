@@ -33,6 +33,8 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 export default function MatrixDnA(props) {
   //שם משתמש
   const [user, setUser] = useState("רופין רופין");
+  //מערך משתמשים מהדאטה
+  const [seatUsers, setSeatUsers] = useState(props.seatsUser);
 //לינק לשרת
   const [apiUrl2, setApiUrl2] = useState("https://localhost:7180/api/Reservedplace");
   //תאריך נוכחי
@@ -43,23 +45,19 @@ export default function MatrixDnA(props) {
   const [showDatePicker, setShowDatePicker] = useState(false);
   //לאחר שריון התאריך
   const [showChoose, setShowChoose] = useState(false);
-  //גישה למושבים
-  const [btnDisabled, setbtnDisabled] = useState(true);
   //טשטוש הרקע
   const [isBlurred, setIsBlurred] = useState(false);
-  //התפריט לאחר לחיצה על מקום
-  const [isHidden, setIsHidden] = useState(true);
-  //לחצן הלוח השנה 
-  const [isDisabled, setIsDisabled] = useState(false);
-//כסא נוכחי
-  const [currentSeat, setCurrentSeat] = useState('');
+    //התפריט לאחר לחיצה על מקום
+    const [isHidden, setIsHidden] = useState(true);
+  //נעילת לחצן תאריך
+  const [isDisabled, setIsDisabled] = useState(true);
   //כסא פנוי
   const [greenColor, setGreenColor] = useState("#76BC8B");
   //כסא תפוס
   const [redColor, setRedColor] = useState("#E87D7D");
   //כסא בתהליך
   const [blueColor, setBlueColor] = useState("#33BBFF");
-  //מחקת אנליטיקס
+  //מחלקת אנליטיקס
   const [classAnalytics, setClassAnlytics] = useState(false);
 
   const [classDelivery, setClassDelivery] = useState(false);
@@ -67,8 +65,6 @@ export default function MatrixDnA(props) {
   const [classtified, setClasstified] = useState(false);
 
   const [meeting, setMeeting] = useState(false);
-
-  const [seatUsers, setSeatUsers] = useState(props.seatsUser);
 
   const [pickDiv, setpickDiv] = useState("");
 
@@ -82,14 +78,13 @@ export default function MatrixDnA(props) {
   const [catch4Blur, setCatch4Blur] = useState(false);
 
   const [analyticsSeats, setAnalyticsSeats] = useState([{
-    "desk":{"AdeskA": ["A1","A2","A3","A4"] ,
-            "AdeskB": ["B1","B2","AseatB3"] ,
-             "AdeskC": ["AseatC1","AseatC2","AseatC3"] },
-    "desk2":{"AdeskE": ["AseatE1","AseatE2","AseatE3","AseatE4","AseatE5","AseatE6"],
-            "AdeskF": ["AseatF1","AseatF2","AseatF3","AseatF4","AseatF5","AseatF6"]
+                  "desk":{"AdeskA": ["A1","A2","A3","A4"] ,
+                          "AdeskB": ["B1","B2","B3"] ,
+                          "AdeskC": ["C1","C2","C3"] },
+                  "desk2":{"AdeskE": ["AseatE1","AseatE2","AseatE3","AseatE4","AseatE5","AseatE6"],
+                          "AdeskF": ["AseatF1","AseatF2","AseatF3","AseatF4","AseatF5","AseatF6"]
                         }}]);
 
-const [status, setStatus] = useState(false)
                                                   
 
           useEffect(() => {
@@ -118,16 +113,26 @@ const [status, setStatus] = useState(false)
 
                    console.log(seatUsers);
             
-          }, [pickDiv]);
+          }, [pickDiv , selectedDate]);
           
 
 
+
+               /// להוסיף פילטור של ימים
       function statusSeats(e){
-        return seatUsers.some(seat => seat.table + seat.seat === e);
+
+          
+
+        return seatUsers.some(user => {
+          const [pickDate,selectD] = [new Date(user.date), new Date(selectedDate)];
+          const [dateUser,dateSelect] = [getDate(pickDate) , getDate(selectD)];
+          
+              return(user.table + user.seat === e && dateUser === dateSelect);
+        });
      }
 
-   
 
+   
 
   
 
@@ -172,7 +177,6 @@ const handleDateChange = date => {
   setDate(getDate(date));
   setShowChoose(true);
   setShowDatePicker(false);
-  setbtnDisabled(false);
   setIsDisabled(true);
 };
 
@@ -182,8 +186,6 @@ const handleDateChange = date => {
       e.style.backgroundColor = blueColor;
       setIsBlurred(true);
       setIsHidden(false);
-
-    
       const pickDiv = (
       <div id="pickDiv">
                   <DisabledByDefaultIcon id="exitIcon" onClick={(e) => {exitMenu(x.style)}} />
@@ -201,9 +203,8 @@ const handleDateChange = date => {
     //יציאה מהתפריט
     function exitMenu(e){
       setIsBlurred(false);
-      setIsHidden(true);
+      setIsHidden(true)
       setpickDiv(null);
-      e.backgroundColor = greenColor;
     }
 
 
@@ -228,6 +229,8 @@ const handleDateChange = date => {
         setMeeting(false)
         setClasstified(true);
       }
+
+      setIsDisabled(false);
     }
 
     function showMeeting(){
@@ -247,7 +250,7 @@ const handleDateChange = date => {
       const newR = {
         UserID: "Eden",
         Class: "analytics" ,
-        Date: new Date() , 
+        Date: selectedDate , 
         Seat : seatNumber ,
         Table: desk ,
       }
@@ -308,7 +311,6 @@ const handleDateChange = date => {
   return (
     <>
       <Container id='MatrixDiv' fluid style={{filter: isBlurred ? 'blur(4px)' : 'none'}}>
-
           <Row id="head">
             <Col id="LeftUp">
               <img id='MatrixImg' src={ImgMatrix}/>
@@ -340,9 +342,8 @@ const handleDateChange = date => {
                                     key={seat} 
                                     id={seat} 
                                     style={{backgroundColor: statusSeats(seat) ? redColor : greenColor}}  
-                                    disabled={btnDisabled} 
+                                    disabled={statusSeats(seat)}
                                     onClick={(e) => {
-                                        setCurrentSeat(e.target.id);
                                         pickSeat(e.target);
                                     }}
                                 >
@@ -360,18 +361,18 @@ const handleDateChange = date => {
 
            <div id="line3"></div>
            <div id="line4"></div>
-               <button id="AseatD1" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+               <button id="AseatD1" onClick={(e) => {
+                                     pickSeat(e.target.style)}}>
                                  </button>   
                <div className="desk"></div>
-               <button id="AseatD2" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+               <button id="AseatD2"  onClick={(e) => {
+                                     pickSeat(e.target.style)}}>
                                  </button>  
-               <button id="AseatD3" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+               <button id="AseatD3"  onClick={(e) => {
+                                     pickSeat(e.target.style)}}>
                                  </button>    
-               <button id="AseatD4" disabled={btnDisabled} onClick={(e) => {
-                                     setCurrentSeat(e.target.id) , pickSeat(e.target.style)}}>
+               <button id="AseatD4"   onClick={(e) => {
+                                     pickSeat(e.target.style)}}>
                                  </button>              
            </div>
       
@@ -386,9 +387,7 @@ const handleDateChange = date => {
                                     key={seat} 
                                     id={seat} 
                                     style={{backgroundColor: statusSeats(seat) ? redColor : greenColor}}  
-                                    disabled={btnDisabled} 
                                     onClick={(e) => {
-                                        setCurrentSeat(e.target.id);
                                         pickSeat(e.target.style);
                                     }}
                                 >
@@ -597,7 +596,7 @@ const handleDateChange = date => {
           </div>
           {showChoose && 
            (<p id="pDiv"><FaEraser id="FaEraser" onClick={(e)=>{
-                                      setShowChoose(false),setIsDisabled(false)}}/>
+                                      setShowChoose(false),setIsDisabled(false),setSelectedDate(null)}}/>
                   <b>{date}</b></p>)}
           {showDatePicker && (
                   <Datepicker

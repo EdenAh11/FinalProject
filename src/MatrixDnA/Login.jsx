@@ -1,4 +1,5 @@
 import {React , useState , useEffect} from 'react'
+import { useNavigate } from 'react-router-dom';
 import './CSS/Login.css'
 import backgroundImage from '/img/login-background.png'
 import ImgMatrix from '/img/imageMatrix.png'
@@ -25,17 +26,16 @@ export default function Login(props) {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  const [users, setUsers] = useState(props.usersArr)
+
   const [username, setUsername] = useState("");
 
   const [password, setPassword] = useState("");
 
-  const { usersArr } = props;
 
-  useEffect(() => {
-    // This effect will run whenever usersArr prop changes
-    console.log('Users prop updated:', usersArr);
-    // You can perform any login-related logic here
-  }, []);
+
+
+
 
     //password function
       const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -55,13 +55,12 @@ export default function Login(props) {
       const loginSubmit = (e) => {
         e.preventDefault();
         
-        usersArr.map(item => {
-          if(item._username == username && item._password == password){
-            console.log(username)
+        users.map(item => {
+          if(item.username == username && item.password == password){
+            console.log(username);
             return true;
           }
         })
-
       
       }
 
@@ -104,6 +103,7 @@ export default function Login(props) {
                 style={{width:'260px'}}
                 InputProps={{
                 style: { color: 'black', 
+                          textAlign:'left',
                         backgroundColor:'white',
                           borderRadius:'40px 40px 40px 40px',
                           height:"40px",
