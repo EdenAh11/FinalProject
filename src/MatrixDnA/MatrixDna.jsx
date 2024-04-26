@@ -1,8 +1,10 @@
 import {React , useState , createContext , useEffect} from 'react'
 import {Container , Row , Col , Button  } from 'react-bootstrap';
-import {InputLabel , MenuItem , FormControl , Select } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 
 import { FaEraser } from "react-icons/fa";
+
+import TextField from '@mui/material/TextField';
 
 
 import WeekendIcon from '@mui/icons-material/Weekend';
@@ -13,6 +15,9 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CheckIcon from '@mui/icons-material/Check';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
+import AddIcon from '@mui/icons-material/Add';
+import OpenWithIcon from '@mui/icons-material/OpenWith';
+import SendIcon from '@mui/icons-material/Send';
 
 import Datepicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
@@ -31,8 +36,12 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 
 export default function MatrixDnA(props) {
+  const location = useLocation();
+
   //שם משתמש
-  const [user, setUser] = useState("רופין רופין");
+  const [user, setUser] = useState('');
+//שם מחלקה
+  const [className, setClassName] = useState('')
   //מערך משתמשים מהדאטה
   const [seatUsers, setSeatUsers] = useState(props.seatsUser);
 //לינק לשרת
@@ -66,7 +75,11 @@ export default function MatrixDnA(props) {
 
   const [meeting, setMeeting] = useState(false);
 
+  const [requests, setRequests] = useState(false);
+
   const [pickDiv, setpickDiv] = useState("");
+
+  const [NewReq, setNewReq] = useState("")
 
   const [catch1Hide, setCatch1Hide] = useState(true);
   const [catch1Blur, setCatch1Blur] = useState(false);
@@ -81,13 +94,16 @@ export default function MatrixDnA(props) {
                   "desk":{"AdeskA": ["A1","A2","A3","A4"] ,
                           "AdeskB": ["B1","B2","B3"] ,
                           "AdeskC": ["C1","C2","C3"] },
-                  "desk2":{"AdeskE": ["AseatE1","AseatE2","AseatE3","AseatE4","AseatE5","AseatE6"],
-                          "AdeskF": ["AseatF1","AseatF2","AseatF3","AseatF4","AseatF5","AseatF6"]
+                  "desk2":{"AdeskE": ["AseatE1","AseatE2","AseatE3","AseatE4","AseatE5" , "AseatE6"],
+                          "AdeskF": ["AseatF1","AseatF2","AseatF3","AseatF4","AseatF5" , "AseatF6"]
                         }}]);
 
                                                   
 
           useEffect(() => {
+                        setUser(location.state.userId);
+                        setClassName(location.state.classId);
+                        chooseClasses(location.state.classId);
 
                           fetch(apiUrl2, {
                             method: 'GET',
@@ -104,8 +120,10 @@ export default function MatrixDnA(props) {
                               })
                             .then(
                               (result) => {
-                                console.log("fetch btnFetchGetStudents= ", result);
-                                setSeatUsers(result);
+
+                                const resultArr = result.map(obj => ({ ...obj, date: new Date(obj.date) }));
+                                console.log("fetch btnFetchGetStudents= ", resultArr);
+                                setSeatUsers(resultArr);
                               },
                               (error) => {
                                 console.log("err post=", error);
@@ -130,13 +148,6 @@ export default function MatrixDnA(props) {
               return(user.table + user.seat === e && dateUser === dateSelect);
         });
      }
-
-
-   
-
-  
-
-
 
 
   //תאריך נוכחי לכותרת
@@ -172,12 +183,14 @@ function getDayOfWeek(date) {
 }
 
 //בחירת תאריך 
-const handleDateChange = date => {
+const handleDateChange = (date) => {
   setSelectedDate(date);
   setDate(getDate(date));
   setShowChoose(true);
   setShowDatePicker(false);
   setIsDisabled(true);
+
+ 
 };
 
 // בחירת מושב
@@ -198,8 +211,15 @@ const handleDateChange = date => {
         )
 
         setpickDiv(pickDiv);
-   
+
+        const newDate = new Date(selectedDate).toISOString();
+        const date2 = new Date(newDate);
+      
+        console.log(newDate , date2);
+
       }
+
+
     //יציאה מהתפריט
     function exitMenu(e){
       setIsBlurred(false);
@@ -210,29 +230,50 @@ const handleDateChange = date => {
 
     //בחירת מחלקות
     function chooseClasses(e){
-      if(e.value == 'analytics'){
+      if(e == 'analytics'){
         setClasstified(false);
         setClassDelivery(false);
-        setMeeting(false)
+        setMeeting(false);
+        setRequests(false);
         setClassAnlytics(true);
+
+        setClassName(e);
       }
-      if(e.value == "delivery"){
+      if(e == "delivery"){
         setClasstified(false);
         setClassAnlytics(false);
-        setMeeting(false)
+        setMeeting(false);
+        setRequests(false);
         setClassDelivery(true);
-       
+        
+        setClassName(e);
+
       }
-      if(e.value == 'classtified'){
+      if(e == 'classtified'){
         setClassDelivery(false);
         setClassAnlytics(false);
-        setMeeting(false)
+        setMeeting(false);
+        setRequests(false);
         setClasstified(true);
+        
+        setClassName(e);
+      }
+
+      if(e == 'בקשות'){
+        setClassDelivery(false);
+        setClassAnlytics(false);
+        setMeeting(false);
+        setClasstified(false);
+        setRequests(true);
+
+        setClassName(null);
+
       }
 
       setIsDisabled(false);
     }
 
+    
     function showMeeting(){
       setMeeting(true)
       setClassDelivery(false);
@@ -247,12 +288,13 @@ const handleDateChange = date => {
 
       const [desk, seatNumber] = e.id.match(/[A-Z]+|[0-9]+/g);
 
+
       const newR = {
         UserID: "Eden",
-        Class: "analytics" ,
+        Class: className ,
         Date: selectedDate , 
         Seat : seatNumber ,
-        Table: desk ,
+        Table: desk 
       }
 
               fetch(apiUrl2, {
@@ -281,6 +323,34 @@ const handleDateChange = date => {
             setpickDiv(null);
 
     }
+
+    function NewRequests(){
+        setRequests(false);
+        const newReq = (<div id='newReq'>
+                      <DisabledByDefaultIcon id="xIcon"  onClick={() => {setNewReq(null) , 
+                                                     chooseClasses(location.state.classId)
+                                                                                            }}/>
+                      <div id='newReq1'>
+                          <h1 >/ בקשה חדשה </h1>
+                          
+                          
+                        <input type='text' id='inputReq'></input>
+                        <label>נושא הבקשה</label>
+
+                        <label>פירוט הבקשה</label>
+                        <br />
+                        <textarea id="textDetail"></textarea>
+                      </div>
+
+                      <button id="sendReq">שליחת הבקשה<SendIcon id="sendIcon" /></button>
+                        </div>
+          )
+                        setNewReq(newReq);
+                          
+    }
+
+
+    
 
     
 
@@ -357,10 +427,13 @@ const handleDateChange = date => {
       
            </div>
            
-           <div id="AdeskD">
+           <div id="DownDesk">
 
            <div id="line3"></div>
            <div id="line4"></div>
+
+               <div id="AdeskD">
+
                <button id="AseatD1" onClick={(e) => {
                                      pickSeat(e.target.style)}}>
                                  </button>   
@@ -375,8 +448,10 @@ const handleDateChange = date => {
                                      pickSeat(e.target.style)}}>
                                  </button>              
            </div>
+           </div>
       
-      <div id="leftDesks">
+         <div id="leftDesks">
+                <div id="line5"></div>
              {Object.keys(analyticsSeats[0].desk2).map(desk => (
                         <div id={desk}>
                             <div className="desk2"></div>
@@ -405,12 +480,10 @@ const handleDateChange = date => {
       
          
     
-           < hr id="line5" />
-           < hr id="line6" />
-           < hr id="line7" />
-      
+         <div id="rightSide">
            <WeekendIcon id="couch" />
            <img id="plot" src={plot} />
+        </div>
       
       
       
@@ -580,13 +653,85 @@ const handleDateChange = date => {
                    </div>
                 </>
             )}
+
+            {requests &&(
+              <>
+                    <div id="requests">
+                      
+                            <DisabledByDefaultIcon id="xIcon" onClick={() => {setRequests(false) ,
+                                                    chooseClasses(location.state.classId);
+                                                  }}/>
+                            <label id="reqBoard">לוח בקשות</label>
+
+                            <button id="allReq">לכל הבקשות<OpenWithIcon id="openIcon"/></button>
+                            <button id="addReq" onClick={NewRequests}>הוסף בקשה <AddIcon /></button>
+                 
+                      <div id="reqStatus">
+                       
+                             <div className='divReq'>
+                                    <labal style={{ 
+                                      color: "#2E2B76" , fontWeight: "700"}}>בקשה #4556 </labal>
+
+                                    <span style={{ 
+                                      fontWeight: "500"}}>חדר ישיבות תפוח</span>
+
+                                      <div className="Rstatus">אושר</div>
+
+
+                                      <br /><br/>
+                                      <p>...ברצוני לבקש 3 כסאות נוספים</p>
+
+
+                              </div>
+
+                              <div className='divReq'>
+                                    <labal style={{ 
+                                      color: "#2E2B76" , fontWeight: "700"}}>בקשה #4556 </labal>
+
+                                    <span style={{ 
+                                      fontWeight: "500"}}>חדר ישיבות תפוח</span>
+
+                                      <div className="Rstatus">אושר</div>
+
+
+                                      <br /><br/>
+                                      <p>...ברצוני לבקש 3 כסאות נוספים</p>
+
+
+                              </div>
+
+                              <div className='divReq'>
+                                    <labal style={{ 
+                                      color: "#2E2B76" , fontWeight: "700"}}>בקשה #4556 </labal>
+
+                                    <span style={{ 
+                                      fontWeight: "500"}}>חדר ישיבות תפוח</span>
+
+                                      <div className="Rstatus"><label>אושר</label></div>
+
+
+                                      <br /><br/>
+                                      <p>...ברצוני לבקש 3 כסאות נוספים</p>
+
+
+                              </div>
+                             
+                             
+                        
+                      </div>
+                   
+                    </div>
+              </>
+            )}
+
+        
        </div>
           </Col>
           <Col xs={3}>
           <div>
-                  <button  id="DateBtn" disabled={isDisabled} onClick={() => 
-                                                    setShowDatePicker(true)} value="בחר/י תאריך">
-                    <CalendarMonthIcon id="CalendarIcon"/>
+                  <button  id="DateBtn" disabled={isDisabled} onClick={() => {
+                                              setShowDatePicker(true), setIsDisabled(true)}} value="בחר/י תאריך">
+                    <CalendarMonthIcon  id="CalendarIcon"/>
                     בחר/י תאריך
                   </button>
           <div>                    
@@ -602,7 +747,7 @@ const handleDateChange = date => {
                   <Datepicker
                     selected={selectedDate}
                     onChange={handleDateChange}
-                    dateFormat="dd/mm/yyyy"
+                    dateFormat="YYYY-MM-DDTHH:MM:SS"
                     showYearDropdown
                     scrollableYearDropdown
                     yearDropdownItemNumber={15}
@@ -615,7 +760,7 @@ const handleDateChange = date => {
             <div>
            
            
-              <select className="dropdown-select" onChange={(e) => {chooseClasses(e.target)}}>
+              <select  className="dropdown-select" value={className}  onChange={(e) => {chooseClasses(e.target.value)}}>
               <option value="" disabled selected>מחלקות</option>
                   <option value="analytics">מחלקת אנליטיקס</option>
                   <option value="delivery">מחלקת דליברי</option>
@@ -623,7 +768,7 @@ const handleDateChange = date => {
               </select>
               <input type="button" onClick={showMeeting} value="חדרי ישיבות" />
               <input type="button" value="דיווחים" />
-              <input type="button" value="בקשות"/>
+              <input type="button" value="בקשות"  onClick={(e) => chooseClasses(e.target.value)}/>
               <input type='button' id="endBtn" value="סיום" />
           
             </div>
@@ -633,6 +778,8 @@ const handleDateChange = date => {
       </Container>
    
         {pickDiv}
+
+        {NewReq}
 
         { catch1Hide ? null : (<div id="Catch1">תפוס</div>)}
 

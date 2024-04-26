@@ -1,4 +1,6 @@
 import { useState , useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom';
+
 import './App.css'
 import Login from './MatrixDnA/Login.jsx'
 import Matrix from './MatrixDnA/MatrixDna.jsx'
@@ -7,8 +9,11 @@ function App() {
 
   const [apiUrl, setApiUrl] = useState("https://localhost:7180/api/User");
   const [apiUrl2, setApiUrl2] = useState("https://localhost:7180/api/Reservedplace");
+  const [apiUrl3, setApiUrl3] = useState("https://localhost:7180/api/Class");
+
   const [users, setUsers] = useState([]);
   const [reservedSeats, setReservedSeats] = useState([]);
+  const [classes, setClasses] = useState([])
   const [first, setfirst] = useState(false)
 
 //לקיחת דאטה מהמערכת
@@ -19,6 +24,28 @@ function App() {
 //};
 
 useEffect(() => {
+
+                fetch(apiUrl3, {
+                  method: 'GET',
+                  headers: new Headers({
+                    'Content-Type': 'application/json; charset=UTF-8',
+                    'Accept': 'application/json; charset=UTF-8',
+                  })
+                  })
+                  .then(res => {
+                    console.log('res=', res);
+                    console.log('res.status', res.status);
+                    console.log('res.ok', res.ok);
+                    return res.json()
+                    })
+                  .then(
+                    (result) => {
+                      console.log("fetch btnFetchGetStudents= ", result);
+                      setClasses(result);
+                    },
+                    (error) => {
+                      console.log("err post=", error);
+                    });
 
                 fetch(apiUrl2, {
                 method: 'GET',
@@ -83,10 +110,14 @@ useEffect(() => {
 
   return (
     <>
-    
-    { first > 0 ?<Login usersArr={users} />: null} 
-    {reservedSeats.length > 0 ? <Matrix seatsUser={reservedSeats} /> : null}
-    
+    <Router>
+      <Routes>
+        {users.length > 0 && reservedSeats.length > 0 && classes.length > 0 &&(
+          <Route path="/" element={<Login usersArr={users} classArr={classes} />} />
+        )}
+        <Route path="/matrix" element={<Matrix seatsUser={reservedSeats} />} />
+      </Routes>
+    </Router>
       
     </>
   )

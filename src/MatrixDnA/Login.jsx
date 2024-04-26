@@ -1,5 +1,6 @@
 import {React , useState , useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
+
 import './CSS/Login.css'
 import backgroundImage from '/img/login-background.png'
 import ImgMatrix from '/img/imageMatrix.png'
@@ -33,6 +34,7 @@ export default function Login(props) {
   const [password, setPassword] = useState("");
 
 
+  const navigate = useNavigate();
 
 
 
@@ -57,8 +59,8 @@ export default function Login(props) {
         
         users.map(item => {
           if(item.username == username && item.password == password){
-            console.log(username);
-            return true;
+            let [userId , classId] = [item.userId , item.class];
+            navigate('matrix', {state:{userId , classId}});
           }
         })
       

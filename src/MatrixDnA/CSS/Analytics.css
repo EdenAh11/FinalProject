@@ -10,70 +10,88 @@
     top:5%
 }
 
+#DownDesk{
+    position: absolute;
+    width: 20%;
+    height: 40%;
+    left: 40%;
+    top:50%
+}
 #leftDesks{
     position: absolute;
-    left: 5%;
-    bottom: 10%;
-    height: 80%;
+    left: 3%;
+    bottom: 0%;
+    height: 65%;
+    width: 30%;
 }
+
+#rightSide{
+    position: absolute;
+    border-bottom: 3px solid #2E2B76;
+    border-left: 3px solid #2E2B76;
+    height: 15%;
+    width: 30%;
+    top: 60%;
+    right: 5%;
+
+}
+
 #AdeskA{
     width: 22%;
-    height: 70%;
+    height: 50%;
     position: absolute;
     right: 5%;
-    top:5%
+    top:15%
 }
 
 #AdeskB{
     width: 22%;
-    height: 70%;
+    height: 50%;
     position: absolute;
     right: 33%;
-    top: 5%;
+    top: 15%;
 }
 
 #AdeskC{
     width: 22%;
-    height: 70%;
+    height: 50%;
     position: absolute;
     right: 60%;
-    top: 5%;
+    top: 15%;
 }
 
 #AdeskD{
-    width: 16%;
-    height: 30%;
+    width: 82%;
+    height: 50%;
     position: absolute;
-    left: 40%;
-    top:55%
+    left: 0%;
+    bottom:15%;
   
 }
 
 #AdeskE{
-    width: 150px;
-    height: 180px;
+    width: 55%;
+    height: 45%;
     position: absolute;
-    transform: rotate(90deg);
-    top:40%;
-    left: 4%;
+    top:2%;
+    left: 20%;
 }
 
 #AdeskF{
-    width: 150px;
-    height: 180px;
+    width: 55%;
+    height: 45%;
     position: absolute;
-    transform: rotate(90deg);
-    top:70%;
-    left: 4%;
+    top:52%;
+    left: 20%;
 }
 
 #AdeskG{
-    width: 150px;
-    height: 180px;
+    width: 8%;
+    height: 18%;
     position: absolute;
-    transform: rotate(45deg);
-    top:10%;
-    left:5%
+    transform: rotate(42deg);
+    top:8%;
+    left:10%
 }
 
 #line{
@@ -106,45 +124,26 @@
     border: 1.5px solid #2E2B76;  
     position: absolute;
     transform: rotate(90deg); 
-    bottom:35%;
+    bottom:30%;
     right: -28%
     
 }
 #line5{
-    width: 8%;
-    border: 3px solid #2E2B76;  
+    width: 70%;
+    border: 1.5px solid #2E2B76;  
     position: absolute;
-    transform: rotate(90deg); 
-    top:58%;
-    right: 33%
-    
-}
-#line6{
-    width: 8%;
-    border: 3px solid #2E2B76;  
-    position: absolute;
-    top:65%;
-    right: 29%
-    
-}
-
-#line7{
-    width: 13%;
-    border: 3px solid #2E2B76;  
-    position: absolute;
-    top:65%;
-    right: 7%
+    top:-5%;
+    left: 5%
     
 }
 
 #couch{
     color: #BFCBD9;
-    width: 120px;
-    height: 90px;
+    width: 50%;
+    height: 95%;
     position: absolute;
-    right: 20%;
-    top:60%
-
+    right: 30%;
+    bottom:-35%;
 }
 
 #spa{
@@ -156,21 +155,20 @@
     right: 30%
 }
 #plot{
-    width: 35px;
-    height: 35px;
+    width: 25px;
+    height: 25px;
     color: #2E2B76;  
     position: absolute;
-    top:53%;
-    right: 34%
+    bottom:0%;
+    left: 0%
 }
 
 
 #A1{
     width: 20%;
-    height: 30%;
-    border-radius: 8px 8px 0px 0px;
+    height: 40%;
+    border-radius: 8px 0px 0px 8px;
     background-color:#76BC8B ;
-    transform: rotate(270deg);
     position: absolute;
     top:5%;
     left: 0;
@@ -178,329 +176,298 @@
 
 #A2{
     width: 20%;
-    height: 30%;
-    border-radius: 8px 8px 0px 0px;
-    transform: rotate(270deg);
+    height: 40%;
+    border-radius: 8px 0px 0px 8px;
     position: absolute;
-    top:47%;
+    bottom:5%;
     left: 0;
 }
 
 #A3{
     width: 20%;
-    height: 30%;
-    border-radius: 8px 8px 0px 0px;
+    height: 40%;
+    border-radius: 0px 8px 8px 0px;
     background-color:#76BC8B ;
-    transform: rotate(90deg);
     position: absolute;
     right: 0;
-    top:12%;
+    top:5%;
 }
 
 #A4{
     width: 20%;
-    height: 30%;
-    border-radius: 8px 8px 0px 0px;
+    height: 40%;
+    border-radius: 0px 8px 8px 0px;
     background-color:#76BC8B ;
-    transform: rotate(90deg);
     position: absolute;
     right: 0;
-    top:47%;
+    bottom:5%;
 }
 
 #B1{
     width: 20%;
-    height: 30%;
-    border-radius: 8px 8px 0px 0px;
+    height: 40%;
+    border-radius: 8px 0px 0px 8px;
     background-color:#76BC8B ;
-    transform: rotate(90deg);
     position: absolute;
-    top:12%;
-    right: 0;
+    top:5%;
+    left: 0;
 }
 
 #B2{
     width: 20%;
-    height: 30%;
-    border-radius: 8px 8px 0px 0px;
-    background-color:#76BC8B ;
-    transform: rotate(270deg);
+    height: 40%;
+    border-radius: 8px 0px 0px 8px;
     position: absolute;
-    top:47%;
+    bottom:5%;
     left: 0;
 }
 
 #B3{
-    width: 20%;
-    height: 30%;
-    border-radius: 8px 8px 0px 0px;
+    height: 40%;
+    border-radius: 0px 8px 8px 0px;
     background-color:#76BC8B ;
-    transform: rotate(90deg);
     position: absolute;
     right: 0;
-    top:47%;
+    bottom:5%;
 }
 
 #C1{
     width: 20%;
-    height: 30%;
-    border-radius: 8px 8px 0px 0px;
+    height: 40%;
+    border-radius: 8px 0px 0px 8px;
     background-color:#76BC8B ;
-    transform: rotate(270deg);
     position: absolute;
-    top:12%;
+    top:5%;
     left: 0;
 }
 
 #C2{
     width: 20%;
-    height: 30%;
-    border-radius: 8px 8px 0px 0px;
-    background-color:#76BC8B ;
-    transform: rotate(270deg);
+    height: 40%;
+    border-radius: 8px 0px 0px 8px;
     position: absolute;
-    top:47%;
+    bottom:5%;
     left: 0;
 }
 
 #C3{
-    width: 20%;
-    height: 30%;
-    border-radius: 8px 8px 0px 0px;
+    height: 40%;
+    border-radius: 0px 8px 8px 0px;
     background-color:#76BC8B ;
-    transform: rotate(90deg);
     position: absolute;
     right: 0;
-    top:47%;
+    bottom:5%;
 }
 
 #AseatD1{
     width: 20%;
-    height: 30%;
-    border-radius: 8px 8px 0px 0px;
+    height: 40%;
+    border-radius: 8px 0px 0px 8px;
     background-color:#76BC8B ;
-    transform: rotate(270deg);
     position: absolute;
-    top:12%;
-    left: 5%;
+    top:5%;
+    left: 0%;
 }
 
 #AseatD2{
-    width: 40px;
-    height: 40px;
-    border-radius: 8px 8px 0px 0px;
+    width: 20%;
+    height: 40%;
+    border-radius: 8px 0px 0px 8px;
     background-color:#76BC8B ;
-    transform: rotate(270deg);
     position: absolute;
-    top:47%;
-    left: 5%;
+    left: 0;
+    bottom: 5%;
 }
 
 #AseatD3{
-    width: 40px;
-    height: 40px;
-    border-radius: 8px 8px 0px 0px;
+    width: 20%;
+    height: 40%;
+    border-radius: 0px 8px 8px 0px;
     background-color:#76BC8B ;
-    transform: rotate(90deg);
     position: absolute;
-    right: 12%;
-    top:47%;
+    right: 0%;
+    top:5%;
 }
 
 #AseatD4{
-    width: 40px;
-    height: 40px;
-    border-radius: 8px 8px 0px 0px;
+    width: 20%;
+    height: 40%;
+    border-radius: 0px 8px 8px 0px;
     background-color:#76BC8B ;
-    transform: rotate(90deg);
     position: absolute;
-    right: 12%;
-    top:12%;
+    right: 0%;
+    bottom:5%;
 }
 
 #AseatE1{
-    width: 40px;
-    height: 40px;
+    width: 30%;
+    height: 26%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
-    transform: rotate(270deg);
     position: absolute;
-    top:10%;
-    left: 0;
+    top:0%;
+    right: 0;
 }
 
 #AseatE2{
-    width: 40px;
-    height: 40px;
+    width: 30%;
+    height: 26%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
-    transform: rotate(270deg);
     position: absolute;
-    top:37%;
-    left: 0;
+    top:0%;
+    left: 35%;
 }
 
 #AseatE3{
-    width: 40px;
-    height: 40px;
+    width: 30%;
+    height: 27%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
-    transform: rotate(90deg);
     position: absolute;
-    right: 0;
-    top:37%;
+    left: 0;
+    top:0%;
 }
 
 #AseatE4{
-    width: 40px;
-    height: 40px;
-    border-radius: 8px 8px 0px 0px;
+    width: 30%;
+    height: 27%;
+    border-radius: 0px 0px 8px 8px;
     background-color:#76BC8B ;
-    transform: rotate(90deg);
     position: absolute;
+    bottom:0%;
     right: 0;
-    top:10%;
 }
 
 #AseatE5{
-    width: 40px;
-    height: 40px;
-    border-radius: 8px 8px 0px 0px;
+    width: 30%;
+    height: 27%;
+    border-radius: 0px 0px 8px 8px;
     background-color:#76BC8B ;
-    transform: rotate(90deg);
     position: absolute;
-    right: 0;
-    top:64%;
+    bottom:0%;
+    right: 35%;
 }
 
 
 #AseatE6{
-    width: 40px;
-    height: 40px;
-    border-radius: 8px 8px 0px 0px;
+    width: 30%;
+    height: 27%;
+    border-radius: 0px 0px 8px 8px;
     background-color:#76BC8B ;
-    transform: rotate(270deg);
     position: absolute;
+    bottom:0%;
     left: 0;
-    top:64%;
 }
 
 #AseatF1{
-    width: 40px;
-    height: 40px;
+    width: 30%;
+    height: 26%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
-    transform: rotate(270deg);
     position: absolute;
-    top:10%;
-    left: 0;
+    top:0%;
+    right: 0;
 }
 
 #AseatF2{
-    width: 40px;
-    height: 40px;
+    width: 30%;
+    height: 26%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
-    transform: rotate(270deg);
     position: absolute;
-    top:37%;
-    left: 0;
+    top:0%;
+    right: 35%;
 }
 
 #AseatF3{
-    width: 40px;
-    height: 40px;
+    width: 30%;
+    height: 26%;
     border-radius: 8px 8px 0px 0px;
     background-color:#76BC8B ;
-    transform: rotate(90deg);
     position: absolute;
-    right: 0;
-    top:37%;
+    top:0%;
+    left: 0;
 }
 
 #AseatF4{
-    width: 40px;
-    height: 40px;
-    border-radius: 8px 8px 0px 0px;
+    width: 30%;
+    height: 27%;
+    border-radius: 0px 0px 8px 8px;
     background-color:#76BC8B ;
-    transform: rotate(90deg);
     position: absolute;
+    bottom:0%;
     right: 0;
-    top:10%;
 }
 
 #AseatF5{
-    width: 40px;
-    height: 40px;
-    border-radius: 8px 8px 0px 0px;
+    width: 30%;
+    height: 27%;
+    border-radius: 0px 0px 8px 8px;
     background-color:#76BC8B ;
-    transform: rotate(90deg);
     position: absolute;
-    right: 0;
-    top:64%;
+    bottom:0%;
+    right: 35%;
 }
 
 
 #AseatF6{
-    width: 40px;
-    height: 40px;
-    border-radius: 8px 8px 0px 0px;
+    width: 30%;
+    height: 27%;
+    border-radius: 0px 0px 8px 8px;
     background-color:#76BC8B ;
-    transform: rotate(270deg);
     position: absolute;
+    bottom:0%;
     left: 0;
-    top:64%;
 }
 
 #AseatG1{
-    width: 40px;
-    height: 40px;
-    border-radius: 8px 8px 0px 0px;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px 0px 0px 8px;
     background-color:#fff ;
-    transform: rotate(270deg);
     position: absolute;
     border: 2px solid #7D7D82;
-    left: 0;
-    top:37%;
+    left: -40%;
+    top:10%;
 }
 #AseatG2{
-    width: 40px;
-    height: 40px;
-    border-radius: 8px 8px 0px 0px;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px 0px 0px 8px;
     background-color:#fff ;
-    transform: rotate(270deg);
     position: absolute;
     border: 2px solid #7D7D82;
-    left: 0;
-    top:10%;
+    left: -40%;
+    bottom: 10%;
 }
 
 .desk{
     width: 40%;
-    height: 55%;
+    height: 100%;
     border-radius: 8px;
     background-color: #BFCBD9 ;
     position: absolute;
-    top:10%;
+    top:0%;
     left:30%
 }
 .desk2{
-    width: 60px;
-    height: 140px;
+    width: 100%;
+    height: 40%;
     border-radius: 8px ;
     background-color: #BFCBD9 ;
     position: absolute;
-    top:10%;
-    left:30%
+    top:30%;
+    left:0%
 }
 .desk5{
-    width: 60px;
-    height: 90px;
+    width: 80%;
+    height: 100%;
     border-radius: 40px;
     background-color: #BFCBD9 ;
     position: absolute;
-    top:10%;
-    left:30%
+    top:0%;
+    right:0%
 }
 
 
