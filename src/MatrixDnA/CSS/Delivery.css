@@ -1,10 +1,21 @@
 
+
+.Ddesk{
+ width: 40%;
+    height: 70%;
+    border-radius: 8px;
+    background-color: #BFCBD9 ;
+    position: absolute;
+    top:0%;
+    left:30%
+}
+
 #DdeskA{
     width: 150px;
     height: 180px;
     position: absolute;
     left: 80%;
-    top:5%
+    top:13%
 }
 
 
@@ -13,7 +24,7 @@
     height: 180px;
     position: absolute;
     left: 60%;
-    top: 5%;
+    top: 13%;
 }
 
 #DdeskC{
@@ -21,7 +32,7 @@
     height: 180px;
     position: absolute;
     left: 40%;
-    top: 5%;
+    top: 13%;
 }
 
 
@@ -262,5 +273,23 @@
     position: absolute;
     top:37%;
     right: 0;
+}
+
+#Dline1{
+    width: 15%;
+    border: 1.5px solid #2E2B76;  
+    transform: rotate(90deg); 
+    position: absolute;
+    top:20%;
+    left: 30%;
+}
+
+#Dline2{
+    width: 30%;
+    border: 1.5px solid #2E2B76;  
+    transform: rotate(90deg); 
+    position: absolute;
+    top:65%;
+    left: 8%;
 }
 

@@ -32,6 +32,8 @@ import './CSS/Meeting.css'
 import ImgMatrix from '/img/imageMatrix.png'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
+import { DateTime } from 'luxon';
+
 
 
 
@@ -98,6 +100,15 @@ export default function MatrixDnA(props) {
                           "AdeskF": ["AseatF1","AseatF2","AseatF3","AseatF4","AseatF5" , "AseatF6"]
                         }}]);
 
+  const [deliverySeats, setDeliverySeats] = useState({
+            "Ddesk":{"DdeskA" : ["DseatA1", "DseatA2","DseatA3"],
+                    "DdeskB" : ["DseatB1","DseatB2","DseatB3"],
+                    "DdeskC" : ["DseatC1","DseatC2","DseatC3","DseatC4"],
+                    "DdeskD": ["DseatD1" , "DseatD2" , "DseatD3" ,"DseatD4"] , 
+                    "DdeskE" : ["DseatE1" , "DseatE2","DseatE3" ], 
+                    "DdeskF" : ["DseatF1" , "DseatF2"]
+                  }});
+
                                                   
 
           useEffect(() => {
@@ -120,10 +131,14 @@ export default function MatrixDnA(props) {
                               })
                             .then(
                               (result) => {
-
-                                const resultArr = result.map(obj => ({ ...obj, date: new Date(obj.date) }));
-                                console.log("fetch btnFetchGetStudents= ", resultArr);
-                                setSeatUsers(resultArr);
+                                const newResult = result.map(item => {
+                                  let newd = new Date(item.date);
+                                  const updatedDate = new Date(newd.getTime() + (3 * 60 * 60 * 1000));
+                                  return {...item , date: updatedDate}
+                                })
+                          
+                                console.log("fetch Reserves1= ", newResult);
+                                setSeatUsers(newResult);
                               },
                               (error) => {
                                 console.log("err post=", error);
@@ -134,6 +149,25 @@ export default function MatrixDnA(props) {
           }, [pickDiv , selectedDate]);
           
 
+
+
+          function formatDate(dateString) {
+           // Parse the original date string using Luxon
+                  const dateTime = DateTime.fromISO(dateString);
+
+                  // Check if Luxon was able to parse the date correctly
+                  if (dateTime.isValid) {
+                    // Format the date as desired
+                    const formattedDate = dateTime.toLocaleString(DateTime.DATETIME_FULL);
+                    console.log('Formatted Date:', formattedDate); // Log the formatted date
+                    return formattedDate;
+                  } else {
+                    // If Luxon failed to parse the date, log an error
+                    console.error('Error parsing date:', dateString);
+                    // Return the original string
+                    return dateString;
+             }
+          }
 
 
                /// להוסיף פילטור של ימים
@@ -185,6 +219,7 @@ function getDayOfWeek(date) {
 //בחירת תאריך 
 const handleDateChange = (date) => {
   setSelectedDate(date);
+  console.log(date);
   setDate(getDate(date));
   setShowChoose(true);
   setShowDatePicker(false);
@@ -212,10 +247,7 @@ const handleDateChange = (date) => {
 
         setpickDiv(pickDiv);
 
-        const newDate = new Date(selectedDate).toISOString();
-        const date2 = new Date(newDate);
-      
-        console.log(newDate , date2);
+     
 
       }
 
@@ -287,8 +319,7 @@ const handleDateChange = (date) => {
       setIsHidden(true);
 
       const [desk, seatNumber] = e.id.match(/[A-Z]+|[0-9]+/g);
-
-
+    
       const newR = {
         UserID: "Eden",
         Class: className ,
@@ -313,7 +344,7 @@ const handleDateChange = (date) => {
                   })
                 .then(
                   (result) => {
-                    console.log("fetch btnFetchGetStudents= ", result);
+                    console.log("fetch btnFetchPostReserve= ", result);
                     setReservedSeats(result);
                   },
                   (error) => {
@@ -323,6 +354,7 @@ const handleDateChange = (date) => {
             setpickDiv(null);
 
     }
+
 
     function NewRequests(){
         setRequests(false);
@@ -492,49 +524,31 @@ const handleDateChange = (date) => {
 
        {classDelivery &&
             (<>
-                  <div id="DdeskA">
-                     <button id="DseatA1"></button>  
-                       <div className="desk"></div>
-                      <button id="DseatA2"></button>
-                      <button id="DseatA3"></button>    
-                  </div>
+                        {Object.keys(deliverySeats["Ddesk"]).map(desk => (
+                        <div id={desk}>
+                            <div className="Ddesk"></div>
 
-                  <div id="DdeskB">
-                     <button id="DseatB1"></button>  
-                       <div className="desk"></div>
-                      <button id="DseatB2"></button>
-                      <button id="DseatB3"></button>    
-                  </div>
+                            {/* Mapping over the seats of each desk */}
+                            {deliverySeats["Ddesk"][desk].map(seat => (
+                                <button 
+                                    key={seat} 
+                                    id={seat} 
+                                    style={{backgroundColor: statusSeats(seat) ? redColor : greenColor}}  
+                                    disabled={statusSeats(seat)}
+                                    onClick={(e) => {
+                                        pickSeat(e.target);
+                                    }}
+                                >
+                                </button>
+                            ))}
+                          </div>
+                              ))}
+                    
+               
 
-                  <div id="DdeskC">
-                     <button id="DseatC1"></button>  
-                       <div className="desk"></div>
-                      <button id="DseatC2"></button>
-                      <button id="DseatC3"></button> 
-                      <button id="DseatC4"></button>    
-                  </div>
-
-                  <div id="DdeskD">
-                     <button id="DseatD1"></button>  
-                       <div className="desk"></div>
-                      <button id="DseatD2"></button>
-                      <button id="DseatD3"></button> 
-                      <button id="DseatD4"></button>    
-                  </div>
-
-                  <div id="DdeskE">
-                     <button id="DseatE1"></button>  
-                       <div className="desk"></div>
-                      <button id="DseatE2"></button>
-                      <button id="DseatE3"></button>    
-                  </div>
-
-                  
-                  <div id="DdeskF">
-                     <button id="DseatF1"></button>  
-                       <div className="desk"></div>
-                      <button id="DseatF2"></button>
-                       
+                  <div id="rightSide">
+                    <WeekendIcon id="couch" />
+                    <img id="plot" src={plot} />
                   </div>
             </>) 
             }
@@ -747,7 +761,7 @@ const handleDateChange = (date) => {
                   <Datepicker
                     selected={selectedDate}
                     onChange={handleDateChange}
-                    dateFormat="YYYY-MM-DDTHH:MM:SS"
+                    dateFormat="yyyy/MM/dd"
                     showYearDropdown
                     scrollableYearDropdown
                     yearDropdownItemNumber={15}

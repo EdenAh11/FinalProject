@@ -40,7 +40,7 @@ useEffect(() => {
                     })
                   .then(
                     (result) => {
-                      console.log("fetch btnFetchGetStudents= ", result);
+                      console.log("fetch btnFetchGetClass= ", result);
                       setClasses(result);
                     },
                     (error) => {
@@ -62,8 +62,13 @@ useEffect(() => {
                   })
                 .then(
                   (result) => {
-                    console.log("fetch btnFetchGetStudents= ", result);
-                    setReservedSeats(result);
+                    const newResult = result.map(item => {
+                      let newd = new Date(item.date);
+                      const updatedDate = new Date(newd.getTime() + (3 * 60 * 60 * 1000));
+                      return {...item , date: updatedDate}
+                    })
+                    console.log("fetch Reserves= ", newResult);
+                    setReservedSeats(newResult);
                   },
                   (error) => {
                     console.log("err post=", error);
