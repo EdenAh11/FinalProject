@@ -1,0 +1,91 @@
+
+#requests{
+    position: absolute;
+    overflow-y: scroll;
+    scrollbar-color: rgba(110, 119, 129, 1) rgba(198, 204, 210, 1);
+    top:15%;
+    left: 20%;
+    height: 70%;
+    width: 60%;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    box-shadow: 2px 4px 40px 2px rgba(0, 0, 0, 0.15);
+}
+
+#newReq{
+    position: absolute;
+    top:15%;
+    left: 30%;
+    height: 70%;
+    width: 30%;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.15);
+}
+
+#newReq1{
+    position: absolute;
+    text-align: right;
+    top:10%;
+    left: 5%;
+    height: 80%;
+    width: 90%;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+}
+
+#sendReq{
+    background-color: #2E2B76;
+    position: absolute;
+    color: white;
+    border-radius: 18px;
+    width: 30%;
+    left:5%;
+    bottom: 3% ;
+    font-size: small;
+    font-weight: 400;
+    padding: 5px;
+}
+
+#sendIcon{
+    width: 10px;
+    height: 10px;
+    transform: rotate(180deg);
+    margin-left: 3%;
+}
+
+
+
+#newReq1 label{
+    font-weight: 700;
+    font-size: small;
+    margin-right: 3%;
+    margin-top: 4%;
+    
+}
+
+#newReq1 h1{
+    color: #2E2B76;
+    font-weight: 700;
+    font-size: large;
+    margin-right: 3%;
+    margin-top: 3%;
+}
+
+#textDetail{
+    margin-right: 3%;
+    width: 95%;
+    direction: rtl;
+    height: 45%;
+    background-color: rgba(242, 242, 243, 1);
+    border-radius: 8px;
+}
+
+#inputReq{
+    width: 65%;
+    margin-right: 5%;
+    border-radius: 0;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+}

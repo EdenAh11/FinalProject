@@ -27,12 +27,12 @@ import './CSS/Analytics.css'
 import './CSS/Delivery.css'
 import './CSS/Classtified.css'
 import './CSS/Meeting.css'
+import './CSS/Requests.css'
 
 
 import ImgMatrix from '/img/imageMatrix.png'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
-import { DateTime } from 'luxon';
 
 
 
@@ -47,13 +47,15 @@ export default function MatrixDnA(props) {
   //מערך משתמשים מהדאטה
   const [seatUsers, setSeatUsers] = useState(props.seatsUser);
 //לינק לשרת
-  const [apiUrl2, setApiUrl2] = useState("https://localhost:7180/api/Reservedplace");
+  const [apiUrl2, setApiUrl2] = useState("https://proj.ruppin.ac.il/cgroup73/test2/tar1/api/Reservedplace");
   //תאריך נוכחי
   const [date, setDate] = useState(getCurrentDate());
   //בחירת תאריך למקום
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(new Date());
   //הצגת לוח שנה לבחירת מקום
   const [showDatePicker, setShowDatePicker] = useState(false);
+
+  const [currentSeat, setCurrentSeat] = useState(null);
   //לאחר שריון התאריך
   const [showChoose, setShowChoose] = useState(false);
   //טשטוש הרקע
@@ -71,6 +73,8 @@ export default function MatrixDnA(props) {
   //מחלקת אנליטיקס
   const [classAnalytics, setClassAnlytics] = useState(false);
 
+  const [btnFinishShow, setbtnFinishShow] = useState(false);
+
   const [classDelivery, setClassDelivery] = useState(false);
 
   const [classtified, setClasstified] = useState(false);
@@ -80,6 +84,8 @@ export default function MatrixDnA(props) {
   const [requests, setRequests] = useState(false);
 
   const [pickDiv, setpickDiv] = useState("");
+
+  const [confirmDiv, setConfirmDiv] = useState("");
 
   const [NewReq, setNewReq] = useState("")
 
@@ -108,6 +114,9 @@ export default function MatrixDnA(props) {
                     "DdeskE" : ["DseatE1" , "DseatE2","DseatE3" ], 
                     "DdeskF" : ["DseatF1" , "DseatF2"]
                   }});
+
+const [hoveredSeat, setHoveredSeat] = useState(null);
+
 
                                                   
 
@@ -151,23 +160,7 @@ export default function MatrixDnA(props) {
 
 
 
-          function formatDate(dateString) {
-           // Parse the original date string using Luxon
-                  const dateTime = DateTime.fromISO(dateString);
-
-                  // Check if Luxon was able to parse the date correctly
-                  if (dateTime.isValid) {
-                    // Format the date as desired
-                    const formattedDate = dateTime.toLocaleString(DateTime.DATETIME_FULL);
-                    console.log('Formatted Date:', formattedDate); // Log the formatted date
-                    return formattedDate;
-                  } else {
-                    // If Luxon failed to parse the date, log an error
-                    console.error('Error parsing date:', dateString);
-                    // Return the original string
-                    return dateString;
-             }
-          }
+       
 
 
                /// להוסיף פילטור של ימים
@@ -230,26 +223,101 @@ const handleDateChange = (date) => {
 
 // בחירת מושב
  function pickSeat(e){
-      let x = e;
       e.style.backgroundColor = blueColor;
-      setIsBlurred(true);
-      setIsHidden(false);
-      const pickDiv = (
-      <div id="pickDiv">
-                  <DisabledByDefaultIcon id="exitIcon" onClick={(e) => {exitMenu(x.style)}} />
-                  <CheckCircleIcon id="checkIcon" />
-                  <p id="textPick">  המושב שוריין לתאריך {date} יום {getDayOfWeek(selectedDate)}</p>
-                  <button id='confimPick' onClick={(e) => {confirmSeat(x)}}>אישור הבחירה וסיום<CheckIcon /></button>
-                  <button id='changePick'>שינוי הבחירה<DriveFileRenameOutlineIcon /></button>
-                  <button id='anotherPick'>שיריון מושב נוסף<ControlPointIcon /></button>
-        </div>
-        )
+   
 
-        setpickDiv(pickDiv);
+      const confirmDiv = (
+             
+                 <div id="confirmDiv">
+                  <label>.המושב אושר בהצלחה</label>
+                  <CheckCircleIcon id="checkIconConfirm" />
+              </div>
+             
+      )
+      setConfirmDiv(confirmDiv);
 
-     
+      const btnFinish = (
+        <input type='button' onClick={() => {finishChose(e)}} id="endBtn" value="סיום" />
+      )
+
+      setbtnFinishShow(btnFinish);
+                  
+  
 
       }
+
+
+
+      function finishChose(e){
+
+        let x = e;
+        setIsBlurred(true);
+        setIsHidden(false);
+
+        const pickDiv = (
+          <div id="pickDiv">
+                      <DisabledByDefaultIcon id="exitIcon" onClick={(e) => {exitMenu(x.style)}} />
+                      <CheckCircleIcon id="checkIcon" />
+                      <p id="textPick">  המושב שוריין לתאריך {date} יום {getDayOfWeek(selectedDate)}</p>
+                      <button id='confimPick' onClick={(e) => {confirmSeat(x)}}>אישור הבחירה וסיום<CheckIcon /></button>
+                      <button id='changePick'>שינוי הבחירה<DriveFileRenameOutlineIcon /></button>
+                      <button id='anotherPick'>שיריון מושב נוסף<ControlPointIcon /></button>
+            </div>
+            )
+    
+    
+            setpickDiv(pickDiv);
+
+      }
+
+        //אישור כיסא
+        function confirmSeat(e){
+          
+          setIsBlurred(false);
+          setIsHidden(true);
+    
+    
+    
+    
+          const [desk, seatNumber] = e.id.match(/[A-Z]+|[0-9]+/g);
+        
+          const newR = {
+            UserID: "Eden",
+            Class: className ,
+            Date: selectedDate , 
+            Seat : seatNumber ,
+            Table: desk 
+          }
+    
+                  fetch(apiUrl2, {
+                    method: 'POST',
+                    headers: new Headers({
+                      'Content-Type': 'application/json; charset=UTF-8',
+                      'Accept': 'application/json; charset=UTF-8',
+                    }) ,
+                    body: JSON.stringify(newR)
+                  })
+                    .then(res => {
+                      console.log('res=', res);
+                      console.log('res.status', res.status);
+                      console.log('res.ok', res.ok);
+                      return res.json()
+                      })
+                    .then(
+                      (result) => {
+                        console.log("fetch btnFetchPostReserve= ", result);
+                        setReservedSeats(result);
+                      },
+                      (error) => {
+                        console.log("err post=", error);
+                      });
+                e.disabled = true;
+                setpickDiv(null);
+                setbtnFinishShow(null);
+                setConfirmDiv(null);
+    
+        }
+      
 
 
     //יציאה מהתפריט
@@ -313,48 +381,36 @@ const handleDateChange = (date) => {
       setClasstified(false);
     }
 
-    //אישור כיסא
-    function confirmSeat(e){
-      setIsBlurred(false);
-      setIsHidden(true);
 
-      const [desk, seatNumber] = e.id.match(/[A-Z]+|[0-9]+/g);
-    
-      const newR = {
-        UserID: "Eden",
-        Class: className ,
-        Date: selectedDate , 
-        Seat : seatNumber ,
-        Table: desk 
-      }
 
-              fetch(apiUrl2, {
-                method: 'POST',
-                headers: new Headers({
-                  'Content-Type': 'application/json; charset=UTF-8',
-                  'Accept': 'application/json; charset=UTF-8',
-                }) ,
-                body: JSON.stringify(newR)
+
+    //בחירת כיסא חוזר
+    function LastSeatChose(e){
+      if(e.checked){
+        const sortedData = seatUsers.slice().sort((a, b) => a.date - b.date);
+        let lastDate = new Date();
+        setSelectedDate(lastDate);
+
+        let lastChoose = "";
+            sortedData.map(item => {
+                const current = new Date();
+                if(item.date < current)
+                {
+                  lastDate = item.date;
+                  lastChoose = item.table + item.seat;
+
+                  
+                }
               })
-                .then(res => {
-                  console.log('res=', res);
-                  console.log('res.status', res.status);
-                  console.log('res.ok', res.ok);
-                  return res.json()
-                  })
-                .then(
-                  (result) => {
-                    console.log("fetch btnFetchPostReserve= ", result);
-                    setReservedSeats(result);
-                  },
-                  (error) => {
-                    console.log("err post=", error);
-                  });
-            e.disabled = true;
-            setpickDiv(null);
+        console.log(sortedData);
+        console.log(lastChoose);
 
+        const chooseID = document.getElementById(lastChoose);
+        
+
+        pickSeat(chooseID);
+      }
     }
-
 
     function NewRequests(){
         setRequests(false);
@@ -427,6 +483,9 @@ const handleDateChange = (date) => {
           <Row id="body" >
           <Col xs={9}>
       <div id="places">
+
+      {confirmDiv}
+   
       {classAnalytics &&
         ( 
           <> 
@@ -448,7 +507,8 @@ const handleDateChange = (date) => {
                                     onClick={(e) => {
                                         pickSeat(e.target);
                                     }}
-                                >
+                                  >
+                                
                                 </button>
                             ))}
                           </div>
@@ -524,8 +584,17 @@ const handleDateChange = (date) => {
 
        {classDelivery &&
             (<>
+
+                          <div id="Dline1"></div>
+                          <div id="Dline2"></div>
+                          <div id="Dline3"></div>
+                          <div id="Dline4"></div>
+
                         {Object.keys(deliverySeats["Ddesk"]).map(desk => (
+                          
                         <div id={desk}>
+                            
+
                             <div className="Ddesk"></div>
 
                             {/* Mapping over the seats of each desk */}
@@ -546,7 +615,7 @@ const handleDateChange = (date) => {
                     
                
 
-                  <div id="rightSide">
+                  <div id="rightSide2">
                     <WeekendIcon id="couch" />
                     <img id="plot" src={plot} />
                   </div>
@@ -684,7 +753,7 @@ const handleDateChange = (date) => {
                        
                              <div className='divReq'>
                                     <labal style={{ 
-                                      color: "#2E2B76" , fontWeight: "700"}}>בקשה #4556 </labal>
+                                      color: "#2E2B76" , fontWeight: "700" }}>בקשה #4556 </labal>
 
                                     <span style={{ 
                                       fontWeight: "500"}}>חדר ישיבות תפוח</span>
@@ -751,7 +820,7 @@ const handleDateChange = (date) => {
           <div>                    
                      <label id="labelCheck" htmlFor='checkPlace'> בחר/י שוב את מה שבחרתי בפעם האחרונה</label>
 
-                     <input type='checkbox' id='checkPlace'></input>
+                     <input type='checkbox' id='checkPlace' onChange={(e) => {LastSeatChose(e.target)}}></input>
           </div>
           {showChoose && 
            (<p id="pDiv"><FaEraser id="FaEraser" onClick={(e)=>{
@@ -780,10 +849,10 @@ const handleDateChange = (date) => {
                   <option value="delivery">מחלקת דליברי</option>
                   <option value="classtified">מסווגים</option>
               </select>
-              <input type="button" onClick={showMeeting} value="חדרי ישיבות" />
-              <input type="button" value="דיווחים" />
-              <input type="button" value="בקשות"  onClick={(e) => chooseClasses(e.target.value)}/>
-              <input type='button' id="endBtn" value="סיום" />
+              <input className='btn1' type="button" onClick={showMeeting} value="חדרי ישיבות" />
+              <input className='btn1'type="button" value="דיווחים" />
+              <input className='btn1' type="button" value="בקשות"  onClick={(e) => chooseClasses(e.target.value)}/>
+              { btnFinishShow} 
           
             </div>
           </Col>

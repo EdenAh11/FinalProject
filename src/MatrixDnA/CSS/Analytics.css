@@ -25,6 +25,12 @@
     width: 30%;
 }
 
+.p2{
+    position: absolute;
+    top:0;
+    transform: rotate(90deg);
+}
+
 #rightSide{
     position: absolute;
     border-bottom: 3px solid #2E2B76;

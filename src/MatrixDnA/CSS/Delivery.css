@@ -1,4 +1,15 @@
 
+#rightSide2{
+    position: absolute;
+    border-bottom: 3px solid #2E2B76;
+    border-left: 3px solid #2E2B76;
+    height: 15%;
+    width: 50%;
+    top: 65%;
+    right: 8%;
+
+}
+
 
 .Ddesk{
  width: 40%;
@@ -285,11 +296,27 @@
 }
 
 #Dline2{
-    width: 30%;
+    width: 10%;
+    border: 1.5px solid #2E2B76;  
+    position: absolute;
+    top:37%;
+    left: 25%;
+}
+
+#Dline3{
+    width: 25%;
     border: 1.5px solid #2E2B76;  
     transform: rotate(90deg); 
     position: absolute;
     top:65%;
-    left: 8%;
+    left: 10%;
+}
+
+#Dline4{
+    width: 50%;
+    border: 1.5px solid #2E2B76;  
+    position: absolute;
+    top:50%;
+    right: 8%;
 }
 

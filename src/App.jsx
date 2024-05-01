@@ -7,9 +7,9 @@ import Matrix from './MatrixDnA/MatrixDna.jsx'
 
 function App() {
 
-  const [apiUrl, setApiUrl] = useState("https://localhost:7180/api/User");
-  const [apiUrl2, setApiUrl2] = useState("https://localhost:7180/api/Reservedplace");
-  const [apiUrl3, setApiUrl3] = useState("https://localhost:7180/api/Class");
+  const [apiUrl, setApiUrl] = useState("https://proj.ruppin.ac.il/cgroup73/test2/tar1/api/User");
+  const [apiUrl2, setApiUrl2] = useState("https://proj.ruppin.ac.il/cgroup73/test2/tar1/api/Reservedplace");
+  const [apiUrl3, setApiUrl3] = useState("https://proj.ruppin.ac.il/cgroup73/test2/tar1/api/Class");
 
   const [users, setUsers] = useState([]);
   const [reservedSeats, setReservedSeats] = useState([]);
