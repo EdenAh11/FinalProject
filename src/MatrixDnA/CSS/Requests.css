@@ -3,14 +3,29 @@
     position: absolute;
     overflow-y: scroll;
     scrollbar-color: rgba(110, 119, 129, 1) rgba(198, 204, 210, 1);
-    top:15%;
+    top:20%;
     left: 20%;
     height: 70%;
     width: 60%;
     background-color: rgba(255, 255, 255, 1);
-    border-radius: 10px;
+    border-radius: 8px;
     box-shadow: 2px 4px 40px 2px rgba(0, 0, 0, 0.15);
 }
+
+#confirmReq{
+    position: absolute;
+    text-align: right;
+    top:25%;
+    height: 40%;
+    left:20%;
+    width: 50%;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 8px;
+    box-shadow: 2px 4px 40px 2px rgba(0, 0, 0, 0.15);
+ 
+}
+
+
 
 #newReq{
     position: absolute;
@@ -64,16 +79,52 @@
     
 }
 
-#newReq1 h1{
+#newReq1 h1 {
     color: #2E2B76;
     font-weight: 700;
     font-size: large;
-    margin-right: 3%;
-    margin-top: 3%;
+    margin: 3% 3% 0 0;
+}
+
+#confirmReq h1{
+    color: #2E2B76;
+    font-weight: 700;
+    font-size: large;
+    text-align: right;
+    margin: 10% 10%  2%  0
+    
+}
+#confirmReq label{
+    font-weight: 500;
+  
+}
+#confirmReq p{
+    font-weight: 400;
+    margin: 0 10%  0  0
+  
+}
+
+#acceptReq{
+    background-color: #2E2B76;
+    position: absolute;
+    color: white;
+    border-radius: 18px;
+    width: 25%;
+    left:5%;
+    bottom: 10% ;
+    font-size: small;
+    font-weight: 400;
+    padding: 5px;
+}
+
+#lReq{
+    font-weight: 600;
+    font-size: large;
 }
 
 #textDetail{
     margin-right: 3%;
+    padding-right: 2%;
     width: 95%;
     direction: rtl;
     height: 45%;
@@ -84,6 +135,7 @@
 #inputReq{
     width: 65%;
     margin-right: 5%;
+    padding-right: 2%;
     border-radius: 0;
     border-top: 0;
     border-right: 0;

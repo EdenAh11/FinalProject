@@ -1,4 +1,5 @@
 import {React , useState , createContext , useEffect} from 'react'
+import axios from 'axios';
 import {Container , Row , Col , Button  } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 
@@ -46,8 +47,14 @@ export default function MatrixDnA(props) {
   const [className, setClassName] = useState('')
   //מערך משתמשים מהדאטה
   const [seatUsers, setSeatUsers] = useState(props.seatsUser);
+  //מערך הבקשות
+  const [allRequests, setallRequests] = useState(props.reqArr);
 //לינק לשרת
   const [apiUrl2, setApiUrl2] = useState("https://proj.ruppin.ac.il/cgroup73/test2/tar1/api/Reservedplace");
+  //לינק לשרת בקשות
+  const [apiUrl3, setApiUrl3] = useState("https://proj.ruppin.ac.il/cgroup73/test2/tar1/api/Requests");
+  //לינק לשרת אימייל
+  const [apiUrl4, setApiUrl4] = useState("https://proj.ruppin.ac.il/cgroup73/test2/tar1/api/Email");
   //תאריך נוכחי
   const [date, setDate] = useState(getCurrentDate());
   //בחירת תאריך למקום
@@ -87,7 +94,17 @@ export default function MatrixDnA(props) {
 
   const [confirmDiv, setConfirmDiv] = useState("");
 
-  const [NewReq, setNewReq] = useState("")
+  const [NewReq, setNewReq] = useState("");
+//נושא בקשה חדשה
+  const [subReq, setSubReq] = useState("");
+//פירוט בקשה חדשה
+  const [detailReq, setdetailReq] = useState("");
+//תפריט הבקשה החדשה
+  const [newReqY, setnewReqY] = useState(false);
+//אישור סופי של הבקשה
+  const [newReqSuccess, setnewReqSuccess] = useState(null);
+
+
 
   const [catch1Hide, setCatch1Hide] = useState(true);
   const [catch1Blur, setCatch1Blur] = useState(false);
@@ -125,56 +142,118 @@ const [hoveredSeat, setHoveredSeat] = useState(null);
                         setClassName(location.state.classId);
                         chooseClasses(location.state.classId);
 
-                          fetch(apiUrl2, {
-                            method: 'GET',
-                            headers: new Headers({
-                              'Content-Type': 'application/json; charset=UTF-8',
-                              'Accept': 'application/json; charset=UTF-8',
-                            })
-                          })
-                            .then(res => {
-                              console.log('res=', res);
-                              console.log('res.status', res.status);
-                              console.log('res.ok', res.ok);
-                              return res.json()
-                              })
-                            .then(
-                              (result) => {
-                                const newResult = result.map(item => {
-                                  let newd = new Date(item.date);
-                                  const updatedDate = new Date(newd.getTime() + (3 * 60 * 60 * 1000));
-                                  return {...item , date: updatedDate}
-                                })
-                          
-                                console.log("fetch Reserves1= ", newResult);
-                                setSeatUsers(newResult);
-                              },
-                              (error) => {
-                                console.log("err post=", error);
-                              });
+                        const fetchData = async () =>{
+                          try{
+                            const responseReq = await axios.get(apiUrl3);
+                            console.log(responseReq.data)
+                            setallRequests(responseReq.data);
 
-                   console.log(seatUsers);
+
+                            const responseSeatUsers = await axios.get(apiUrl2);
+                            const newResult = responseSeatUsers.data.map(item => {
+                              let newd = new Date(item.date);
+                              const updatedDate = new Date(newd.getTime() + (3 * 60 * 60 * 1000));
+                              return {...item , date: updatedDate}
+                            })
+                      
+                            console.log("fetch Reserves1= ", newResult);
+                            setSeatUsers(newResult);
+
+                          }
+                          catch (error)
+                              {
+                                console.log("err post=", error);
+                              }
+                            };
+                            
+                            fetchData();
+
+                  //       fetch(apiUrl3, {
+                  //         method: 'GET',
+                  //         headers: new Headers({
+                  //           'Content-Type': 'application/json; charset=UTF-8',
+                  //           'Accept': 'application/json; charset=UTF-8',
+                  //         })
+                  //       })
+                  //         .then(res => {
+                  //           console.log('res=', res);
+                  //           console.log('res.status', res.status);
+                  //           console.log('res.ok', res.ok);
+                  //           return res.json()
+                  //           })
+                  //         .then(
+                  //           (result) => {
+                  //                 console.log("R = " ,result);
+                  //                 setallRequests(result);
+                           
+                  //           },
+                  //           (error) => {
+                  //             console.log("err post=", error);
+                  //           });
+
+
+                  //         fetch(apiUrl2, {
+                  //           method: 'GET',
+                  //           headers: new Headers({
+                  //             'Content-Type': 'application/json; charset=UTF-8',
+                  //             'Accept': 'application/json; charset=UTF-8',
+                  //           })
+                  //         })
+                  //           .then(res => {
+                  //             console.log('res=', res);
+                  //             console.log('res.status', res.status);
+                  //             console.log('res.ok', res.ok);
+                  //             return res.json()
+                  //             })
+                  //           .then(
+                  //             (result) => {
+                  //               const newResult = result.map(item => {
+                  //                 let newd = new Date(item.date);
+                  //                 const updatedDate = new Date(newd.getTime() + (3 * 60 * 60 * 1000));
+                  //                 return {...item , date: updatedDate}
+                  //               })
+                          
+                  //               console.log("fetch Reserves1= ", newResult);
+                  //               setSeatUsers(newResult);
+                  //             },
+                  //             (error) => {
+                  //               console.log("err post=", error);
+                  //             });
+
+                  //  console.log(seatUsers);
             
           }, [pickDiv , selectedDate]);
           
 
 
 
-       
-
-
+      
                /// להוסיף פילטור של ימים
       function statusSeats(e){
 
-          
-
-        return seatUsers.some(user => {
-          const [pickDate,selectD] = [new Date(user.date), new Date(selectedDate)];
+        return seatUsers.some(users => {
+          const [pickDate,selectD] = [new Date(users.date), new Date(selectedDate)];
           const [dateUser,dateSelect] = [getDate(pickDate) , getDate(selectD)];
           
-              return(user.table + user.seat === e && dateUser === dateSelect);
+              return(users.table + users.seat === e && dateUser === dateSelect);
         });
      }
+
+     function statusSeats2(e){
+
+      return seatUsers.some(users => {
+        const [pickDate,selectD] = [new Date(user.date), new Date(selectedDate)];
+        const [dateUser,dateSelect] = [getDate(pickDate) , getDate(selectD)];
+        console.log(users)
+        console.log(users.userid === user);
+        console.log(users.userid == user);
+        
+            return(users.table + users.seat === e && dateUser === dateSelect && users.userid === user);
+      });
+   }
+
+   
+
 
 
   //תאריך נוכחי לכותרת
@@ -224,7 +303,6 @@ const handleDateChange = (date) => {
 // בחירת מושב
  function pickSeat(e){
       e.style.backgroundColor = blueColor;
-   
 
       const confirmDiv = (
              
@@ -247,7 +325,7 @@ const handleDateChange = (date) => {
       }
 
 
-
+//תפריט לאחר לחיצת על מקום
       function finishChose(e){
 
         let x = e;
@@ -270,8 +348,8 @@ const handleDateChange = (date) => {
 
       }
 
-        //אישור כיסא
-        function confirmSeat(e){
+  //אישור כיסא
+        const confirmSeat = async (e) => {
           
           setIsBlurred(false);
           setIsHidden(true);
@@ -282,35 +360,53 @@ const handleDateChange = (date) => {
           const [desk, seatNumber] = e.id.match(/[A-Z]+|[0-9]+/g);
         
           const newR = {
-            UserID: "Eden",
+            UserID: user,
             Class: className ,
             Date: selectedDate , 
             Seat : seatNumber ,
             Table: desk 
           }
+
+          let datePost = getDate(selectedDate);
+
+          const email = {
+            to: "vivian.klein@ethereal.email" , 
+            subject : "שריון מקום ישיבה" ,
+            body : `<div> <h1>שיריון מקום ישיבה עבר בהצלחה</h1> <p> ${desk + seatNumber}   מקום ישיבה </p>`+                   
+                             `<p>בתאריך : ${datePost}</p></div>`
+          }
     
-                  fetch(apiUrl2, {
-                    method: 'POST',
-                    headers: new Headers({
-                      'Content-Type': 'application/json; charset=UTF-8',
-                      'Accept': 'application/json; charset=UTF-8',
-                    }) ,
-                    body: JSON.stringify(newR)
-                  })
-                    .then(res => {
-                      console.log('res=', res);
-                      console.log('res.status', res.status);
-                      console.log('res.ok', res.ok);
-                      return res.json()
-                      })
-                    .then(
-                      (result) => {
-                        console.log("fetch btnFetchPostReserve= ", result);
-                        setReservedSeats(result);
-                      },
-                      (error) => {
-                        console.log("err post=", error);
-                      });
+                  // fetch(apiUrl2, {
+                  //   method: 'POST',
+                  //   headers: new Headers({
+                  //     'Content-Type': 'application/json; charset=UTF-8',
+                  //     'Accept': 'application/json; charset=UTF-8',
+                  //   }) ,
+                  //   body: JSON.stringify(newR)
+                  // })
+
+
+                    // .then(res => {
+                    //   console.log('res=', res);
+                    //   console.log('res.status', res.status);
+                    //   console.log('res.ok', res.ok);
+                    //   return res.json()
+                    //   })
+                    // .then(
+                    //   (result) => {
+                    //     console.log("fetch btnFetchPostReserve= ", result);
+                    //     setReservedSeats(result);
+                    //   },
+                    //   (error) => {
+                    //     console.log("err post=", error);
+                    //   });
+
+                    const response = await axios.post(apiUrl2, newR);
+
+                    const response2 = await axios.post(apiUrl4, email);
+
+
+                  
                 e.disabled = true;
                 setpickDiv(null);
                 setbtnFinishShow(null);
@@ -322,6 +418,7 @@ const handleDateChange = (date) => {
 
     //יציאה מהתפריט
     function exitMenu(e){
+
       setIsBlurred(false);
       setIsHidden(true)
       setpickDiv(null);
@@ -414,28 +511,63 @@ const handleDateChange = (date) => {
 
     function NewRequests(){
         setRequests(false);
-        const newReq = (<div id='newReq'>
-                      <DisabledByDefaultIcon id="xIcon"  onClick={() => {setNewReq(null) , 
-                                                     chooseClasses(location.state.classId)
-                                                                                            }}/>
-                      <div id='newReq1'>
-                          <h1 >/ בקשה חדשה </h1>
-                          
-                          
-                        <input type='text' id='inputReq'></input>
-                        <label>נושא הבקשה</label>
-
-                        <label>פירוט הבקשה</label>
-                        <br />
-                        <textarea id="textDetail"></textarea>
-                      </div>
-
-                      <button id="sendReq">שליחת הבקשה<SendIcon id="sendIcon" /></button>
-                        </div>
-          )
-                        setNewReq(newReq);
+        setnewReqY(true);
                           
     }
+
+      const sendReq = async () =>{
+        
+        let requestsDate = new Date();
+
+        const newRequest = {
+          requestid1: allRequests.length + 1,
+          userId1: user ,
+          topic1: subReq , 
+          detail1 : detailReq ,
+          requestsDate1: requestsDate ,
+          status:true
+        }
+
+        const responseAllReq = await axios.post(apiUrl3, newRequest);
+        setallRequests(responseAllReq);
+
+        const divAcceptReq =  (<div id='confirmReq'>
+        <DisabledByDefaultIcon id="xIcon" onClick={setnewReqSuccess(null)} />   
+        <h1 > <label>בקשה מספר 4585#</label> / חדר ישיבות</h1>   
+        <p>הבקשה נשלחה לאישור המנהלת. תקבל/י התראה ברגע שתיענה.</p>   
+        <button id="acceptReq" onClick={setnewReqSuccess(null)}>אישור</button>                                                                         
+          </div>)
+
+        setnewReqSuccess(divAcceptReq)
+        setnewReqY(false);
+
+        
+
+
+  
+                // fetch(apiUrl3, {
+                //   method: 'POST',
+                //   headers: new Headers({
+                //     'Content-Type': 'application/json; charset=UTF-8',
+                //     'Accept': 'application/json; charset=UTF-8',
+                //   }) ,
+                //   body: JSON.stringify(newRequest)
+                // })
+                //   .then(res => {
+                //     console.log('res=', res);
+                //     console.log('res.status', res.status);
+                //     console.log('res.ok', res.ok);
+                //     return res.json()
+                //     })
+                //   .then(
+                //     (result) => {
+                //       console.log("fetch NewPost= ", result);
+                //       setallRequests(result);
+                //     },
+                //     (error) => {
+                //       console.log("err post=", error);
+                //     });
+      }
 
 
     
@@ -502,7 +634,8 @@ const handleDateChange = (date) => {
                                 <button 
                                     key={seat} 
                                     id={seat} 
-                                    style={{backgroundColor: statusSeats(seat) ? redColor : greenColor}}  
+                                    style={{backgroundColor: statusSeats(seat) ? redColor : greenColor,
+                                              border: statusSeats2(seat) ? "5px solid #fff" : null}}  
                                     disabled={statusSeats(seat)}
                                     onClick={(e) => {
                                         pickSeat(e.target);
@@ -750,54 +883,29 @@ const handleDateChange = (date) => {
                             <button id="addReq" onClick={NewRequests}>הוסף בקשה <AddIcon /></button>
                  
                       <div id="reqStatus">
+                      {allRequests.map((req,index) => (
+                        req.userId1 === user ?
+                            (<div className='divReq'>
+                                    <labal style={{ 
+                                      color: "#2E2B76" , fontWeight: "700" }}>בקשה #{index + 1} </labal>
+
+                                    <span style={{ 
+                                      fontWeight: "500"}}>{req.topic1}</span>
+
+                                      <div className="Rstatus">אושר</div>
+
+
+                                      <br /><br/>
+                                      <p>{req.detail1}</p>
+
+
+                              </div>) : null
+                                    
+                                ))}
                        
-                             <div className='divReq'>
-                                    <labal style={{ 
-                                      color: "#2E2B76" , fontWeight: "700" }}>בקשה #4556 </labal>
+                           
 
-                                    <span style={{ 
-                                      fontWeight: "500"}}>חדר ישיבות תפוח</span>
-
-                                      <div className="Rstatus">אושר</div>
-
-
-                                      <br /><br/>
-                                      <p>...ברצוני לבקש 3 כסאות נוספים</p>
-
-
-                              </div>
-
-                              <div className='divReq'>
-                                    <labal style={{ 
-                                      color: "#2E2B76" , fontWeight: "700"}}>בקשה #4556 </labal>
-
-                                    <span style={{ 
-                                      fontWeight: "500"}}>חדר ישיבות תפוח</span>
-
-                                      <div className="Rstatus">אושר</div>
-
-
-                                      <br /><br/>
-                                      <p>...ברצוני לבקש 3 כסאות נוספים</p>
-
-
-                              </div>
-
-                              <div className='divReq'>
-                                    <labal style={{ 
-                                      color: "#2E2B76" , fontWeight: "700"}}>בקשה #4556 </labal>
-
-                                    <span style={{ 
-                                      fontWeight: "500"}}>חדר ישיבות תפוח</span>
-
-                                      <div className="Rstatus"><label>אושר</label></div>
-
-
-                                      <br /><br/>
-                                      <p>...ברצוני לבקש 3 כסאות נוספים</p>
-
-
-                              </div>
+                           
                              
                              
                         
@@ -822,6 +930,8 @@ const handleDateChange = (date) => {
 
                      <input type='checkbox' id='checkPlace' onChange={(e) => {LastSeatChose(e.target)}}></input>
           </div>
+
+
           {showChoose && 
            (<p id="pDiv"><FaEraser id="FaEraser" onClick={(e)=>{
                                       setShowChoose(false),setIsDisabled(false),setSelectedDate(null)}}/>
@@ -862,7 +972,29 @@ const handleDateChange = (date) => {
    
         {pickDiv}
 
-        {NewReq}
+        {newReqSuccess}
+
+
+        {newReqY ? <div id='newReq'>
+                      <DisabledByDefaultIcon id="xIcon"  onClick={() => {setNewReq(null) , 
+                                                     chooseClasses(location.state.classId),
+                                                              setnewReqY(false) }}/>
+                      <div id='newReq1'>
+                          <h1 >בקשה חדשה </h1>
+                          
+                          
+                        <input type='text' id='inputReq'onChange={(e) => {setSubReq(e.target.value)}}></input>
+                        <label>נושא הבקשה</label>
+
+                        <label>פירוט הבקשה</label>
+                        <br />
+                        <textarea id="textDetail" onChange={(e) => {setdetailReq(e.target.value)}}></textarea>
+                      </div>
+
+                      <button id="sendReq" onClick={sendReq}>שליחת הבקשה<SendIcon id="sendIcon" /></button>
+                        </div> : null}
+
+                                                                                       
 
         { catch1Hide ? null : (<div id="Catch1">תפוס</div>)}
 

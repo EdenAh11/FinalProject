@@ -27,7 +27,7 @@ export default function Login(props) {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const [users, setUsers] = useState(props.usersArr)
+  const [users, setUsers] = useState([])
 
   const [username, setUsername] = useState("");
 
@@ -36,6 +36,13 @@ export default function Login(props) {
 
   const navigate = useNavigate();
 
+
+  useEffect(() => {
+
+    setUsers(props.usersArr);
+    
+  }, [])
+  
 
 
 
