@@ -12,6 +12,7 @@
     box-shadow: 2px 4px 40px 2px rgba(0, 0, 0, 0.15);
 }
 
+
 #confirmReq{
     position: absolute;
     text-align: right;
@@ -23,6 +24,71 @@
     border-radius: 8px;
     box-shadow: 2px 4px 40px 2px rgba(0, 0, 0, 0.15);
  
+}
+
+#reqBoard{
+    position: absolute;
+    color: #2E2B76;  
+    right: 5%;
+    top: 2%;
+    font-family: Rubik , sans-serif;
+    font-size:x-large;
+    font-weight: 700;
+}
+
+#allReq{
+    position: absolute;
+    background-color: rgba(255, 255, 255, 1);
+    color: #2E2B76;
+    width: 40%;
+    height: 11%;
+    top:17%;
+    left: 5%;
+    text-align: center;
+    box-shadow: 2px 4px 40px 2px rgba(0, 0, 0, 0.15);
+    border-radius:40px ;
+}
+
+#addReq{
+    position: absolute;
+    background-color: rgba(255, 255, 255, 1);
+    color: #2E2B76;
+    width: 40%;
+    height: 11%;
+    top:17%;
+    right: 5%;
+    /* text-align: center; */
+    box-shadow: 2px 4px 40px 2px rgba(0, 0, 0, 0.15);
+    border-radius:40px ;
+}
+
+
+#reqStatus {
+    position: absolute;
+    color:#2E2B76;
+    top:35%;
+    left: 5%;
+    max-height: 65%;
+    width: 90%;
+    text-align: right;
+
+}
+
+.divReq{
+
+    padding-top: 3%;
+    padding-bottom: 2%;
+    border-top: 1px solid #000;
+
+}
+
+.Rstatus{
+    position: absolute;
+    width: 15%;
+    text-align:center;
+    font-weight: 600;
+    border-radius: 40px;
+   
 }
 
 

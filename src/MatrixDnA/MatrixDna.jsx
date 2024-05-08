@@ -33,6 +33,7 @@ import './CSS/Requests.css'
 
 import ImgMatrix from '/img/imageMatrix.png'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { Opacity } from '@mui/icons-material';
 
 
 
@@ -70,13 +71,15 @@ export default function MatrixDnA(props) {
     //התפריט לאחר לחיצה על מקום
     const [isHidden, setIsHidden] = useState(true);
   //נעילת לחצן תאריך
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(false);
   //כסא פנוי
   const [greenColor, setGreenColor] = useState("#76BC8B");
   //כסא תפוס
   const [redColor, setRedColor] = useState("#E87D7D");
   //כסא בתהליך
   const [blueColor, setBlueColor] = useState("#33BBFF");
+
+  const [grayColor, setGrayColor] = useState("rgba(199, 199, 201, 1)");
   //מחלקת אנליטיקס
   const [classAnalytics, setClassAnlytics] = useState(false);
 
@@ -103,6 +106,8 @@ export default function MatrixDnA(props) {
   const [newReqY, setnewReqY] = useState(false);
 //אישור סופי של הבקשה
   const [newReqSuccess, setnewReqSuccess] = useState(null);
+  //סטטוס הבקשה
+  const [checkStatus, setcheckStatus] = useState('ממתין');
 
 
 
@@ -222,7 +227,7 @@ const [hoveredSeat, setHoveredSeat] = useState(null);
 
                   //  console.log(seatUsers);
             
-          }, [pickDiv , selectedDate]);
+          }, [pickDiv , selectedDate , newReqSuccess]);
           
 
 
@@ -242,7 +247,7 @@ const [hoveredSeat, setHoveredSeat] = useState(null);
      function statusSeats2(e){
 
       return seatUsers.some(users => {
-        const [pickDate,selectD] = [new Date(user.date), new Date(selectedDate)];
+        const [pickDate,selectD] = [new Date(users.date), new Date(selectedDate)];
         const [dateUser,dateSelect] = [getDate(pickDate) , getDate(selectD)];
         console.log(users)
         console.log(users.userid === user);
@@ -491,7 +496,7 @@ const handleDateChange = (date) => {
         let lastChoose = "";
             sortedData.map(item => {
                 const current = new Date();
-                if(item.date < current)
+                if(item.date < current && user == item.userid)
                 {
                   lastDate = item.date;
                   lastChoose = item.table + item.seat;
@@ -525,21 +530,21 @@ const handleDateChange = (date) => {
           topic1: subReq , 
           detail1 : detailReq ,
           requestsDate1: requestsDate ,
-          status:true
+          status:checkStatus
         }
+
+        const divAcceptReq =  (<div id='confirmReq'>
+                <DisabledByDefaultIcon id="xIcon" onClick={setnewReqSuccess(null)} />   
+                <h1 > <label>בקשה מספר {newRequest.requestid1}#</label> / חדר ישיבות</h1>   
+                <p>הבקשה נשלחה לאישור המנהלת. תקבל/י התראה ברגע שתיענה.</p>   
+                <button id="acceptReq" onClick={setnewReqSuccess(null)}>אישור</button>                                                                         
+          </div>)
+
+        setnewReqSuccess(divAcceptReq);
+        setnewReqY(false);
 
         const responseAllReq = await axios.post(apiUrl3, newRequest);
         setallRequests(responseAllReq);
-
-        const divAcceptReq =  (<div id='confirmReq'>
-        <DisabledByDefaultIcon id="xIcon" onClick={setnewReqSuccess(null)} />   
-        <h1 > <label>בקשה מספר 4585#</label> / חדר ישיבות</h1>   
-        <p>הבקשה נשלחה לאישור המנהלת. תקבל/י התראה ברגע שתיענה.</p>   
-        <button id="acceptReq" onClick={setnewReqSuccess(null)}>אישור</button>                                                                         
-          </div>)
-
-        setnewReqSuccess(divAcceptReq)
-        setnewReqY(false);
 
         
 
@@ -634,9 +639,11 @@ const handleDateChange = (date) => {
                                 <button 
                                     key={seat} 
                                     id={seat} 
-                                    style={{backgroundColor: statusSeats(seat) ? redColor : greenColor,
-                                              border: statusSeats2(seat) ? "5px solid #fff" : null}}  
-                                    disabled={statusSeats(seat)}
+                                    style={{backgroundColor:statusSeats2(seat) ? redColor :
+                                                       statusSeats(seat) ? grayColor : greenColor
+                                                                        }}
+                                    disabled={statusSeats2(seat) ? false :
+                                           statusSeats(seat) ? true : false}
                                     onClick={(e) => {
                                         pickSeat(e.target);
                                     }}
@@ -647,9 +654,6 @@ const handleDateChange = (date) => {
                           </div>
                               ))}
 
-                     
-                     
-      
            </div>
            
            <div id="DownDesk">
@@ -880,7 +884,8 @@ const handleDateChange = (date) => {
                             <label id="reqBoard">לוח בקשות</label>
 
                             <button id="allReq">לכל הבקשות<OpenWithIcon id="openIcon"/></button>
-                            <button id="addReq" onClick={NewRequests}>הוסף בקשה <AddIcon /></button>
+                            <button id="addReq" onClick={NewRequests} > <label style={{position:'relative' , top:"0%"}}
+                                                    >הוסף בקשה</label><AddIcon style={{position:'relative' , top:"0%"}} /></button>
                  
                       <div id="reqStatus">
                       {allRequests.map((req,index) => (
@@ -892,7 +897,18 @@ const handleDateChange = (date) => {
                                     <span style={{ 
                                       fontWeight: "500"}}>{req.topic1}</span>
 
-                                      <div className="Rstatus">אושר</div>
+                                     {
+                                        req.status == 'אושר' ?
+                                        <div className="Rstatus" style={{color:"rgba(104, 166, 89, 1)" ,
+                                                        border:"2px solid rgba(104, 166, 89, 1)" }}>אושר</div> :
+
+                                        req.status == 'נדחה' ?
+                                        <div className="Rstatus" style={{color:"rgba(191, 64, 64, 1)" ,
+                                                        border:"2px solid rgba(191, 64, 64, 1)" }}>נדחה</div> :
+
+                                        <div className="Rstatus" style={{color:"rgba(46, 43, 118, 1)" ,
+                                                        border:"2px solid rgba(46, 43, 118, 1)"}}>ממתין</div>
+                                     }
 
 
                                       <br /><br/>
@@ -934,7 +950,9 @@ const handleDateChange = (date) => {
 
           {showChoose && 
            (<p id="pDiv"><FaEraser id="FaEraser" onClick={(e)=>{
-                                      setShowChoose(false),setIsDisabled(false),setSelectedDate(null)}}/>
+                                      setShowChoose(false),setIsDisabled(false),
+                                      setSelectedDate(null) , setConfirmDiv(null);
+                                    }}/>
                   <b>{date}</b></p>)}
           {showDatePicker && (
                   <Datepicker
