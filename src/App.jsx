@@ -142,10 +142,10 @@ useEffect(() => {
           const responseClass= await axios.get(apiUrl3);
           const responseRequest = await axios.get(apiUrl4);
 
-          setUsers(responseUser.data);
-          setReservedSeats(responseReserve.data);
-          setClasses(responseClass.data);
-          setRequests(responseRequest.data);
+          setUsers(responseUser.data || []);
+          setReservedSeats(responseReserve.data || []);
+          setClasses(responseClass.data || []);
+          setRequests(responseRequest.data || []);
 
           console.log(responseUser.data);
           console.log(responseReserve.data);
@@ -170,10 +170,13 @@ useEffect(() => {
     <>
     <Router>
       <Routes>
-    
-         <Route path="/" element={<Login usersArr={users} classArr={classes} />} />
-     
-        <Route path="/matrix" element={<Matrix seatsUser={reservedSeats} reqArr={requests}/>} />
+    { users.length > 0 && reservedSeats.length > 0  &&
+         (<Route path="/" element={<Login usersArr={users} classArr={classes} />} />)
+    }
+
+    { classes.length > 0 && requests.length > 0 &&
+       (<Route path="/matrix" element={<Matrix seatsUser={reservedSeats} reqArr={requests}/>} />)
+    }
       </Routes>
     </Router>
       

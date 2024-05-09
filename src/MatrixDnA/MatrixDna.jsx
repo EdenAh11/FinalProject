@@ -150,7 +150,6 @@ const [hoveredSeat, setHoveredSeat] = useState(null);
                         const fetchData = async () =>{
                           try{
                             const responseReq = await axios.get(apiUrl3);
-                            console.log(responseReq.data)
                             setallRequests(responseReq.data);
 
 
@@ -249,9 +248,7 @@ const [hoveredSeat, setHoveredSeat] = useState(null);
       return seatUsers.some(users => {
         const [pickDate,selectD] = [new Date(users.date), new Date(selectedDate)];
         const [dateUser,dateSelect] = [getDate(pickDate) , getDate(selectD)];
-        console.log(users)
-        console.log(users.userid === user);
-        console.log(users.userid == user);
+      
         
             return(users.table + users.seat === e && dateUser === dateSelect && users.userid === user);
       });
@@ -354,7 +351,7 @@ const handleDateChange = (date) => {
       }
 
   //אישור כיסא
-        const confirmSeat = async (e) => {
+      const confirmSeat = async (e) => {
           
           setIsBlurred(false);
           setIsHidden(true);
@@ -375,7 +372,7 @@ const handleDateChange = (date) => {
           let datePost = getDate(selectedDate);
 
           const email = {
-            to: "vivian.klein@ethereal.email" , 
+            to: "edenah11@gmail.com" , 
             subject : "שריון מקום ישיבה" ,
             body : `<div> <h1>שיריון מקום ישיבה עבר בהצלחה</h1> <p> ${desk + seatNumber}   מקום ישיבה </p>`+                   
                              `<p>בתאריך : ${datePost}</p></div>`
@@ -391,24 +388,24 @@ const handleDateChange = (date) => {
                   // })
 
 
-                    // .then(res => {
-                    //   console.log('res=', res);
-                    //   console.log('res.status', res.status);
-                    //   console.log('res.ok', res.ok);
-                    //   return res.json()
-                    //   })
-                    // .then(
-                    //   (result) => {
-                    //     console.log("fetch btnFetchPostReserve= ", result);
-                    //     setReservedSeats(result);
-                    //   },
-                    //   (error) => {
-                    //     console.log("err post=", error);
-                    //   });
+                  //   .then(res => {
+                  //     console.log('res=', res);
+                  //     console.log('res.status', res.status);
+                  //     console.log('res.ok', res.ok);
+                  //     return res.json()
+                  //     })
+                  //   .then(
+                  //     (result) => {
+                  //       console.log("fetch btnFetchPostReserve= ", result);
+                  //       setReservedSeats(result);
+                  //     },
+                  //     (error) => {
+                  //       console.log("err post=", error);
+                  //     });
 
-                    const response = await axios.post(apiUrl2, newR);
+                   const response = await axios.post(apiUrl2, newR);
 
-                    const response2 = await axios.post(apiUrl4, email);
+                    //const response2 = await axios.post(apiUrl4, email);
 
 
                   
@@ -534,16 +531,24 @@ const handleDateChange = (date) => {
         }
 
         const divAcceptReq =  (<div id='confirmReq'>
-                <DisabledByDefaultIcon id="xIcon" onClick={setnewReqSuccess(null)} />   
+                <DisabledByDefaultIcon id="xIcon" onClick={exitReq} />   
                 <h1 > <label>בקשה מספר {newRequest.requestid1}#</label> / חדר ישיבות</h1>   
                 <p>הבקשה נשלחה לאישור המנהלת. תקבל/י התראה ברגע שתיענה.</p>   
-                <button id="acceptReq" onClick={setnewReqSuccess(null)}>אישור</button>                                                                         
+                <button id="acceptReq" onClick={exitReq}>אישור</button>                                                                         
           </div>)
 
         setnewReqSuccess(divAcceptReq);
         setnewReqY(false);
 
+        const email = {
+          to: "edenah11@gmail.com" , 
+          subject : newRequest.topic1 ,
+          body : newRequest.detail1
+        }
+
         const responseAllReq = await axios.post(apiUrl3, newRequest);
+        //const responseEmailReq = await axios.post(apiUrl4, email);
+
         setallRequests(responseAllReq);
 
         
@@ -572,6 +577,12 @@ const handleDateChange = (date) => {
                 //     (error) => {
                 //       console.log("err post=", error);
                 //     });
+      }
+
+      function exitReq(){
+        setnewReqSuccess(null);
+
+       
       }
 
 
@@ -877,8 +888,8 @@ const handleDateChange = (date) => {
             {requests &&(
               <>
                     <div id="requests">
-                      
-                            <DisabledByDefaultIcon id="xIcon" onClick={() => {setRequests(false) ,
+                      <div id="fixedDiv">
+                            <DisabledByDefaultIcon id="xIcon2" onClick={() => {setRequests(false) ,
                                                     chooseClasses(location.state.classId);
                                                   }}/>
                             <label id="reqBoard">לוח בקשות</label>
@@ -886,7 +897,7 @@ const handleDateChange = (date) => {
                             <button id="allReq">לכל הבקשות<OpenWithIcon id="openIcon"/></button>
                             <button id="addReq" onClick={NewRequests} > <label style={{position:'relative' , top:"0%"}}
                                                     >הוסף בקשה</label><AddIcon style={{position:'relative' , top:"0%"}} /></button>
-                 
+                      </div>
                       <div id="reqStatus">
                       {allRequests.map((req,index) => (
                         req.userId1 === user ?
