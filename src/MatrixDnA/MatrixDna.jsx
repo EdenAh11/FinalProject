@@ -7,6 +7,10 @@ import { FaEraser } from "react-icons/fa";
 
 import TextField from '@mui/material/TextField';
 
+import { styled } from '@mui/system';
+import { TablePagination, tablePaginationClasses as classes } from '@mui/base/TablePagination';
+
+
 
 import WeekendIcon from '@mui/icons-material/Weekend';
 import plot from '/img/plot.png'
@@ -48,6 +52,8 @@ export default function MatrixDnA(props) {
   const [className, setClassName] = useState('')
   //מערך משתמשים מהדאטה
   const [seatUsers, setSeatUsers] = useState(props.seatsUser);
+//כל המשתמשים
+  const [AllUsers, setAllUsers] = useState(props.userA);
   //מערך הבקשות
   const [allRequests, setallRequests] = useState(props.reqArr);
 //לינק לשרת
@@ -93,6 +99,8 @@ export default function MatrixDnA(props) {
 
   const [requests, setRequests] = useState(false);
 
+  const [editUsers, seteditUsers] = useState(false);
+
   const [pickDiv, setpickDiv] = useState("");
 
   const [confirmDiv, setConfirmDiv] = useState("");
@@ -108,6 +116,11 @@ export default function MatrixDnA(props) {
   const [newReqSuccess, setnewReqSuccess] = useState(null);
   //סטטוס הבקשה
   const [checkStatus, setcheckStatus] = useState('ממתין');
+
+//מנהל
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
 
 
 
@@ -138,6 +151,82 @@ export default function MatrixDnA(props) {
                   }});
 
 const [hoveredSeat, setHoveredSeat] = useState(null);
+
+
+
+
+
+  const rows = AllUsers.sort((a, b) => (a.userId < b.userId ? -1 : 1));
+
+const grey = {
+  50: '#F3F6F9',
+  100: '#E5EAF2',
+  200: '#DAE2ED',
+  300: '#C7D0DD',
+  400: '#B0B8C4',
+  500: '#9DA8B7',
+  600: '#6B7A90',
+  700: '#434D5B',
+  800: '#303740',
+  900: '#1C2025',
+};
+
+
+const Root = styled('div')(
+  ({ theme }) => `
+  table {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.875rem;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[200]};
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  }
+  `,
+);
+
+const CustomTablePagination = styled(TablePagination)`
+  & .${classes.toolbar} {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  & .${classes.selectLabel} {
+    margin: 0;
+  }
+
+  & .${classes.displayedRows} {
+    margin: 0;
+
+    @media (min-width: 768px) {
+      margin-left: auto;
+    }
+  }
+
+  & .${classes.spacer} {
+    display: none;
+  }
+
+  & .${classes.actions} {
+    display: flex;
+    gap: 0.25rem;
+  }
+`;
 
 
                                                   
@@ -292,15 +381,27 @@ function getDayOfWeek(date) {
 
 //בחירת תאריך 
 const handleDateChange = (date) => {
-  setSelectedDate(date);
-  console.log(date);
-  setDate(getDate(date));
-  setShowChoose(true);
-  setShowDatePicker(false);
-  setIsDisabled(true);
+      setSelectedDate(date);
+      console.log(date);
+      setDate(getDate(date));
+      setShowChoose(true);
+      setShowDatePicker(false);
+      setIsDisabled(true);
 
  
 };
+
+
+//בחירת משתמשים
+function UserManagement(){
+  seteditUsers(true);
+  setMeeting(false);
+  setClassDelivery(false);
+  setClassAnlytics(false);
+  setClasstified(false);
+  setRequests(false);
+  console.log(rows);
+  }
 
 // בחירת מושב
  function pickSeat(e){
@@ -434,7 +535,7 @@ const handleDateChange = (date) => {
         setClassDelivery(false);
         setMeeting(false);
         setRequests(false);
-        setClassAnlytics(true);
+        setClassAnlytics(false);
 
         setClassName(e);
       }
@@ -469,7 +570,6 @@ const handleDateChange = (date) => {
 
       }
 
-      setIsDisabled(false);
     }
 
     
@@ -478,6 +578,7 @@ const handleDateChange = (date) => {
       setClassDelivery(false);
       setClassAnlytics(false);
       setClasstified(false);
+      setRequests(false);
     }
 
 
@@ -610,6 +711,20 @@ const handleDateChange = (date) => {
 
 
 
+    const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+
+        const handleChangePage = (event, newPage) => {
+          setPage(newPage);
+        };
+
+        const handleChangeRowsPerPage = (event) => {
+          setRowsPerPage(parseInt(event.target.value, 10));
+          setPage(0);
+        };
+
+
+
 
 
 
@@ -628,8 +743,8 @@ const handleDateChange = (date) => {
         
             </Col>
           </Row>
-          <Row id="body" >
-          <Col xs={9}>
+          <Row id="body">
+          <Col xs={12} sm={9}>
       <div id="places">
 
       {confirmDiv}
@@ -942,10 +1057,91 @@ const handleDateChange = (date) => {
               </>
             )}
 
+            {editUsers &&(
+              <>
+                  <Root sx={{ maxWidth: '100%' , maxHeight:'100%'}}>
+                      <table aria-label="custom pagination table" >
+                        <thead>
+                          <tr>
+                            <th>מספר עובד</th>
+                            <th>שם העובד</th>
+                            <th>אימייל</th>
+                            <th>סיסמא</th>
+                            <th>מחלקה</th>
+                            <th>תפקיד</th>
+                            <th>אדמין</th>
+                            <th>מנהל</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {(rowsPerPage > 0
+                            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            : rows
+                          ).map((row) => (
+                            <tr key={row.userId}>
+                              <td>{row.userId}</td>
+                              <td style={{ width: 160 }}>
+                                {row.username}
+                              </td>
+                              <td style={{ width: 160 }} >
+                                {row.email}
+                              </td>
+                              <td style={{ width: 160 }} >
+                                {row.password}
+                              </td>
+                              <td style={{ width: 160 }} align="right">
+                                {row.class}
+                              </td>
+                              <td style={{ width: 160 }} >
+                                {row.title}
+                              </td>
+                              <td style={{ width: 160 }} align="right">
+                              <input type='checkbox' disabled id='checkPlace'checked={row.IsAdmin ? true:false} ></input>
+                              </td>
+                              <td style={{ width: 160 }} align="right">
+                            <input type='checkbox' disable did='checkPlace'  checked={row.IsManager ? true:false} ></input>
+                              </td>
+                            </tr>
+                          ))}
+                          {emptyRows > 0 && (
+                            <tr style={{ height: 41 * emptyRows }}>
+                              <td colSpan={3} aria-hidden />
+                            </tr>
+                          )}
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <CustomTablePagination
+                              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                              colSpan={3}
+                              count={rows.length}
+                              rowsPerPage={rowsPerPage}
+                              page={page}
+                              slotProps={{
+                                select: {
+                                  'aria-label': 'rows per page',
+                                },
+                                actions: {
+                                  showFirstButton: true,
+                                  showLastButton: true,
+                                },
+                              }}
+                              onPageChange={handleChangePage}
+                              onRowsPerPageChange={handleChangeRowsPerPage}
+                            />
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </Root>
+ 
+
+              </>
+            )}
+
         
        </div>
           </Col>
-          <Col xs={3}>
+          <Col xs={12} sm={3}>
           <div>
                   <button  id="DateBtn" disabled={isDisabled} onClick={() => {
                                               setShowDatePicker(true), setIsDisabled(true)}} value="בחר/י תאריך">
@@ -988,12 +1184,16 @@ const handleDateChange = (date) => {
                   <option value="delivery">מחלקת דליברי</option>
                   <option value="classtified">מסווגים</option>
               </select>
+              <input className='btn1'type="button" value="ניהול משתמשים" onClick={UserManagement} />  
               <input className='btn1' type="button" onClick={showMeeting} value="חדרי ישיבות" />
               <input className='btn1'type="button" value="דיווחים" />
               <input className='btn1' type="button" value="בקשות"  onClick={(e) => chooseClasses(e.target.value)}/>
               { btnFinishShow} 
           
             </div>
+
+
+
           </Col>
           </Row>
             

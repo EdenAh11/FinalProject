@@ -175,7 +175,7 @@ useEffect(() => {
     }
 
     { classes.length > 0 && requests.length > 0 &&
-       (<Route path="/matrix" element={<Matrix seatsUser={reservedSeats} reqArr={requests}/>} />)
+       (<Route path="/matrix" element={<Matrix userA={users} seatsUser={reservedSeats} reqArr={requests}/>} />)
     }
       </Routes>
     </Router>

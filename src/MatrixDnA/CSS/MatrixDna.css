@@ -323,3 +323,10 @@ position: relative;
     padding: 0;
     text-align: center;
 }
+
+#red{
+    width: 10px;
+    height: 10px;
+    background-color: #E87D7D;
+    margin-right: 0px;
+}
